@@ -7,6 +7,6 @@ Pod::Spec.new do |s|
   s.source                = { :git => 'https://github.com/phranck/CCNStatusItemView.git', :tag => s.version.to_s }
   s.osx.deployment_target = '10.9'
   s.requires_arc          = true
-  s.source_files          = 'Classes/*.{h,m}'
+  s.source_files          = 'CCNStatusItemView/*.{h,m}'
   s.license               = { :type => 'MIT', :file => 'ReadMe.md' }
 end
