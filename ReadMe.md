@@ -47,6 +47,18 @@ That's all! You will have some options to change the design of this statusItem p
 ```
 
 
+## Some Side Notes
+
+The statusItem window's frame size will be determined automatically by calling `preferedContentSize` on the `contentViewController`. So you shouldn't forget to set it to a reasonable value. Using XIB's for building the content a good war to do so is returning:
+
+```Objective-C
+- (CGSize)preferredContentSize {
+    return self.view.frame.size;
+}
+
+```
+
+
 ## Requirements
 
 `CCNStatusItemView` was written using ARC and "modern" Objective-C 2. At the moment it has been tested only on OS X 10.10 Yosemite, but it should run on 10.9, too.
