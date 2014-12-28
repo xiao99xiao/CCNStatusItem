@@ -43,7 +43,7 @@ static const CGFloat CCNStatusItemIconDefaultHorizontalEdgeSpacing      = 10.0;
 @implementation CCNStatusItemWindowDesign
 
 + (void)initialize {
-    CCNStatusItemWindowDefaultBackgroundColor = [NSColor colorWithCalibratedWhite:0.888 alpha:1.000];
+    CCNStatusItemWindowDefaultBackgroundColor = [NSColor windowBackgroundColor];
 }
 
 + (instancetype)defaultDesign {
