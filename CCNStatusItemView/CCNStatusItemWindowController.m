@@ -61,6 +61,8 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemWindowAnimationType) {
         // StatusItem Window
         self.window = [CCNStatusItemWindow statusItemWindowWithDesign:design];
         self.window.contentViewController = contentViewController;
+
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleApplicationDidResignActiveNotification:) name:NSApplicationDidResignActiveNotification object:nil];
     }
     return self;
 }
@@ -74,7 +76,7 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemWindowAnimationType) {
 - (void)updateWindowFrame {
     CGRect statusItemRect = [[self.statusItem window] frame];
     CGRect windowFrame = NSMakeRect(NSMinX(statusItemRect) - NSWidth(self.window.frame)/2 + NSWidth(statusItemRect)/2,
-                                    NSMinY(statusItemRect) - NSHeight(self.window.frame) - 3,
+                                    NSMinY(statusItemRect) - NSHeight(self.window.frame) - self.design.statusItemWindowToStatusItemMargin,
                                     self.window.frame.size.width,
                                     self.window.frame.size.height);
     [self.window setFrame:windowFrame display:YES];
@@ -113,13 +115,19 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemWindowAnimationType) {
 
         if (animationType == CCNStatusItemWindowAnimationTypeFadeIn) {
             [window makeKeyAndOrderFront:nil];
-//            [window becomeKeyWindow];
         }
         else {
             [window orderOut:wSelf];
             [window close];
         }
     }];
+}
+
+#pragma mark - Notifications
+
+
+- (void)handleApplicationDidResignActiveNotification:(NSNotification *)note {
+    [self dismissStatusItemWindow];
 }
 
 @end

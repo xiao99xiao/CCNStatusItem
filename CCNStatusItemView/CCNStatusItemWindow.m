@@ -36,7 +36,6 @@
 @interface CCNStatusItemWindow () {
     CCNStatusItemWindowDesign *_design;
 }
-@property (strong) CCNStatusItemView *statusItem;
 @property (strong) NSView *userContentView;
 @property (strong, nonatomic) CCNStatusItemWindowBackgroundView *backgroundView;
 @end
@@ -44,7 +43,7 @@
 @implementation CCNStatusItemWindow
 
 + (instancetype)statusItemWindowWithDesign:(CCNStatusItemWindowDesign *)design {
-    return [[[self class] alloc] initWithContentRect:NSZeroRect styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:YES design:design];
+    return [[[self class] alloc] initWithContentRect:NSZeroRect styleMask:NSBorderlessWindowMask|NSResizableWindowMask backing:NSBackingStoreBuffered defer:YES design:design];
 }
 
 - (instancetype)initWithContentRect:(NSRect)contentRect styleMask:(NSUInteger)aStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)flag design:(CCNStatusItemWindowDesign *)design {
@@ -54,23 +53,15 @@
         self.alphaValue = 0.0;
         self.opaque = NO;
         self.hasShadow = YES;
-        self.level = NSFloatingWindowLevel;
+        self.level = NSPopUpMenuWindowLevel;
         self.backgroundColor = [NSColor clearColor];
     }
     return self;
 }
 
--(BOOL)canBecomeKeyWindow {
-    return YES;
-}
-
--(BOOL)canBecomeMainWindow {
-    return YES;
-}
-
-- (id)contentView {
-    return self.userContentView;
-}
+- (BOOL)canBecomeKeyWindow { return YES; }
+- (BOOL)canBecomeMainWindow { return YES; }
+- (BOOL)isKeyWindow { return YES; }
 
 - (void)setContentView:(id)contentView {
     if ([self.userContentView isEqual:contentView]) return;
@@ -98,6 +89,10 @@
     self.userContentView.autoresizingMask = (NSViewWidthSizable | NSViewHeightSizable);
 
     [self.backgroundView addSubview:self.userContentView];
+}
+
+- (id)contentView {
+    return self.userContentView;
 }
 
 - (NSRect)frameRectForContentRect:(NSRect)contentRect {

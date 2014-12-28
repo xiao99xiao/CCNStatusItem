@@ -30,8 +30,13 @@
 #import "CCNStatusItemView.h"
 #import "CCNStatusItemWindowController.h"
 
+NSString *const CCNStatusItemViewWillBecomeActiveNotification = @"CCNStatusItemViewWillBecomeActiveNotification";
+NSString *const CCNStatusItemViewDidBecomeActiveNotification = @"CCNStatusItemViewDidBecomeActiveNotification";
+NSString *const CCNStatusItemViewWillResignActiveNotification = @"CCNStatusItemViewWillResignActiveNotification";
+NSString *const CCNStatusItemViewDidResignActiveNotification = @"CCNStatusItemViewDidResignActiveNotification";
 
-@interface CCNStatusItemView ()
+
+@interface CCNStatusItemView () <NSWindowDelegate>
 @property (strong) NSStatusItem *statusItem;
 @property (assign, nonatomic, getter = isHighlighted) BOOL highlighted;
 @property (copy) CCNStatusItemViewLeftMouseActionHandler leftMouseDownActionHandler;
@@ -103,12 +108,21 @@
 
     CCNStatusItemView *statusItemView = [CCNStatusItemView sharedInstance];
     if (statusItemView) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleApplicationDidResignActiveNotification:) name:NSApplicationDidResignActiveNotification object:nil];
+
         statusItemView.image = defaultImage;
         statusItemView.alternateImage = alternateImage;
         statusItemView.frame = NSMakeRect(0, 0, defaultImage.size.width, [NSStatusBar systemStatusBar].thickness);
 
         statusItemView.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:defaultImage.size.width + self.design.statusItemIconHorizontalEdgeSpacing];
         statusItemView.statusItem.view = statusItemView;
+
+    }
+}
+
+- (void)handleApplicationDidResignActiveNotification:(NSNotification *)note {
+    if (self.statusItemWindowController && [self.statusItemWindowController windowIsOpen]) {
+        self.highlighted = !self.highlighted;
     }
 }
 
@@ -118,14 +132,14 @@
                     alternateImage:(NSImage *)alternateImage
              contentViewController:(NSViewController *)contentViewController {
 
-    CCNStatusItemView *statusItemView = [CCNStatusItemView sharedInstance];
-    [statusItemView reset];
-    [statusItemView configureWithImage:defaultImage alternateImage:alternateImage];
+    CCNStatusItemView *sharedItem = [CCNStatusItemView sharedInstance];
+    [sharedItem reset];
+    [sharedItem configureWithImage:defaultImage alternateImage:alternateImage];
 
-    statusItemView.presentationMode = CCNStatusItemPresentationModeImage;
-    statusItemView.statusItemWindowController = [[CCNStatusItemWindowController alloc] initWithConnectedStatusItem:statusItemView
-                                                                                             contentViewController:contentViewController
-                                                                                                            design:statusItemView.design];
+    sharedItem.presentationMode = CCNStatusItemPresentationModeImage;
+    sharedItem.statusItemWindowController = [[CCNStatusItemWindowController alloc] initWithConnectedStatusItem:sharedItem
+                                                                                         contentViewController:contentViewController
+                                                                                                        design:sharedItem.design];
 }
 
 + (void)presentStatusItemWithImage:(NSImage *)defaultImage
@@ -222,7 +236,7 @@
     self.canHandleMouseEvent = NO;
 
     if (self.leftMouseDownActionHandler) {
-//        [[NSApplication sharedApplication] activateIgnoringOtherApps:NO];
+        [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
         self.leftMouseDownActionHandler(self);
         self.highlighted = !self.highlighted;
         self.canHandleMouseEvent = YES;
@@ -237,12 +251,17 @@
     self.canHandleMouseEvent = NO;
 
     if (self.rightMouseDownActionHandler) {
-//        [[NSApplication sharedApplication] activateIgnoringOtherApps:NO];
+        [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
         self.rightMouseDownActionHandler(self);
         self.highlighted = !self.highlighted;
         self.canHandleMouseEvent = YES;
     }
 }
 
+#pragma mark - NSWindowDelegate
+
+- (void)windowDidResignKey:(NSNotification *)note {
+    self.highlighted = !self.highlighted;
+}
 
 @end
