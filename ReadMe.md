@@ -19,7 +19,7 @@ pod 'CCNStatusItemView'
 
 After it is integrated into your project you are just a four-liner away from your (maybe) first `NSStatusItem` with a custom view. A good place to add these lines of code is your AppDelegate:
 
-```
+```Objective-C
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
    ...
    MyContentViewController *vc = [[MyContentViewController alloc] initWithNibName:NSStringFromClass([MyContentViewController class]) bundle:nil];
@@ -32,7 +32,7 @@ After it is integrated into your project you are just a four-liner away from you
 
 That's all! You will have some options to change the design of this statusItem popover window using `CCNStatusItemWindowDesign`. In the example above internally `CCNStatusItemView` uses `[CCNStatusItemWindowDesign defaultDesign]` to set a default design. The next example will show you how to change the design of your statusItem popover window:
 
-```
+```Objective-C
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
    ...
 
