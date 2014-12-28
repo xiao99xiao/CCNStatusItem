@@ -39,7 +39,6 @@ That's all! You will have some options to change the design of this statusItem p
    design.statusItemWindowCornerRadius = 9.0;	// the default value is 5.0
    
    [CCNStatusItemView setDesign:design];
-
    [CCNStatusItemView presentStatusItemWithImage:[NSImage imageNamed:@"statusBarIcon"]
                                   alternateImage:[NSImage imageNamed:@"statusBarAlternateIcon"]
                            contentViewController:[[MyContentViewController alloc] initWithNibName:NSStringFromClass([MyContentViewController class]) bundle:nil]];
