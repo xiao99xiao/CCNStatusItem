@@ -28,18 +28,23 @@
  */
 
 
+#import <Cocoa/Cocoa.h>
 #import <Foundation/Foundation.h>
 
 @interface CCNStatusItemWindowDesign : NSObject
 
 + (instancetype)defaultDesign;
 
+// status item window
 @property (assign, nonatomic) CGFloat statusItemWindowArrowHeight;                  // default: 9.0
 @property (assign, nonatomic) CGFloat statusItemWindowArrowWidth;                   // default: 21.0
 @property (assign, nonatomic) CGFloat statusItemWindowCornerRadius;                 // default: 5.0
 @property (assign, nonatomic) CGFloat statusItemWindowToStatusItemMargin;           // default: 2.0
 @property (assign, nonatomic) NSTimeInterval statusItemWindowAnimationDuration;     // default: 0.25
 @property (strong, nonatomic) NSColor *statusItemWindowBackgroundColor;
+
+// status item
 @property (strong, nonatomic) NSString *statusItemToolTip;
+@property (assign, nonatomic) CGFloat statusItemIconHorizontalEdgeSpacing;          // default: 10.0
 
 @end

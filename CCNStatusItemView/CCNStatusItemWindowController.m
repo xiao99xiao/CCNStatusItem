@@ -88,7 +88,7 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemWindowAnimationType) {
 
     [self updateWindowFrame];
     [self showWindow:nil];
-    [self.window makeKeyAndOrderFront:self];
+
     [self animateWindow:self.window withAnimationType:CCNStatusItemWindowAnimationTypeFadeIn];
 }
 
@@ -98,7 +98,7 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemWindowAnimationType) {
     [self animateWindow:self.window withAnimationType:CCNStatusItemWindowAnimationTypeFadeOut];
 }
 
-- (void)animateWindow:(NSWindow *)window withAnimationType:(CCNStatusItemWindowAnimationType)animationType {
+- (void)animateWindow:(CCNStatusItemWindow *)window withAnimationType:(CCNStatusItemWindowAnimationType)animationType {
     __weak typeof(self) wSelf = self;
     self.animationIsRunning = YES;
 
@@ -112,7 +112,8 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemWindowAnimationType) {
         wSelf.windowIsOpen = (animationType == CCNStatusItemWindowAnimationTypeFadeIn);
 
         if (animationType == CCNStatusItemWindowAnimationTypeFadeIn) {
-            [window makeKeyAndOrderFront:wSelf];
+            [window makeKeyAndOrderFront:nil];
+//            [window becomeKeyWindow];
         }
         else {
             [window orderOut:wSelf];

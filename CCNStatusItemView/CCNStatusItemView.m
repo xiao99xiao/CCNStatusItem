@@ -107,7 +107,7 @@
         statusItemView.alternateImage = alternateImage;
         statusItemView.frame = NSMakeRect(0, 0, defaultImage.size.width, [NSStatusBar systemStatusBar].thickness);
 
-        statusItemView.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
+        statusItemView.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:defaultImage.size.width + self.design.statusItemIconHorizontalEdgeSpacing];
         statusItemView.statusItem.view = statusItemView;
     }
 }
@@ -222,6 +222,7 @@
     self.canHandleMouseEvent = NO;
 
     if (self.leftMouseDownActionHandler) {
+//        [[NSApplication sharedApplication] activateIgnoringOtherApps:NO];
         self.leftMouseDownActionHandler(self);
         self.highlighted = !self.highlighted;
         self.canHandleMouseEvent = YES;
@@ -236,6 +237,7 @@
     self.canHandleMouseEvent = NO;
 
     if (self.rightMouseDownActionHandler) {
+//        [[NSApplication sharedApplication] activateIgnoringOtherApps:NO];
         self.rightMouseDownActionHandler(self);
         self.highlighted = !self.highlighted;
         self.canHandleMouseEvent = YES;

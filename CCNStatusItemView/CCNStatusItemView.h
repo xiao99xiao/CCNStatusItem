@@ -27,6 +27,7 @@
  THE SOFTWARE.
  */
 
+#import <Cocoa/Cocoa.h>
 #import "CCNStatusItemWindowDesign.h"
 
 
@@ -67,6 +68,7 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemPresentationMode) {
 
 #pragma mark - Handling StatusItem Layout
 
+@property (readonly, nonatomic) CCNStatusItemWindowDesign *design;
 + (void)setDesign:(CCNStatusItemWindowDesign *)design;
 
 @end

@@ -54,17 +54,17 @@
         self.alphaValue = 0.0;
         self.opaque = NO;
         self.hasShadow = YES;
-        self.level = NSStatusWindowLevel;
+        self.level = NSFloatingWindowLevel;
         self.backgroundColor = [NSColor clearColor];
     }
     return self;
 }
 
--(BOOL)canBecomeKeyWindow{
+-(BOOL)canBecomeKeyWindow {
     return YES;
 }
 
--(BOOL)canBecomeMainWindow{
+-(BOOL)canBecomeMainWindow {
     return YES;
 }
 

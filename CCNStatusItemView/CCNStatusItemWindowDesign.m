@@ -31,12 +31,13 @@
 #import "CCNStatusItemWindowDesign.h"
 
 
-static CGFloat CCNStatusItemWindowDefaultArrowHeight              = 9.0;
-static CGFloat CCNStatusItemWindowDefaultArrowWidth               = 21.0;
-static CGFloat CCNStatusItemWindowDefaultCornerRadius             = 5.0;
-static CGFloat CCNStatusItemWindowDefaultStatusItemMargin         = 2.0;
-static NSTimeInterval CCNStatusItemWindowDefaultAnimationDuration = 0.25;
+static const CGFloat CCNStatusItemWindowDefaultArrowHeight              = 9.0;
+static const CGFloat CCNStatusItemWindowDefaultArrowWidth               = 21.0;
+static const CGFloat CCNStatusItemWindowDefaultCornerRadius             = 5.0;
+static const CGFloat CCNStatusItemWindowDefaultStatusItemMargin         = 2.0;
+static const NSTimeInterval CCNStatusItemWindowDefaultAnimationDuration = 0.25;
 static NSColor *CCNStatusItemWindowDefaultBackgroundColor;
+static const CGFloat CCNStatusItemIconDefaultHorizontalEdgeSpacing      = 10.0;
 
 
 @implementation CCNStatusItemWindowDesign
@@ -52,13 +53,15 @@ static NSColor *CCNStatusItemWindowDefaultBackgroundColor;
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.statusItemWindowArrowHeight        = CCNStatusItemWindowDefaultArrowHeight;
-        self.statusItemWindowArrowWidth         = CCNStatusItemWindowDefaultArrowWidth;
-        self.statusItemWindowCornerRadius       = CCNStatusItemWindowDefaultCornerRadius;
-        self.statusItemWindowToStatusItemMargin = CCNStatusItemWindowDefaultStatusItemMargin;
-        self.statusItemWindowAnimationDuration  = CCNStatusItemWindowDefaultAnimationDuration;
-        self.statusItemWindowBackgroundColor    = CCNStatusItemWindowDefaultBackgroundColor;
-        self.statusItemToolTip                  = nil;
+        self.statusItemWindowArrowHeight         = CCNStatusItemWindowDefaultArrowHeight;
+        self.statusItemWindowArrowWidth          = CCNStatusItemWindowDefaultArrowWidth;
+        self.statusItemWindowCornerRadius        = CCNStatusItemWindowDefaultCornerRadius;
+        self.statusItemWindowToStatusItemMargin  = CCNStatusItemWindowDefaultStatusItemMargin;
+        self.statusItemWindowAnimationDuration   = CCNStatusItemWindowDefaultAnimationDuration;
+        self.statusItemWindowBackgroundColor     = CCNStatusItemWindowDefaultBackgroundColor;
+
+        self.statusItemToolTip                   = nil;
+        self.statusItemIconHorizontalEdgeSpacing = CCNStatusItemIconDefaultHorizontalEdgeSpacing;
     }
     return self;
 }
