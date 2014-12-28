@@ -22,10 +22,9 @@ After it is integrated into your project you are just a four-liner away from you
 ```Objective-C
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
    ...
-   MyContentViewController *vc = [[MyContentViewController alloc] initWithNibName:NSStringFromClass([MyContentViewController class]) bundle:nil];
    [CCNStatusItemView presentStatusItemWithImage:[NSImage imageNamed:@"statusBarIcon"]
                                   alternateImage:[NSImage imageNamed:@"statusBarAlternateIcon"]
-                           contentViewController:vc];
+                           contentViewController:[[MyContentViewController alloc] initWithNibName:NSStringFromClass([MyContentViewController class]) bundle:nil]];
    ...
 }
 ```
@@ -41,10 +40,9 @@ That's all! You will have some options to change the design of this statusItem p
    
    [CCNStatusItemView setDesign:design];
 
-   MyContentViewController *vc = [[MyContentViewController alloc] initWithNibName:NSStringFromClass([MyContentViewController class]) bundle:nil];
    [CCNStatusItemView presentStatusItemWithImage:[NSImage imageNamed:@"statusBarIcon"]
                                   alternateImage:[NSImage imageNamed:@"statusBarAlternateIcon"]
-                           contentViewController:vc];
+                           contentViewController:[[MyContentViewController alloc] initWithNibName:NSStringFromClass([MyContentViewController class]) bundle:nil]];
    ...
 }
 ```
