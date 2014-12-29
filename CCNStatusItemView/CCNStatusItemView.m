@@ -30,11 +30,6 @@
 #import "CCNStatusItemView.h"
 #import "CCNStatusItemWindowController.h"
 
-NSString *const CCNStatusItemViewWillBecomeActiveNotification = @"CCNStatusItemViewWillBecomeActiveNotification";
-NSString *const CCNStatusItemViewDidBecomeActiveNotification = @"CCNStatusItemViewDidBecomeActiveNotification";
-NSString *const CCNStatusItemViewWillResignActiveNotification = @"CCNStatusItemViewWillResignActiveNotification";
-NSString *const CCNStatusItemViewDidResignActiveNotification = @"CCNStatusItemViewDidResignActiveNotification";
-
 
 @interface CCNStatusItemView () <NSWindowDelegate>
 @property (strong) NSStatusItem *statusItem;
@@ -108,7 +103,7 @@ NSString *const CCNStatusItemViewDidResignActiveNotification = @"CCNStatusItemVi
 
     CCNStatusItemView *statusItemView = [CCNStatusItemView sharedInstance];
     if (statusItemView) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleApplicationDidResignActiveNotification:) name:NSApplicationDidResignActiveNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleWindowDidResignKeyNotification:) name:NSWindowDidResignKeyNotification object:nil];
 
         statusItemView.image = defaultImage;
         statusItemView.alternateImage = alternateImage;
@@ -117,12 +112,6 @@ NSString *const CCNStatusItemViewDidResignActiveNotification = @"CCNStatusItemVi
         statusItemView.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:defaultImage.size.width + self.design.statusItemIconHorizontalEdgeSpacing];
         statusItemView.statusItem.view = statusItemView;
 
-    }
-}
-
-- (void)handleApplicationDidResignActiveNotification:(NSNotification *)note {
-    if (self.statusItemWindowController && [self.statusItemWindowController windowIsOpen]) {
-        self.highlighted = !self.highlighted;
     }
 }
 
@@ -170,6 +159,14 @@ NSString *const CCNStatusItemViewDidResignActiveNotification = @"CCNStatusItemVi
     CGPoint iconPoint = NSMakePoint(iconX, iconY);
 
     [icon drawAtPoint:iconPoint fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
+}
+
+#pragma mark - NSNotification
+
+- (void)handleWindowDidResignKeyNotification:(NSNotification *)note {
+    if (self.statusItemWindowController && [self.statusItemWindowController windowIsOpen]) {
+        self.highlighted = !self.highlighted;
+    }
 }
 
 #pragma mark - Custom Accessors
@@ -236,7 +233,7 @@ NSString *const CCNStatusItemViewDidResignActiveNotification = @"CCNStatusItemVi
     self.canHandleMouseEvent = NO;
 
     if (self.leftMouseDownActionHandler) {
-        [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
+//        [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
         self.leftMouseDownActionHandler(self);
         self.highlighted = !self.highlighted;
         self.canHandleMouseEvent = YES;
@@ -251,7 +248,7 @@ NSString *const CCNStatusItemViewDidResignActiveNotification = @"CCNStatusItemVi
     self.canHandleMouseEvent = NO;
 
     if (self.rightMouseDownActionHandler) {
-        [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
+//        [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
         self.rightMouseDownActionHandler(self);
         self.highlighted = !self.highlighted;
         self.canHandleMouseEvent = YES;

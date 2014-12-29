@@ -31,12 +31,6 @@
 #import "CCNStatusItemWindowDesign.h"
 
 
-FOUNDATION_EXPORT NSString *const CCNStatusItemViewWillBecomeActiveNotification;
-FOUNDATION_EXPORT NSString *const CCNStatusItemViewDidBecomeActiveNotification;
-FOUNDATION_EXPORT NSString *const CCNStatusItemViewWillResignActiveNotification;
-FOUNDATION_EXPORT NSString *const CCNStatusItemViewDidResignActiveNotification;
-
-
 @class CCNStatusItemView;
 
 typedef void(^CCNStatusItemViewLeftMouseActionHandler)(CCNStatusItemView *statusItem);
