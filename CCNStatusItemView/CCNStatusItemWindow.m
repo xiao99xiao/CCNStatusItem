@@ -43,7 +43,7 @@
 @implementation CCNStatusItemWindow
 
 + (instancetype)statusItemWindowWithDesign:(CCNStatusItemWindowDesign *)design {
-    return [[[self class] alloc] initWithContentRect:NSZeroRect styleMask:NSBorderlessWindowMask|NSResizableWindowMask backing:NSBackingStoreBuffered defer:YES design:design];
+    return [[[self class] alloc] initWithContentRect:NSZeroRect styleMask:NSNonactivatingPanelMask backing:NSBackingStoreBuffered defer:YES design:design];
 }
 
 - (instancetype)initWithContentRect:(NSRect)contentRect styleMask:(NSUInteger)aStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)flag design:(CCNStatusItemWindowDesign *)design {
@@ -53,7 +53,7 @@
         self.alphaValue = 0.0;
         self.opaque = NO;
         self.hasShadow = YES;
-        self.level = NSPopUpMenuWindowLevel;
+        self.level = NSFloatingWindowLevel;
         self.backgroundColor = [NSColor clearColor];
     }
     return self;
@@ -61,7 +61,6 @@
 
 - (BOOL)canBecomeKeyWindow { return YES; }
 - (BOOL)canBecomeMainWindow { return YES; }
-- (BOOL)isKeyWindow { return YES; }
 
 - (void)setContentView:(id)contentView {
     if ([self.userContentView isEqual:contentView]) return;
@@ -88,7 +87,7 @@
     self.userContentView.frame = [self contentRectForFrameRect:bounds];
     self.userContentView.autoresizingMask = (NSViewWidthSizable | NSViewHeightSizable);
     self.userContentView.wantsLayer = YES;
-    self.userContentView.layer.frame = self.backgroundView.frame;
+    self.userContentView.layer.frame = self.userContentView.frame;
     self.userContentView.layer.cornerRadius = _design.statusItemWindowCornerRadius;
     self.userContentView.layer.masksToBounds = YES;
     self.userContentView.layer.edgeAntialiasingMask = kCALayerLeftEdge | kCALayerRightEdge | kCALayerBottomEdge | kCALayerTopEdge;

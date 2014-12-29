@@ -31,7 +31,7 @@
 #import <Cocoa/Cocoa.h>
 #import "CCNStatusItemWindowDesign.h"
 
-@interface CCNStatusItemWindow : NSWindow
+@interface CCNStatusItemWindow : NSPanel
 
 + (instancetype)statusItemWindowWithDesign:(CCNStatusItemWindowDesign *)design;
 
