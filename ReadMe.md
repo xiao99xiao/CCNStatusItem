@@ -5,6 +5,10 @@
 
 `CCNStatusItemView` is a subclass of `NSView` to act as a custom view for `NSStatusItem`.
 
+Here is a shot of the included example application:
+
+![CCNStatusItemView Example Application](https://dl.dropbox.com/u/34133216/WebImages/Github/CCNStatusItemView.png)
+
 
 ## Project Integration
 
