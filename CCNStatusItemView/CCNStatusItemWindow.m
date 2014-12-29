@@ -87,6 +87,11 @@
     self.userContentView = userContentView;
     self.userContentView.frame = [self contentRectForFrameRect:bounds];
     self.userContentView.autoresizingMask = (NSViewWidthSizable | NSViewHeightSizable);
+    self.userContentView.wantsLayer = YES;
+    self.userContentView.layer.frame = self.backgroundView.frame;
+    self.userContentView.layer.cornerRadius = _design.statusItemWindowCornerRadius;
+    self.userContentView.layer.masksToBounds = YES;
+    self.userContentView.layer.edgeAntialiasingMask = kCALayerLeftEdge | kCALayerRightEdge | kCALayerBottomEdge | kCALayerTopEdge;
 
     [self.backgroundView addSubview:self.userContentView];
 }

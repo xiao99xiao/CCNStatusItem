@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name                  = 'CCNStatusItemView'
-  s.version               = '0.0.1'
+  s.version               = '0.0.2'
   s.summary               = 'CCNStatusItemView is a subclass of NSView to act as a custom view for NSStatusItem.'
   s.homepage              = 'https://github.com/phranck/CCNStatusItemView'
   s.author                = { 'Frank Gregor' => 'phranck@cocoanaut.com' }
