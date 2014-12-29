@@ -35,7 +35,7 @@ static const CGFloat CCNStatusItemWindowDefaultArrowHeight              = 9.0;
 static const CGFloat CCNStatusItemWindowDefaultArrowWidth               = 21.0;
 static const CGFloat CCNStatusItemWindowDefaultCornerRadius             = 5.0;
 static const CGFloat CCNStatusItemWindowDefaultStatusItemMargin         = 2.0;
-static const NSTimeInterval CCNStatusItemWindowDefaultAnimationDuration = 0.25;
+static const NSTimeInterval CCNStatusItemWindowDefaultAnimationDuration = 0.20;
 static NSColor *CCNStatusItemWindowDefaultBackgroundColor;
 static const CGFloat CCNStatusItemIconDefaultHorizontalEdgeSpacing      = 10.0;
 
