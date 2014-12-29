@@ -62,7 +62,7 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemWindowAnimationType) {
         self.window = [CCNStatusItemWindow statusItemWindowWithDesign:design];
         self.window.contentViewController = contentViewController;
 
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleApplicationDidResignActiveNotification:) name:NSApplicationDidResignActiveNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleWindowDidResignKeyNotification:) name:NSWindowDidResignKeyNotification object:nil];
     }
     return self;
 }
@@ -115,6 +115,7 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemWindowAnimationType) {
 
         if (animationType == CCNStatusItemWindowAnimationTypeFadeIn) {
             [window makeKeyAndOrderFront:nil];
+            [window makeKeyWindow];
         }
         else {
             [window orderOut:wSelf];
@@ -125,8 +126,7 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemWindowAnimationType) {
 
 #pragma mark - Notifications
 
-
-- (void)handleApplicationDidResignActiveNotification:(NSNotification *)note {
+- (void)handleWindowDidResignKeyNotification:(NSNotification *)note {
     [self dismissStatusItemWindow];
 }
 
