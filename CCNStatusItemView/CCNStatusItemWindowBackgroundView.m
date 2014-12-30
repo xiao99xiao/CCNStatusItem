@@ -59,7 +59,7 @@
     [arrowPath closePath];
 
     [arrowPath setLineCapStyle: NSRoundLineCapStyle];
-    [arrowPath setLineJoinStyle: NSRoundLineJoinStyle];
+    [arrowPath setLineJoinStyle: NSBevelLineJoinStyle];
 
     [windowPath appendBezierPath:arrowPath];
     [windowPath appendBezierPath:backgroundPath];

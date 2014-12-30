@@ -61,7 +61,7 @@ DQ
                 <constraint firstItem="2GC-v0-EfZ" firstAttribute="top" secondItem="97X-GA-gtw" secondAttribute="bottom" constant="13" id="VOd-WC-97Q"/>
                 <constraint firstItem="97X-GA-gtw" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="Vbg-J7-G9q"/>
             </constraints>
-            <point key="canvasLocation" x="-577" y="339.5"/>
+            <point key="canvasLocation" x="-900" y="288.5"/>
         </customView>
     </objects>
 </document>
