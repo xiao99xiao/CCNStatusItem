@@ -9,34 +9,6 @@
          <BuildActionEntry
             buildForTesting = "YES"
             buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FD9AC02B1A4F728600129381"
-               BuildableName = "CCNStatusItemView Example.app"
-               BlueprintName = "CCNStatusItemView Example"
-               ReferencedContainer = "container:CCNStatusItemView Example.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FD9AC03E1A4F728600129381"
-               BuildableName = "CCNStatusItemView ExampleTests.xctest"
-               BlueprintName = "CCNStatusItemView ExampleTests"
-               ReferencedContainer = "container:CCNStatusItemView Example.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
             buildForProfiling = "NO"
             buildForArchiving = "NO"
             buildForAnalyzing = "YES">
@@ -60,16 +32,6 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FD9AC03E1A4F728600129381"
-               BuildableName = "CCNStatusItemView ExampleTests.xctest"
-               BlueprintName = "CCNStatusItemView ExampleTests"
-               ReferencedContainer = "container:CCNStatusItemView Example.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "FD1F33991A53791F007AFB67"
                BuildableName = "CCNStatusItemView Example Tests.xctest"
                BlueprintName = "CCNStatusItemView Example Tests"
@@ -80,9 +42,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FD9AC02B1A4F728600129381"
-            BuildableName = "CCNStatusItemView Example.app"
-            BlueprintName = "CCNStatusItemView Example"
+            BlueprintIdentifier = "FD1F33991A53791F007AFB67"
+            BuildableName = "CCNStatusItemView Example Tests.xctest"
+            BlueprintName = "CCNStatusItemView Example Tests"
             ReferencedContainer = "container:CCNStatusItemView Example.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -96,15 +58,15 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable>
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FD9AC02B1A4F728600129381"
-            BuildableName = "CCNStatusItemView Example.app"
-            BlueprintName = "CCNStatusItemView Example"
+            BlueprintIdentifier = "FD1F33991A53791F007AFB67"
+            BuildableName = "CCNStatusItemView Example Tests.xctest"
+            BlueprintName = "CCNStatusItemView Example Tests"
             ReferencedContainer = "container:CCNStatusItemView Example.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -114,15 +76,15 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable>
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FD9AC02B1A4F728600129381"
-            BuildableName = "CCNStatusItemView Example.app"
-            BlueprintName = "CCNStatusItemView Example"
+            BlueprintIdentifier = "FD1F33991A53791F007AFB67"
+            BuildableName = "CCNStatusItemView Example Tests.xctest"
+            BlueprintName = "CCNStatusItemView Example Tests"
             ReferencedContainer = "container:CCNStatusItemView Example.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
