@@ -28,7 +28,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FD9AC03E1A4F728600129381"
+               BlueprintIdentifier = "FD1F33A81A538110007AFB67"
                BuildableName = "CCNStatusItemView ExampleTests.xctest"
                BlueprintName = "CCNStatusItemView ExampleTests"
                ReferencedContainer = "container:CCNStatusItemView Example.xcodeproj">
@@ -60,19 +60,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FD9AC03E1A4F728600129381"
+               BlueprintIdentifier = "FD1F33A81A538110007AFB67"
                BuildableName = "CCNStatusItemView ExampleTests.xctest"
                BlueprintName = "CCNStatusItemView ExampleTests"
-               ReferencedContainer = "container:CCNStatusItemView Example.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FD1F33991A53791F007AFB67"
-               BuildableName = "CCNStatusItemView Example Tests.xctest"
-               BlueprintName = "CCNStatusItemView Example Tests"
                ReferencedContainer = "container:CCNStatusItemView Example.xcodeproj">
             </BuildableReference>
          </TestableReference>
