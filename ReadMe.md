@@ -1,5 +1,5 @@
 [![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=phranck&url=https://github.com/phranck/CCNStatusItemView&title=CCNStatusItemView&tags=github&category=software)
-![Travis Status](https://travis-ci.org/ricobeck/KFAboutWindow.png?branch=master)
+![Travis Status](https://travis-ci.org/phranck/CCNStatusItemView.png?branch=master)
 
 
 
