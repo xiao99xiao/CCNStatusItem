@@ -156,9 +156,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		FD1F33991A53791F007AFB67 /* CCNStatusItemView Example Tests */ = {
+		FD1F33991A53791F007AFB67 /* CCNStatusItemView ExampleTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FD1F33A41A53791F007AFB67 /* Build configuration list for PBXNativeTarget "CCNStatusItemView Example Tests" */;
+			buildConfigurationList = FD1F33A41A53791F007AFB67 /* Build configuration list for PBXNativeTarget "CCNStatusItemView ExampleTests" */;
 			buildPhases = (
 				FD1F33961A53791F007AFB67 /* Sources */,
 				FD1F33971A53791F007AFB67 /* Frameworks */,
@@ -169,7 +169,7 @@
 			dependencies = (
 				FD1F33A11A53791F007AFB67 /* PBXTargetDependency */,
 			);
-			name = "CCNStatusItemView Example Tests";
+			name = "CCNStatusItemView ExampleTests";
 			productName = "CCNStatusItemView Example Tests";
 			productReference = FD1F339A1A53791F007AFB67 /* CCNStatusItemView Example Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -223,7 +223,7 @@
 			projectRoot = "";
 			targets = (
 				FD9AC02B1A4F728600129381 /* CCNStatusItemView Example */,
-				FD1F33991A53791F007AFB67 /* CCNStatusItemView Example Tests */,
+				FD1F33991A53791F007AFB67 /* CCNStatusItemView ExampleTests */,
 			);
 		};
 /* End PBXProject section */
@@ -431,7 +431,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		FD1F33A41A53791F007AFB67 /* Build configuration list for PBXNativeTarget "CCNStatusItemView Example Tests" */ = {
+		FD1F33A41A53791F007AFB67 /* Build configuration list for PBXNativeTarget "CCNStatusItemView ExampleTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FD1F33A21A53791F007AFB67 /* Debug */,
