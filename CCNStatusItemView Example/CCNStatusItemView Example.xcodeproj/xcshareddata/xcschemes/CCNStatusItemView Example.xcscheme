@@ -43,8 +43,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "FD1F33991A53791F007AFB67"
-               BuildableName = "CCNStatusItemView ExampleTests.xctest"
-               BlueprintName = "CCNStatusItemView ExampleTests"
+               BuildableName = "CCNStatusItemView Example Tests.xctest"
+               BlueprintName = "CCNStatusItemView Example Tests"
                ReferencedContainer = "container:CCNStatusItemView Example.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -71,8 +71,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "FD1F33991A53791F007AFB67"
-               BuildableName = "CCNStatusItemView ExampleTests.xctest"
-               BlueprintName = "CCNStatusItemView ExampleTests"
+               BuildableName = "CCNStatusItemView Example Tests.xctest"
+               BlueprintName = "CCNStatusItemView Example Tests"
                ReferencedContainer = "container:CCNStatusItemView Example.xcodeproj">
             </BuildableReference>
          </TestableReference>
