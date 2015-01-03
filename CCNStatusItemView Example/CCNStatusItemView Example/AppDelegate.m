@@ -22,7 +22,8 @@
 
 //    CCNStatusItemWindowDesign *design = [CCNStatusItemWindowDesign defaultDesign];
 //    design.statusItemWindowBackgroundColor = [NSColor colorWithCalibratedRed:0.780 green:0.807 blue:0.818 alpha:1.000];
-//    design.statusItemWindowCornerRadius = 9.0;
+//    design.statusItemWindowCornerRadius = 13.0;
+//    design.statusItemWindowArrowWidth = 36;
 //    [CCNStatusItemView setDesign:design];
 
     [CCNStatusItemView presentStatusItemWithImage:[NSImage imageNamed:@"statusbar-icon"]

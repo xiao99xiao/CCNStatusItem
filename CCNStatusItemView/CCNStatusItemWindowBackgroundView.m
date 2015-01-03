@@ -30,9 +30,7 @@
 
 #import "CCNStatusItemWindowBackgroundView.h"
 
-@interface CCNStatusItemWindowBackgroundView () {
-    CALayer *_backgroundLayer;
-}
+@interface CCNStatusItemWindowBackgroundView ()
 @property (strong) CCNStatusItemWindowDesign *design;
 @end
 
@@ -47,19 +45,32 @@
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
-    NSRect backgroundRect = NSMakeRect(NSMinX(self.bounds), NSMinY(self.bounds), NSWidth(self.bounds), NSHeight(self.bounds) - self.design.statusItemWindowArrowHeight);
+    CGFloat arrowHeight   = self.design.statusItemWindowArrowHeight;
+    CGFloat arrowWidth    = self.design.statusItemWindowArrowWidth;
+    CGFloat cornerRadius  = self.design.statusItemWindowCornerRadius;
+    NSRect backgroundRect = NSMakeRect(NSMinX(self.bounds), NSMinY(self.bounds), NSWidth(self.bounds), NSHeight(self.bounds) - arrowHeight);
 
-    NSBezierPath *windowPath = [NSBezierPath bezierPath];
-    NSBezierPath *arrowPath = [NSBezierPath bezierPath];
-    NSBezierPath *backgroundPath = [NSBezierPath bezierPathWithRoundedRect:backgroundRect xRadius:self.design.statusItemWindowCornerRadius yRadius:self.design.statusItemWindowCornerRadius];
+    NSBezierPath *windowPath     = [NSBezierPath bezierPath];
+    NSBezierPath *arrowPath      = [NSBezierPath bezierPath];
+    NSBezierPath *backgroundPath = [NSBezierPath bezierPathWithRoundedRect:backgroundRect xRadius:cornerRadius yRadius:cornerRadius];
 
-    [arrowPath moveToPoint: NSMakePoint(NSMaxX(backgroundRect)/2, NSMaxY(backgroundRect) + self.design.statusItemWindowArrowHeight)];
-    [arrowPath lineToPoint: NSMakePoint(NSMaxX(backgroundRect)/2 + self.design.statusItemWindowArrowWidth/2, NSMaxY(backgroundRect))];
-    [arrowPath lineToPoint: NSMakePoint(NSMaxX(backgroundRect)/2 - self.design.statusItemWindowArrowWidth/2, NSMaxY(backgroundRect))];
+    NSPoint leftPoint = {NSWidth(backgroundRect)/2 - arrowWidth/2, NSMaxY(backgroundRect)};
+    NSPoint topPoint = {NSWidth(backgroundRect)/2, NSMaxY(backgroundRect) + arrowHeight};
+    NSPoint rightPoint = {NSWidth(backgroundRect)/2 + arrowWidth/2, NSMaxY(backgroundRect)};
+
+    [arrowPath moveToPoint:leftPoint];
+    [arrowPath curveToPoint:topPoint
+              controlPoint1: NSMakePoint(NSWidth(backgroundRect)/2 - arrowWidth/4, NSMaxY(backgroundRect))
+              controlPoint2: NSMakePoint(NSWidth(backgroundRect)/2 - arrowWidth/8, NSMaxY(backgroundRect) + arrowHeight)];
+    [arrowPath curveToPoint:rightPoint
+              controlPoint1: NSMakePoint(NSWidth(backgroundRect)/2 + arrowWidth/8, NSMaxY(backgroundRect) + arrowHeight)
+              controlPoint2: NSMakePoint(NSWidth(backgroundRect)/2 + arrowWidth/4, NSMaxY(backgroundRect))];
+    [arrowPath lineToPoint:leftPoint];
     [arrowPath closePath];
 
     [arrowPath setLineCapStyle: NSRoundLineCapStyle];
     [arrowPath setLineJoinStyle: NSBevelLineJoinStyle];
+
 
     [windowPath appendBezierPath:arrowPath];
     [windowPath appendBezierPath:backgroundPath];

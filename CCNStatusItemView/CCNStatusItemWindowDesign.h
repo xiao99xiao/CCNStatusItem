@@ -36,8 +36,8 @@
 + (instancetype)defaultDesign;
 
 // status item window
-@property (assign, nonatomic) CGFloat statusItemWindowArrowHeight;                  // default: 9.0
-@property (assign, nonatomic) CGFloat statusItemWindowArrowWidth;                   // default: 21.0
+@property (assign, nonatomic) CGFloat statusItemWindowArrowHeight;                  // default: 11.0
+@property (assign, nonatomic) CGFloat statusItemWindowArrowWidth;                   // default: 42.0
 @property (assign, nonatomic) CGFloat statusItemWindowCornerRadius;                 // default: 5.0
 @property (assign, nonatomic) CGFloat statusItemWindowToStatusItemMargin;           // default: 2.0
 @property (assign, nonatomic) NSTimeInterval statusItemWindowAnimationDuration;     // default: 0.20
