@@ -39,16 +39,18 @@ That's all! You will have some options to change the design of this statusItem p
 
 ```Objective-C
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-   ...
-
-   CCNStatusItemWindowDesign *design = [CCNStatusItemWindowDesign defaultDesign];	// get the default design
-   design.statusItemWindowCornerRadius = 9.0;	// the default value is 5.0
-   
-   [CCNStatusItemView setDesign:design];
-   [CCNStatusItemView presentStatusItemWithImage:[NSImage imageNamed:@"statusBarIcon"]
-                                  alternateImage:[NSImage imageNamed:@"statusBarAlternateIcon"]
-                           contentViewController:[[MyContentViewController alloc] initWithNibName:NSStringFromClass([MyContentViewController class]) bundle:nil]];
-   ...
+    ...
+    
+    CCNStatusItemWindowStyle *style = [CCNStatusItemWindowStyle defaultStyle];
+    style.cornerRadius = 13.0;
+    style.presentationTransition = CCNPresentationTransitionSlideAndFade;
+    [CCNStatusItemView setWindowStyle:style];
+    
+    [CCNStatusItemView setDesign:design];
+    [CCNStatusItemView presentStatusItemWithImage:[NSImage imageNamed:@"statusBarIcon"]
+                                   alternateImage:[NSImage imageNamed:@"statusBarAlternateIcon"]
+                            contentViewController:[[MyContentViewController alloc] initWithNibName:NSStringFromClass([MyContentViewController class]) bundle:nil]];
+    ...
 }
 ```
 
