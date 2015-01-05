@@ -31,23 +31,23 @@
 #import "CCNStatusItemWindowBackgroundView.h"
 
 @interface CCNStatusItemWindowBackgroundView ()
-@property (strong) CCNStatusItemWindowDesign *design;
+@property (strong) CCNStatusItemWindowStyle *style;
 @end
 
 @implementation CCNStatusItemWindowBackgroundView
 
-- (instancetype)initWithFrame:(NSRect)frameRect design:(CCNStatusItemWindowDesign *)design {
+- (instancetype)initWithFrame:(NSRect)frameRect style:(CCNStatusItemWindowStyle *)style {
     self = [super initWithFrame:frameRect];
     if (self) {
-        self.design = design;
+        self.style = style;
     }
     return self;
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
-    CGFloat arrowHeight   = self.design.statusItemWindowArrowHeight;
-    CGFloat arrowWidth    = self.design.statusItemWindowArrowWidth;
-    CGFloat cornerRadius  = self.design.statusItemWindowCornerRadius;
+    CGFloat arrowHeight   = self.style.arrowHeight;
+    CGFloat arrowWidth    = self.style.arrowWidth;
+    CGFloat cornerRadius  = self.style.cornerRadius;
     NSRect backgroundRect = NSMakeRect(NSMinX(self.bounds), NSMinY(self.bounds), NSWidth(self.bounds), NSHeight(self.bounds) - arrowHeight);
 
     NSBezierPath *windowPath     = [NSBezierPath bezierPath];
@@ -61,9 +61,9 @@
     [arrowPath moveToPoint:leftPoint];
     [arrowPath curveToPoint:topPoint
               controlPoint1: NSMakePoint(NSWidth(backgroundRect)/2 - arrowWidth/4, NSMaxY(backgroundRect))
-              controlPoint2: NSMakePoint(NSWidth(backgroundRect)/2 - arrowWidth/8, NSMaxY(backgroundRect) + arrowHeight)];
+              controlPoint2: NSMakePoint(NSWidth(backgroundRect)/2 - arrowWidth/7, NSMaxY(backgroundRect) + arrowHeight)];
     [arrowPath curveToPoint:rightPoint
-              controlPoint1: NSMakePoint(NSWidth(backgroundRect)/2 + arrowWidth/8, NSMaxY(backgroundRect) + arrowHeight)
+              controlPoint1: NSMakePoint(NSWidth(backgroundRect)/2 + arrowWidth/7, NSMaxY(backgroundRect) + arrowHeight)
               controlPoint2: NSMakePoint(NSWidth(backgroundRect)/2 + arrowWidth/4, NSMaxY(backgroundRect))];
     [arrowPath lineToPoint:leftPoint];
     [arrowPath closePath];
@@ -75,7 +75,7 @@
     [windowPath appendBezierPath:arrowPath];
     [windowPath appendBezierPath:backgroundPath];
 
-    [self.design.statusItemWindowBackgroundColor setFill];
+    [self.style.backgroundColor setFill];
     [windowPath fill];
 }
 

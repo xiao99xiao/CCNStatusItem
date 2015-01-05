@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "CCNStatusItemView.h"
-#import "CCNStatusItemWindowDesign.h"
+#import "CCNStatusItemWindowStyle.h"
 #import "ContentViewController.h"
 
 
@@ -20,11 +20,12 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 
-//    CCNStatusItemWindowDesign *design = [CCNStatusItemWindowDesign defaultDesign];
-//    design.statusItemWindowBackgroundColor = [NSColor colorWithCalibratedRed:0.780 green:0.807 blue:0.818 alpha:1.000];
-//    design.statusItemWindowCornerRadius = 13.0;
-//    design.statusItemWindowArrowWidth = 36;
-//    [CCNStatusItemView setDesign:design];
+//    CCNStatusItemWindowStyle *style = [CCNStatusItemWindowStyle defaultStyle];
+//    style.backgroundColor = [NSColor colorWithCalibratedRed:0.780 green:0.807 blue:0.818 alpha:1.000];
+//    style.cornerRadius = 13.0;
+//    style.arrowWidth = 36;
+//    style.presentationTransition = CCNPresentationTransitionSlideAndFade;
+//    [CCNStatusItemView setWindowStyle:style];
 
     [CCNStatusItemView presentStatusItemWithImage:[NSImage imageNamed:@"statusbar-icon"]
                                    alternateImage:[NSImage imageNamed:@"statusbar-alternate-icon"]

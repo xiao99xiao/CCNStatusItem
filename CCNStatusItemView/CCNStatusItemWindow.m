@@ -31,10 +31,10 @@
 #import "CCNStatusItemWindow.h"
 #import "CCNStatusItemWindowBackgroundView.h"
 #import "CCNStatusItemView.h"
-#import "CCNStatusItemWindowDesign.h"
+#import "CCNStatusItemWindowStyle.h"
 
 @interface CCNStatusItemWindow () {
-    CCNStatusItemWindowDesign *_design;
+    CCNStatusItemWindowStyle *_style;
 }
 @property (strong) NSView *userContentView;
 @property (strong, nonatomic) CCNStatusItemWindowBackgroundView *backgroundView;
@@ -42,13 +42,13 @@
 
 @implementation CCNStatusItemWindow
 
-+ (instancetype)statusItemWindowWithDesign:(CCNStatusItemWindowDesign *)design {
-    return [[[self class] alloc] initWithContentRect:NSZeroRect styleMask:NSNonactivatingPanelMask backing:NSBackingStoreBuffered defer:YES design:design];
++ (instancetype)statusItemWindowWithStyle:(CCNStatusItemWindowStyle *)style {
+    return [[[self class] alloc] initWithContentRect:NSZeroRect styleMask:NSNonactivatingPanelMask backing:NSBackingStoreBuffered defer:YES style:style];
 }
 
-- (instancetype)initWithContentRect:(NSRect)contentRect styleMask:(NSUInteger)aStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)flag design:(CCNStatusItemWindowDesign *)design {
-    _design = design;
-    self = [super initWithContentRect:contentRect styleMask:aStyle backing:bufferingType defer:flag];
+- (instancetype)initWithContentRect:(NSRect)contentRect styleMask:(NSUInteger)styleMask backing:(NSBackingStoreType)bufferingType defer:(BOOL)flag style:(CCNStatusItemWindowStyle *)style {
+    _style = style;
+    self = [super initWithContentRect:contentRect styleMask:styleMask backing:bufferingType defer:flag];
     if (self) {
         self.alphaValue = 0.0;
         self.opaque = NO;
@@ -70,10 +70,10 @@
 
     self.backgroundView = super.contentView;
     if (!self.backgroundView) {
-        self.backgroundView = [[CCNStatusItemWindowBackgroundView alloc] initWithFrame:bounds design:_design];
+        self.backgroundView = [[CCNStatusItemWindowBackgroundView alloc] initWithFrame:bounds style:_style];
         self.backgroundView.wantsLayer = YES;
         self.backgroundView.layer.frame = self.backgroundView.frame;
-        self.backgroundView.layer.cornerRadius = _design.statusItemWindowCornerRadius;
+        self.backgroundView.layer.cornerRadius = _style.cornerRadius;
         self.backgroundView.layer.masksToBounds = YES;
         self.backgroundView.layer.edgeAntialiasingMask = kCALayerLeftEdge | kCALayerRightEdge | kCALayerBottomEdge | kCALayerTopEdge;
         super.contentView = self.backgroundView;
@@ -88,7 +88,7 @@
     self.userContentView.autoresizingMask = (NSViewWidthSizable | NSViewHeightSizable);
     self.userContentView.wantsLayer = YES;
     self.userContentView.layer.frame = self.userContentView.frame;
-    self.userContentView.layer.cornerRadius = _design.statusItemWindowCornerRadius;
+    self.userContentView.layer.cornerRadius = _style.cornerRadius;
     self.userContentView.layer.masksToBounds = YES;
     self.userContentView.layer.edgeAntialiasingMask = kCALayerLeftEdge | kCALayerRightEdge | kCALayerBottomEdge | kCALayerTopEdge;
 
@@ -100,7 +100,7 @@
 }
 
 - (NSRect)frameRectForContentRect:(NSRect)contentRect {
-    return NSMakeRect(NSMinX(contentRect), NSMinY(contentRect), NSWidth(contentRect), NSHeight(contentRect) + _design.statusItemWindowArrowHeight);
+    return NSMakeRect(NSMinX(contentRect), NSMinY(contentRect), NSWidth(contentRect), NSHeight(contentRect) + _style.arrowHeight);
 }
 
 @end

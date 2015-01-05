@@ -42,7 +42,7 @@
 @property (assign, nonatomic) BOOL isStatusItemWindowVisible;
 
 @property (strong, nonatomic) CCNStatusItemWindowController *statusItemWindowController;
-@property (strong, nonatomic) CCNStatusItemWindowDesign *design;
+@property (strong, nonatomic) CCNStatusItemWindowStyle *style;
 @end
 
 @implementation CCNStatusItemView
@@ -63,7 +63,7 @@
         _canHandleMouseEvent = YES;
         _isStatusItemWindowVisible = NO;
         _statusItemWindowController = nil;
-        _design = [CCNStatusItemWindowDesign defaultDesign];
+        _style = [CCNStatusItemWindowStyle defaultStyle];
     }
     return self;
 }
@@ -74,7 +74,7 @@
     _leftMouseDownActionHandler = nil;
     _rightMouseDownActionHandler = nil;
     _statusItemWindowController = nil;
-    _design = nil;
+    _style = nil;
 }
 
 + (instancetype)sharedInstance {
@@ -109,7 +109,7 @@
         statusItemView.alternateImage = alternateImage;
         statusItemView.frame = NSMakeRect(0, 0, defaultImage.size.width, [NSStatusBar systemStatusBar].thickness);
 
-        statusItemView.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:defaultImage.size.width + self.design.statusItemIconHorizontalEdgeSpacing];
+        statusItemView.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:defaultImage.size.width + self.style.iconHorizontalEdgeSpacing];
         statusItemView.statusItem.view = statusItemView;
 
     }
@@ -128,7 +128,7 @@
     sharedItem.presentationMode = CCNStatusItemPresentationModeImage;
     sharedItem.statusItemWindowController = [[CCNStatusItemWindowController alloc] initWithConnectedStatusItem:sharedItem
                                                                                          contentViewController:contentViewController
-                                                                                                        design:sharedItem.design];
+                                                                                                         style:sharedItem.style];
 }
 
 + (void)presentStatusItemWithImage:(NSImage *)defaultImage
@@ -211,16 +211,16 @@
     }
 }
 
-- (void)setDesign:(CCNStatusItemWindowDesign *)design {
-    _design = design;
-    self.toolTip = _design.statusItemToolTip;
+- (void)setWindowStyle:(CCNStatusItemWindowStyle *)style {
+    _style = style;
+    self.toolTip = _style.toolTip;
 }
 
 #pragma mark - Handling StatusItem Layout
 
-+ (void)setDesign:(CCNStatusItemWindowDesign *)design {
++ (void)setWindowStyle:(CCNStatusItemWindowStyle *)windowStyle {
     CCNStatusItemView *sharedInstance = [CCNStatusItemView sharedInstance];
-    sharedInstance.design = design;
+    sharedInstance.windowStyle = windowStyle;
 }
 
 #pragma mark - NSResponder
@@ -233,7 +233,6 @@
     self.canHandleMouseEvent = NO;
 
     if (self.leftMouseDownActionHandler) {
-//        [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
         self.leftMouseDownActionHandler(self);
         self.highlighted = !self.highlighted;
         self.canHandleMouseEvent = YES;
@@ -248,7 +247,6 @@
     self.canHandleMouseEvent = NO;
 
     if (self.rightMouseDownActionHandler) {
-//        [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
         self.rightMouseDownActionHandler(self);
         self.highlighted = !self.highlighted;
         self.canHandleMouseEvent = YES;

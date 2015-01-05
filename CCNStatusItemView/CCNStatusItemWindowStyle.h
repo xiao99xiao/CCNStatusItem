@@ -31,20 +31,29 @@
 #import <Cocoa/Cocoa.h>
 #import <Foundation/Foundation.h>
 
-@interface CCNStatusItemWindowDesign : NSObject
 
-+ (instancetype)defaultDesign;
+typedef NS_ENUM(NSUInteger, CCNPresentationTransition) {
+    CCNPresentationTransitionNone = 0,
+    CCNPresentationTransitionFade,
+    CCNPresentationTransitionSlideAndFade
+};
+
+@interface CCNStatusItemWindowStyle : NSObject
+
++ (instancetype)defaultStyle;
 
 // status item window
-@property (assign, nonatomic) CGFloat statusItemWindowArrowHeight;                  // default: 11.0
-@property (assign, nonatomic) CGFloat statusItemWindowArrowWidth;                   // default: 42.0
-@property (assign, nonatomic) CGFloat statusItemWindowCornerRadius;                 // default: 5.0
-@property (assign, nonatomic) CGFloat statusItemWindowToStatusItemMargin;           // default: 2.0
-@property (assign, nonatomic) NSTimeInterval statusItemWindowAnimationDuration;     // default: 0.20
-@property (strong, nonatomic) NSColor *statusItemWindowBackgroundColor;
+@property (assign, nonatomic) CGFloat arrowHeight;                                  // default: 11.0
+@property (assign, nonatomic) CGFloat arrowWidth;                                   // default: 42.0
+@property (assign, nonatomic) CGFloat cornerRadius;                                 // default: 5.0
+@property (assign, nonatomic) CGFloat windowToStatusItemMargin;                     // default: 2.0
+@property (assign, nonatomic) NSTimeInterval animationDuration;                     // default: 0.21
+@property (strong, nonatomic) NSColor *backgroundColor;                             // default: [NSColor windowBackgroundColor]
+@property (assign, nonatomic) CCNPresentationTransition presentationTransition;     // default: CCNPresentationTransitionFade
+                                                                                    // On setting the 'presentationTranstion' to case 'CCNPresentationTransitionNone' property 'animationDuration' will be set to 0
 
 // status item
-@property (strong, nonatomic) NSString *statusItemToolTip;
-@property (assign, nonatomic) CGFloat statusItemIconHorizontalEdgeSpacing;          // default: 10.0
+@property (strong, nonatomic) NSString *toolTip;
+@property (assign, nonatomic) CGFloat iconHorizontalEdgeSpacing;          // default: 10.0
 
 @end
