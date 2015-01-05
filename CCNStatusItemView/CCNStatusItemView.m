@@ -64,6 +64,7 @@
         _isStatusItemWindowVisible = NO;
         _statusItemWindowController = nil;
         _style = [CCNStatusItemWindowStyle defaultStyle];
+        _appearsDisabled = NO;
     }
     return self;
 }
@@ -95,6 +96,7 @@
     self.presentationMode = CCNStatusItemPresentationModeUndefined;
     self.frame = NSZeroRect;
     self.statusItemWindowController = nil;
+    self.appearsDisabled = NO;
 }
 
 - (void)configureWithImage:(NSImage *)defaultImage alternateImage:(NSImage *)alternateImage {
@@ -112,6 +114,7 @@
         statusItemView.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:defaultImage.size.width + self.style.iconHorizontalEdgeSpacing];
         statusItemView.statusItem.view = statusItemView;
 
+        [[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(handleAppleInterfaceThemeChangedNotification:) name:@"AppleInterfaceThemeChangedNotification" object:nil];
     }
 }
 
@@ -169,6 +172,12 @@
     }
 }
 
+- (void)handleAppleInterfaceThemeChangedNotification:(NSNotification *)note {
+    //TODO: No idea how to check to which mode we switched by now.
+    //      The notification object doesn't provide an object nor an userInfo dict... Thanks a lot Apple!
+    NSLog(@"handleAppleInterfaceThemeChangedNotification: %@", note);
+}
+
 #pragma mark - Custom Accessors
 
 - (void)setHighlighted:(BOOL)highlighted {
@@ -181,6 +190,7 @@
 - (void)setImage:(NSImage *)newImage {
     if (_image != newImage) {
         _image = newImage;
+        [_image setTemplate:YES];
         [self setNeedsDisplay:YES];
     }
 }
@@ -188,6 +198,7 @@
 - (void)setAlternateImage:(NSImage *)newImage {
     if (_alternateImage != newImage) {
         _alternateImage = newImage;
+        [_alternateImage setTemplate:YES];
         if (self.isHighlighted) {
             [self setNeedsDisplay:YES];
         }
@@ -215,6 +226,54 @@
     _style = style;
     self.toolTip = _style.toolTip;
 }
+
+- (void)setAppearsDisabled:(BOOL)appearsDisabled {
+    static NSImage *imageBackup = nil;
+    static NSImage *alternateImageBackup = nil;
+
+    if (_appearsDisabled != appearsDisabled) {
+        _appearsDisabled = appearsDisabled;
+
+        if (_appearsDisabled) {
+            imageBackup = [self.image copy];
+            alternateImageBackup = [self.alternateImage copy];
+
+            self.image = [self tintedImage:self.image withColor:[NSColor lightGrayColor]];
+            self.alternateImage = [self tintedImage:self.alternateImage withColor:[NSColor lightGrayColor]];
+        }
+        else {
+            if (imageBackup) {
+                self.image = [imageBackup copy];
+                imageBackup = nil;
+            }
+            if (alternateImageBackup) {
+                self.alternateImage = [alternateImageBackup copy];
+                alternateImageBackup = nil;
+            }
+        }
+    }
+}
+
+#pragma mark - Helper
+
+- (NSImage *)tintedImage:(NSImage *)image withColor:(NSColor *)color  {
+    if (color) {
+        NSImage *tintedImage = [image copy];
+        NSSize iconSize = [tintedImage size];
+        NSRect iconRect = {NSZeroPoint, iconSize};
+
+        [tintedImage lockFocus];
+        [color set];
+        NSRectFillUsingOperation(iconRect, NSCompositeSourceAtop);
+        [tintedImage unlockFocus];
+
+        return tintedImage;
+    }
+    else {
+        return image;
+    }
+}
+
 
 #pragma mark - Handling StatusItem Layout
 

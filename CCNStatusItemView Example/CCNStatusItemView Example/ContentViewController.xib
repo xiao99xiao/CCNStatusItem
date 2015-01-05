@@ -26,6 +26,18 @@
                             <view key="view" id="bey-20-xGw">
                                 <rect key="frame" x="10" y="19" width="519" height="249"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kyl-1K-MzH">
+                                        <rect key="frame" x="162" y="118" width="195" height="18"/>
+                                        <buttonCell key="cell" type="check" title="StatusItem appears disabled" bezelStyle="regularSquare" imagePosition="left" inset="2" id="jjb-ZN-RLx">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="enableDisableCheckboxAction:" target="Ruq-Mh-u0B" id="Hiz-Sk-w78"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                             </view>
                         </tabViewItem>
                         <tabViewItem label="View" identifier="2" id="9Wh-Sb-meA">
@@ -64,5 +76,10 @@ DQ
             </constraints>
             <point key="canvasLocation" x="-993.5" y="288.5"/>
         </customView>
+        <customObject id="Ruq-Mh-u0B" customClass="AppDelegate">
+            <connections>
+                <outlet property="enableDisableCheckbox" destination="kyl-1K-MzH" id="s79-SB-K3M"/>
+            </connections>
+        </customObject>
     </objects>
 </document>

@@ -14,6 +14,7 @@
 
 @interface AppDelegate ()
 @property (weak) IBOutlet NSWindow *window;
+@property (weak) IBOutlet NSButton *enableDisableCheckbox;
 @end
 
 @implementation AppDelegate
@@ -30,7 +31,11 @@
     [CCNStatusItemView presentStatusItemWithImage:[NSImage imageNamed:@"statusbar-icon"]
                                    alternateImage:[NSImage imageNamed:@"statusbar-alternate-icon"]
                             contentViewController:[[ContentViewController alloc] initWithNibName:NSStringFromClass([ContentViewController class]) bundle:nil]];
+}
 
+- (IBAction)enableDisableCheckboxAction:(id)sender {
+    CCNStatusItemView *item = [CCNStatusItemView sharedInstance];
+    item.appearsDisabled = self.enableDisableCheckbox.state == NSOnState;
 }
 
 @end

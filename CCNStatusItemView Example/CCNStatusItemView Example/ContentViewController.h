@@ -11,5 +11,7 @@
 @interface ContentViewController : NSViewController
 @property (weak) IBOutlet NSButton *quitButton;
 @property (weak) IBOutlet NSTabView *tabview;
+
 - (IBAction)quitButtonAction:(id)sender;
+
 @end

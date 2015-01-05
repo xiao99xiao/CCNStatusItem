@@ -58,12 +58,15 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemPresentationMode) {
 //                   leftMouseAction:(CCNStatusItemViewLeftMouseActionHandler)leftMouseAction
 //                  rightMouseAction:(CCNStatusItemViewRightMouseActionHandler)rightMouseAction;
 
++ (instancetype)sharedInstance;
+
 #pragma mark - Handling the StatusBarItem Image
 
 @property (strong, nonatomic) NSImage *image;
 @property (strong, nonatomic) NSImage *alternateImage;
 @property (readonly, nonatomic) BOOL isStatusItemWindowVisible;
 @property (readonly, nonatomic) CCNStatusItemPresentationMode presentationMode;
+@property (assign, nonatomic) BOOL appearsDisabled;
 
 
 #pragma mark - Handling StatusItem Layout
