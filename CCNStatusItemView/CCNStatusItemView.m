@@ -30,9 +30,20 @@
 #import "CCNStatusItemView.h"
 #import "CCNStatusItemWindowController.h"
 
+NSString *const CCNInterfaceStyleDefaultsKey = @"AppleInterfaceStyle";
+NSString *const CCNAppleInterfaceThemeChangedNotification = @"AppleInterfaceThemeChangedNotification";
+
+static NSImage  *_itemImage, *_alternateItemImage;
+
+typedef NS_ENUM(NSUInteger, CCNStatusItemViewInterfaceStyle) {
+    CCNStatusItemViewInterfaceStyleLight = 0,
+    CCNStatusItemViewInterfaceStyleDark
+};
+
 
 @interface CCNStatusItemView () <NSWindowDelegate>
 @property (strong) NSStatusItem *statusItem;
+@property (readonly) CCNStatusItemViewInterfaceStyle interfaceStyle;
 @property (assign, nonatomic, getter = isHighlighted) BOOL highlighted;
 @property (copy) CCNStatusItemViewLeftMouseActionHandler leftMouseDownActionHandler;
 @property (copy) CCNStatusItemViewRightMouseActionHandler rightMouseDownActionHandler;
@@ -52,8 +63,8 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _image = nil;
-        _alternateImage = nil;
+        _itemImage = nil;
+        _alternateItemImage = nil;
 
         _statusItem = nil;
         _highlighted = NO;
@@ -70,8 +81,6 @@
 }
 
 - (void)dealloc {
-    _image = nil;
-    _alternateImage = nil;
     _leftMouseDownActionHandler = nil;
     _rightMouseDownActionHandler = nil;
     _statusItemWindowController = nil;
@@ -107,14 +116,17 @@
     if (statusItemView) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleWindowDidResignKeyNotification:) name:NSWindowDidResignKeyNotification object:nil];
 
-        statusItemView.image = defaultImage;
-        statusItemView.alternateImage = alternateImage;
+        _itemImage = defaultImage;
+        _alternateItemImage = alternateImage;
+
+        statusItemView.image = [self imageForCurrentInterfaceStyle];
+        statusItemView.alternateImage = [self alternateImageForCurrentInterfaceStyle];
         statusItemView.frame = NSMakeRect(0, 0, defaultImage.size.width, [NSStatusBar systemStatusBar].thickness);
 
         statusItemView.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:defaultImage.size.width + self.style.iconHorizontalEdgeSpacing];
         statusItemView.statusItem.view = statusItemView;
 
-        [[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(handleAppleInterfaceThemeChangedNotification:) name:@"AppleInterfaceThemeChangedNotification" object:nil];
+        [[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(handleAppleInterfaceThemeChangedNotification:) name:CCNAppleInterfaceThemeChangedNotification object:nil];
     }
 }
 
@@ -173,9 +185,9 @@
 }
 
 - (void)handleAppleInterfaceThemeChangedNotification:(NSNotification *)note {
-    //TODO: No idea how to check to which mode we switched by now.
-    //      The notification object doesn't provide an object nor an userInfo dict... Thanks a lot Apple!
-    NSLog(@"handleAppleInterfaceThemeChangedNotification: %@", note);
+//    [self setImage:[self imageForCurrentInterfaceStyle]];
+//    [self setAlternateImage:[self alternateImageForCurrentInterfaceStyle]];
+    [self setNeedsDisplay:YES];
 }
 
 #pragma mark - Custom Accessors
@@ -187,18 +199,24 @@
     }
 }
 
+- (NSImage *)image {
+    return [self imageForCurrentInterfaceStyle];
+}
+
 - (void)setImage:(NSImage *)newImage {
-    if (_image != newImage) {
-        _image = newImage;
-        [_image setTemplate:YES];
+    if (_itemImage != newImage) {
+        _itemImage = newImage;
         [self setNeedsDisplay:YES];
     }
 }
 
+- (NSImage *)alternateImage {
+    return [self alternateImageForCurrentInterfaceStyle];
+}
+
 - (void)setAlternateImage:(NSImage *)newImage {
-    if (_alternateImage != newImage) {
-        _alternateImage = newImage;
-        [_alternateImage setTemplate:YES];
+    if (_alternateItemImage != newImage) {
+        _alternateItemImage = newImage;
         if (self.isHighlighted) {
             [self setNeedsDisplay:YES];
         }
@@ -228,30 +246,15 @@
 }
 
 - (void)setAppearsDisabled:(BOOL)appearsDisabled {
-    static NSImage *imageBackup = nil;
-    static NSImage *alternateImageBackup = nil;
-
     if (_appearsDisabled != appearsDisabled) {
         _appearsDisabled = appearsDisabled;
-
-        if (_appearsDisabled) {
-            imageBackup = [self.image copy];
-            alternateImageBackup = [self.alternateImage copy];
-
-            self.image = [self tintedImage:self.image withColor:[NSColor lightGrayColor]];
-            self.alternateImage = [self tintedImage:self.alternateImage withColor:[NSColor lightGrayColor]];
-        }
-        else {
-            if (imageBackup) {
-                self.image = [imageBackup copy];
-                imageBackup = nil;
-            }
-            if (alternateImageBackup) {
-                self.alternateImage = [alternateImageBackup copy];
-                alternateImageBackup = nil;
-            }
-        }
+        [self setNeedsDisplay:YES];
     }
+}
+
+- (CCNStatusItemViewInterfaceStyle)interfaceStyle {
+    NSString *style = [[NSUserDefaults standardUserDefaults] stringForKey:CCNInterfaceStyleDefaultsKey];
+    return ([style isEqualToString:@"Dark"] ? CCNStatusItemViewInterfaceStyleDark : CCNStatusItemViewInterfaceStyleLight);
 }
 
 #pragma mark - Helper
@@ -274,6 +277,33 @@
     }
 }
 
+- (NSImage *)tintedStatusItemImageForCurrentInterfaceStyle:(NSImage *)originalImage {
+    static NSImage *tintedImage;
+    if (self.interfaceStyle == CCNStatusItemViewInterfaceStyleLight) {
+        if (self.appearsDisabled) {
+            tintedImage = [self tintedImage:originalImage withColor:[NSColor lightGrayColor]];
+        }
+        else {
+            tintedImage = originalImage;
+        }
+    } else {
+        if (self.appearsDisabled) {
+            tintedImage = [self tintedImage:originalImage withColor:[NSColor colorWithCalibratedWhite:0.322 alpha:1.000]];
+        }
+        else {
+            tintedImage = [self tintedImage:originalImage withColor:[NSColor whiteColor]];
+        }
+    }
+    return tintedImage;
+}
+
+- (NSImage *)imageForCurrentInterfaceStyle {
+    return [self tintedStatusItemImageForCurrentInterfaceStyle:_itemImage];
+}
+
+- (NSImage *)alternateImageForCurrentInterfaceStyle {
+    return [self tintedStatusItemImageForCurrentInterfaceStyle:_alternateItemImage];
+}
 
 #pragma mark - Handling StatusItem Layout
 

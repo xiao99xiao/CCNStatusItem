@@ -8,48 +8,17 @@
         <customObject id="-2" userLabel="File's Owner" customClass="ContentViewController">
             <connections>
                 <outlet property="quitButton" destination="2GC-v0-EfZ" id="W6a-3q-nDa"/>
-                <outlet property="tabview" destination="97X-GA-gtw" id="VoA-Z8-r1a"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="565" height="335"/>
+            <rect key="frame" x="0.0" y="0.0" width="349" height="198"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <tabView controlSize="mini" translatesAutoresizingMaskIntoConstraints="NO" id="97X-GA-gtw">
-                    <rect key="frame" x="13" y="36" width="539" height="281"/>
-                    <font key="font" metaFont="miniSystem"/>
-                    <tabViewItems>
-                        <tabViewItem label="Tab" identifier="1" id="rHj-LY-g6M">
-                            <view key="view" id="bey-20-xGw">
-                                <rect key="frame" x="10" y="19" width="519" height="249"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kyl-1K-MzH">
-                                        <rect key="frame" x="162" y="118" width="195" height="18"/>
-                                        <buttonCell key="cell" type="check" title="StatusItem appears disabled" bezelStyle="regularSquare" imagePosition="left" inset="2" id="jjb-ZN-RLx">
-                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="enableDisableCheckboxAction:" target="Ruq-Mh-u0B" id="Hiz-Sk-w78"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </view>
-                        </tabViewItem>
-                        <tabViewItem label="View" identifier="2" id="9Wh-Sb-meA">
-                            <view key="view" id="i2G-yY-fVl">
-                                <rect key="frame" x="10" y="33" width="157" height="78"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                            </view>
-                        </tabViewItem>
-                    </tabViewItems>
-                </tabView>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2GC-v0-EfZ">
-                    <rect key="frame" x="242" y="5" width="82" height="32"/>
+                    <rect key="frame" x="134" y="5" width="82" height="32"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="70" id="1qC-um-NVm"/>
                         <constraint firstAttribute="height" constant="21" id="CMb-3X-4Bq"/>
@@ -65,16 +34,24 @@ DQ
                         <action selector="quitButtonAction:" target="-2" id="r7Q-JY-O7R"/>
                     </connections>
                 </button>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="kyl-1K-MzH">
+                    <rect key="frame" x="77" y="90" width="195" height="18"/>
+                    <buttonCell key="cell" type="check" title="StatusItem appears disabled" bezelStyle="regularSquare" imagePosition="left" inset="2" id="jjb-ZN-RLx">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="enableDisableCheckboxAction:" target="Ruq-Mh-u0B" id="Hiz-Sk-w78"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
-                <constraint firstItem="97X-GA-gtw" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="5Rb-xz-Ahz"/>
                 <constraint firstAttribute="bottom" secondItem="2GC-v0-EfZ" secondAttribute="bottom" constant="12" id="Cf7-hq-DEF"/>
-                <constraint firstAttribute="trailing" secondItem="97X-GA-gtw" secondAttribute="trailing" constant="20" id="Dwb-ef-xFA"/>
                 <constraint firstAttribute="centerX" secondItem="2GC-v0-EfZ" secondAttribute="centerX" id="QUZ-k4-0Yd"/>
-                <constraint firstItem="2GC-v0-EfZ" firstAttribute="top" secondItem="97X-GA-gtw" secondAttribute="bottom" constant="13" id="VOd-WC-97Q"/>
-                <constraint firstItem="97X-GA-gtw" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="Vbg-J7-G9q"/>
+                <constraint firstAttribute="centerY" secondItem="kyl-1K-MzH" secondAttribute="centerY" id="umw-5D-END"/>
+                <constraint firstAttribute="centerX" secondItem="kyl-1K-MzH" secondAttribute="centerX" id="wZy-Fi-Avd"/>
             </constraints>
-            <point key="canvasLocation" x="-993.5" y="288.5"/>
+            <point key="canvasLocation" x="-1101.5" y="220"/>
         </customView>
         <customObject id="Ruq-Mh-u0B" customClass="AppDelegate">
             <connections>
