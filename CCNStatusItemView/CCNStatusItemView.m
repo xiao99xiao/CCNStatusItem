@@ -120,7 +120,7 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemViewInterfaceStyle) {
 
         sharedItem.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
         if ([sharedItem.statusItem respondsToSelector:@selector(button)]) {
-            [self configureCustomStatusItem];
+            [self configureStatusItemButton];
         }
         else {
             [self configureCustomStatusItem];
