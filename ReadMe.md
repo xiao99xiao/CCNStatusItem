@@ -5,14 +5,15 @@
 
 ## Overview
 
-`CCNStatusItemView` is a subclass of `NSView` to act as a custom view for `NSStatusItem`. It supports a customizable statusItemWindow handling any `NSViewController` instance for presenting the content.
+`CCNStatusItemView` is a subclass of `NSView` to act as a custom view for `NSStatusItem`. Running on Yosemite it has full support for the class `NSStatusBarButton` which is provided by `NSStatusItem` via the `button` property. Yosemite's dark menu mode will be automatically handled.<br />
+It supports a customizable statusItemWindow that will manage any `NSViewController` instance for presenting the content.
 
 Here is a shot of the included example application:
 
 ![CCNStatusItemView Example Application](https://dl.dropbox.com/u/34133216/WebImages/Github/CCNStatusItemView.png)
 
 
-## Project Integration
+## Integration
 
 You can add `CCNStatusItemView` by using CocoaPods. Just add this line to your Podfile:
 
@@ -23,7 +24,7 @@ pod 'CCNStatusItemView'
 
 ## Usage
 
-After it is integrated into your project you are just a four-liner away from your (maybe) first `NSStatusItem` with a custom view. A good place to add these lines of code is your AppDelegate:
+After it's integrated into your project you are just a four-liner away from your (maybe) first `NSStatusItem` with a custom view and a beautiful looking popover window. A good place to add these lines of code is your AppDelegate:
 
 ```Objective-C
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
@@ -42,11 +43,11 @@ That's all! You will have some options to change the design of this statusItem p
     ...
     
     CCNStatusItemWindowStyle *style = [CCNStatusItemWindowStyle defaultStyle];
+    style.backgroundColor = [NSColor colorWithCalibratedRed:0.780 green:0.807 blue:0.818 alpha:1.000];
     style.cornerRadius = 13.0;
     style.presentationTransition = CCNPresentationTransitionSlideAndFade;
     [CCNStatusItemView setWindowStyle:style];
     
-    [CCNStatusItemView setDesign:design];
     [CCNStatusItemView presentStatusItemWithImage:[NSImage imageNamed:@"statusBarIcon"]
                                    alternateImage:[NSImage imageNamed:@"statusBarAlternateIcon"]
                             contentViewController:[[MyContentViewController alloc] initWithNibName:NSStringFromClass([MyContentViewController class]) bundle:nil]];
@@ -69,7 +70,7 @@ The statusItem window's frame size will be determined automatically by calling `
 
 ## Requirements
 
-`CCNStatusItemView` was written using ARC and "modern" Objective-C 2. At the moment it has been tested only on OS X 10.10 Yosemite, but it should run on 10.9, too.
+`CCNStatusItemView` was written using ARC and "modern" Objective-C 2. At the moment it has been tested only on OS X 10.10 Yosemite and 10.9 Mavericks.
 
 
 ## Contribution
