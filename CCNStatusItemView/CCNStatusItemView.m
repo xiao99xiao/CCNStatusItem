@@ -192,7 +192,6 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemViewInterfaceStyle) {
 #pragma mark - Button Action Handling
 
 - (void)handleStatusItemButtonAction:(id)sender {
-    NSLog(@"handleStatusItemButtonAction");
     [self.statusItem.button highlight:YES];
     self.statusItem.button.highlighted = YES;
     if (self.leftMouseDownActionHandler) {
