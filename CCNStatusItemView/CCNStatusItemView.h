@@ -33,8 +33,8 @@
 
 @class CCNStatusItemView;
 
-typedef void(^CCNStatusItemViewLeftMouseActionHandler)(CCNStatusItemView *statusItem);
-typedef void(^CCNStatusItemViewRightMouseActionHandler)(CCNStatusItemView *statusItem);
+typedef void(^CCNStatusItemLeftMouseActionHandler)(CCNStatusItemView *statusItem);
+typedef void(^CCNStatusItemRightMouseActionHandler)(CCNStatusItemView *statusItem);
 
 typedef NS_ENUM(NSUInteger, CCNStatusItemPresentationMode) {
     CCNStatusItemPresentationModeUndefined = 0,
@@ -43,7 +43,7 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemPresentationMode) {
 };
 
 
-#pragma mark - CCNStatusItemView
+#pragma mark - CCNStatusItem
 
 @interface CCNStatusItemView : NSView
 
@@ -53,17 +53,11 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemPresentationMode) {
                     alternateImage:(NSImage *)alternateImage
              contentViewController:(NSViewController *)contentViewController;
 
-//+ (void)presentStatusItemWithImage:(NSImage *)defaultImage
-//                    alternateImage:(NSImage *)alternateImage
-//                   leftMouseAction:(CCNStatusItemViewLeftMouseActionHandler)leftMouseAction
-//                  rightMouseAction:(CCNStatusItemViewRightMouseActionHandler)rightMouseAction;
-
 + (instancetype)sharedInstance;
+@property (strong, readonly) NSStatusItem *statusItem;
 
 #pragma mark - Handling the StatusBarItem Image
 
-@property (strong, nonatomic) NSImage *image;
-@property (strong, nonatomic) NSImage *alternateImage;
 @property (readonly, nonatomic) BOOL isStatusItemWindowVisible;
 @property (readonly, nonatomic) CCNStatusItemPresentationMode presentationMode;
 @property (assign, nonatomic) BOOL appearsDisabled;

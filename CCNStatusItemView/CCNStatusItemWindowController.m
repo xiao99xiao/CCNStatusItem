@@ -43,7 +43,7 @@ typedef NS_ENUM(NSUInteger, CCNFadeDirection) {
 #pragma mark - StatusItem Window Controller
 
 @interface CCNStatusItemWindowController ()
-@property (strong) CCNStatusItemView *statusItem;
+@property (strong) CCNStatusItemView *statusItemView;
 @property (strong) CCNStatusItemWindowStyle *style;
 @end
 
@@ -59,7 +59,7 @@ typedef NS_ENUM(NSUInteger, CCNFadeDirection) {
     if (self) {
         [self setupDefaults];
 
-        self.statusItem = statusItem;
+        self.statusItemView = statusItem;
         self.style = style;
 
         // StatusItem Window
@@ -78,7 +78,13 @@ typedef NS_ENUM(NSUInteger, CCNFadeDirection) {
 #pragma mark - Helper
 
 - (void)updateWindowFrame {
-    CGRect statusItemRect = [[self.statusItem window] frame];
+    CGRect statusItemRect = NSZeroRect;
+    if (self.statusItemView.statusItem.view) {
+        statusItemRect = [[self.statusItemView window] frame];
+    } else {
+        statusItemRect = [[self.statusItemView.statusItem.button window] frame];
+    }
+
     CGRect windowFrame = NSMakeRect(NSMinX(statusItemRect) - NSWidth(self.window.frame)/2 + NSWidth(statusItemRect)/2,
                                     NSMinY(statusItemRect) - NSHeight(self.window.frame) - self.style.windowToStatusItemMargin,
                                     self.window.frame.size.width,

@@ -43,10 +43,13 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemViewInterfaceStyle) {
 
 @interface CCNStatusItemView () <NSWindowDelegate>
 @property (strong) NSStatusItem *statusItem;
+@property (strong, nonatomic) NSImage *image;
+@property (strong, nonatomic) NSImage *alternateImage;
+@property (readonly, nonatomic) BOOL hasStatusBarButton;
+
 @property (readonly) CCNStatusItemViewInterfaceStyle interfaceStyle;
 @property (assign, nonatomic, getter = isHighlighted) BOOL highlighted;
-@property (copy) CCNStatusItemViewLeftMouseActionHandler leftMouseDownActionHandler;
-@property (copy) CCNStatusItemViewRightMouseActionHandler rightMouseDownActionHandler;
+@property (copy) CCNStatusItemLeftMouseActionHandler leftMouseDownActionHandler;
 
 @property (assign) CCNStatusItemPresentationMode presentationMode;
 @property (assign) BOOL canHandleMouseEvent;
@@ -69,7 +72,6 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemViewInterfaceStyle) {
         _statusItem = nil;
         _highlighted = NO;
         _leftMouseDownActionHandler = nil;
-        _rightMouseDownActionHandler = nil;
         _presentationMode = CCNStatusItemPresentationModeUndefined;
         _canHandleMouseEvent = YES;
         _isStatusItemWindowVisible = NO;
@@ -82,7 +84,6 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemViewInterfaceStyle) {
 
 - (void)dealloc {
     _leftMouseDownActionHandler = nil;
-    _rightMouseDownActionHandler = nil;
     _statusItemWindowController = nil;
     _style = nil;
 }
@@ -101,63 +102,63 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemViewInterfaceStyle) {
     self.alternateImage = nil;
     self.statusItem = nil;
     self.leftMouseDownActionHandler  = nil;
-    self.rightMouseDownActionHandler = nil;
     self.presentationMode = CCNStatusItemPresentationModeUndefined;
-    self.frame = NSZeroRect;
     self.statusItemWindowController = nil;
     self.appearsDisabled = NO;
 }
 
-- (void)configureWithImage:(NSImage *)defaultImage alternateImage:(NSImage *)alternateImage {
-    NSAssert(defaultImage, @"[%@] The default Image must not be nil!", [self className]);
+- (void)configureWithImage:(NSImage *)itemImage alternateImage:(NSImage *)alternateImage {
+    NSAssert(itemImage, @"[%@] The default Image must not be nil!", [self className]);
     NSAssert(alternateImage, @"[%@] The alternate Image must not be nil!", [self className]);
 
-    CCNStatusItemView *statusItemView = [CCNStatusItemView sharedInstance];
-    if (statusItemView) {
+    CCNStatusItemView *sharedItem = [CCNStatusItemView sharedInstance];
+    if (sharedItem) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleWindowDidResignKeyNotification:) name:NSWindowDidResignKeyNotification object:nil];
 
-        _itemImage = defaultImage;
+        _itemImage = itemImage;
         _alternateItemImage = alternateImage;
 
-        statusItemView.image = [self imageForCurrentInterfaceStyle];
-        statusItemView.alternateImage = [self alternateImageForCurrentInterfaceStyle];
-        statusItemView.frame = NSMakeRect(0, 0, defaultImage.size.width, [NSStatusBar systemStatusBar].thickness);
-
-        statusItemView.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:defaultImage.size.width + self.style.iconHorizontalEdgeSpacing];
-        statusItemView.statusItem.view = statusItemView;
-
-        [[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(handleAppleInterfaceThemeChangedNotification:) name:CCNAppleInterfaceThemeChangedNotification object:nil];
+        sharedItem.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
+        if ([sharedItem.statusItem respondsToSelector:@selector(button)]) {
+            [self configureCustomStatusItem];
+        }
+        else {
+            [self configureCustomStatusItem];
+        }
     }
+}
+
+- (void)configureStatusItemButton {
+    [self.image setTemplate:YES];
+
+    self.statusItem.button.image = self.image;
+    self.statusItem.button.target = self;
+    self.statusItem.button.action = @selector(handleStatusItemButtonAction:);
+}
+
+- (void)configureCustomStatusItem {
+    self.image = [self imageForCurrentInterfaceStyle];
+    self.alternateImage = [self alternateImageForCurrentInterfaceStyle];
+    self.frame = NSMakeRect(0, 0, self.image.size.width, [NSStatusBar systemStatusBar].thickness);
+    self.statusItem.view = [CCNStatusItemView sharedInstance];
+
+    [[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(handleAppleInterfaceThemeChangedNotification:) name:CCNAppleInterfaceThemeChangedNotification object:nil];
 }
 
 #pragma mark - Creating and Displaying a StatusBarItem
 
-+ (void)presentStatusItemWithImage:(NSImage *)defaultImage
++ (void)presentStatusItemWithImage:(NSImage *)itemImage
                     alternateImage:(NSImage *)alternateImage
              contentViewController:(NSViewController *)contentViewController {
 
     CCNStatusItemView *sharedItem = [CCNStatusItemView sharedInstance];
     [sharedItem reset];
-    [sharedItem configureWithImage:defaultImage alternateImage:alternateImage];
+    [sharedItem configureWithImage:itemImage alternateImage:alternateImage];
 
     sharedItem.presentationMode = CCNStatusItemPresentationModeImage;
     sharedItem.statusItemWindowController = [[CCNStatusItemWindowController alloc] initWithConnectedStatusItem:sharedItem
                                                                                          contentViewController:contentViewController
                                                                                                          style:sharedItem.style];
-}
-
-+ (void)presentStatusItemWithImage:(NSImage *)defaultImage
-                    alternateImage:(NSImage *)alternateImage
-                   leftMouseAction:(CCNStatusItemViewLeftMouseActionHandler)leftMouseDown
-                  rightMouseAction:(CCNStatusItemViewRightMouseActionHandler)rightMouseDown {
-
-    CCNStatusItemView *sharedItem = [CCNStatusItemView sharedInstance];
-    [sharedItem reset];
-    [sharedItem configureWithImage:defaultImage alternateImage:alternateImage];
-
-    sharedItem.presentationMode = CCNStatusItemPresentationModeCustomView;
-    sharedItem.leftMouseDownActionHandler = leftMouseDown;
-    sharedItem.rightMouseDownActionHandler = rightMouseDown;
 }
 
 #pragma mark - NSView Drawing
@@ -185,10 +186,20 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemViewInterfaceStyle) {
 }
 
 - (void)handleAppleInterfaceThemeChangedNotification:(NSNotification *)note {
-//    [self setImage:[self imageForCurrentInterfaceStyle]];
-//    [self setAlternateImage:[self alternateImageForCurrentInterfaceStyle]];
     [self setNeedsDisplay:YES];
 }
+
+#pragma mark - Button Action Handling
+
+- (void)handleStatusItemButtonAction:(id)sender {
+    NSLog(@"handleStatusItemButtonAction");
+    [self.statusItem.button highlight:YES];
+    self.statusItem.button.highlighted = YES;
+    if (self.leftMouseDownActionHandler) {
+        self.leftMouseDownActionHandler(self);
+    }
+}
+
 
 #pragma mark - Custom Accessors
 
@@ -217,9 +228,7 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemViewInterfaceStyle) {
 - (void)setAlternateImage:(NSImage *)newImage {
     if (_alternateItemImage != newImage) {
         _alternateItemImage = newImage;
-        if (self.isHighlighted) {
-            [self setNeedsDisplay:YES];
-        }
+        [self setNeedsDisplay:YES];
     }
 }
 
@@ -248,7 +257,12 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemViewInterfaceStyle) {
 - (void)setAppearsDisabled:(BOOL)appearsDisabled {
     if (_appearsDisabled != appearsDisabled) {
         _appearsDisabled = appearsDisabled;
-        [self setNeedsDisplay:YES];
+        if (self.statusItem.view) {
+            [self setNeedsDisplay:YES];
+        }
+        else {
+            self.statusItem.button.appearsDisabled = _appearsDisabled;
+        }
     }
 }
 
@@ -257,16 +271,21 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemViewInterfaceStyle) {
     return ([style isEqualToString:@"Dark"] ? CCNStatusItemViewInterfaceStyleDark : CCNStatusItemViewInterfaceStyleLight);
 }
 
+- (BOOL)hasStatusBarButton {
+    id statusItem = [[NSStatusItem alloc] init];
+    return [statusItem respondsToSelector:@selector(button)];
+}
+
 #pragma mark - Helper
 
-- (NSImage *)tintedImage:(NSImage *)image withColor:(NSColor *)color  {
-    if (color) {
+- (NSImage *)tintedImage:(NSImage *)image withColor:(NSColor *)tintColor  {
+    if (tintColor) {
         NSImage *tintedImage = [image copy];
         NSSize iconSize = [tintedImage size];
         NSRect iconRect = {NSZeroPoint, iconSize};
 
         [tintedImage lockFocus];
-        [color set];
+        [tintColor set];
         NSRectFillUsingOperation(iconRect, NSCompositeSourceAtop);
         [tintedImage unlockFocus];
 
@@ -278,17 +297,26 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemViewInterfaceStyle) {
 }
 
 - (NSImage *)tintedStatusItemImageForCurrentInterfaceStyle:(NSImage *)originalImage {
-    static NSImage *tintedImage;
+    NSImage *tintedImage;
     if (self.interfaceStyle == CCNStatusItemViewInterfaceStyleLight) {
         if (self.appearsDisabled) {
-            tintedImage = [self tintedImage:originalImage withColor:[NSColor lightGrayColor]];
+            if (self.isHighlighted) {
+                tintedImage = [self tintedImage:originalImage withColor:[NSColor colorWithCalibratedWhite:0.190 alpha:1.000]];
+            }
+            else {
+                tintedImage = [self tintedImage:originalImage withColor:[NSColor colorWithCalibratedWhite:0.706 alpha:1.000]];
+            }
         }
         else {
             tintedImage = originalImage;
         }
     } else {
         if (self.appearsDisabled) {
-            tintedImage = [self tintedImage:originalImage withColor:[NSColor colorWithCalibratedWhite:0.322 alpha:1.000]];
+            if (self.isHighlighted) {
+                tintedImage = [self tintedImage:originalImage withColor:[[NSColor whiteColor] colorWithAlphaComponent:0.30]];
+            } else {
+                tintedImage = [self tintedImage:originalImage withColor:[NSColor colorWithCalibratedWhite:0.322 alpha:1.000]];
+            }
         }
         else {
             tintedImage = [self tintedImage:originalImage withColor:[NSColor whiteColor]];
@@ -323,20 +351,6 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemViewInterfaceStyle) {
 
     if (self.leftMouseDownActionHandler) {
         self.leftMouseDownActionHandler(self);
-        self.highlighted = !self.highlighted;
-        self.canHandleMouseEvent = YES;
-    }
-}
-
-- (void)rightMouseDown:(NSEvent *)theEvent {
-    if (!self.canHandleMouseEvent) return;
-    if (!self.rightMouseDownActionHandler) return;
-    if (self.statusItemWindowController && self.statusItemWindowController.animationIsRunning) return;
-
-    self.canHandleMouseEvent = NO;
-
-    if (self.rightMouseDownActionHandler) {
-        self.rightMouseDownActionHandler(self);
         self.highlighted = !self.highlighted;
         self.canHandleMouseEvent = YES;
     }

@@ -1,7 +1,4 @@
 //
-//  AppDelegate.m
-//  CCNStatusItemView Example
-//
 //  Created by Frank Gregor on 28.12.14.
 //  Copyright (c) 2014 cocoa:naut. All rights reserved.
 //
@@ -26,7 +23,7 @@
 //    style.cornerRadius = 13.0;
 //    style.arrowWidth = 36;
 //    style.presentationTransition = CCNPresentationTransitionSlideAndFade;
-//    [CCNStatusItemView setWindowStyle:style];
+//    [CCNStatusItem setWindowStyle:style];
 
     [CCNStatusItemView presentStatusItemWithImage:[NSImage imageNamed:@"statusbar-icon"]
                                    alternateImage:[NSImage imageNamed:@"statusbar-alternate-icon"]

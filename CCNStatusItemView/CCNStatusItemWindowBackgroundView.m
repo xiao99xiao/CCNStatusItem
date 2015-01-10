@@ -30,6 +30,7 @@
 
 #import "CCNStatusItemWindowBackgroundView.h"
 
+
 @interface CCNStatusItemWindowBackgroundView ()
 @property (strong) CCNStatusItemWindowStyle *style;
 @end
@@ -45,8 +46,8 @@
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
-    CGFloat arrowHeight   = self.style.arrowHeight;
-    CGFloat arrowWidth    = self.style.arrowWidth;
+    CGFloat arrowHeight   = CCNDefaultArrowHeight;
+    CGFloat arrowWidth    = CCNDefaultArrowWidth;
     CGFloat cornerRadius  = self.style.cornerRadius;
     NSRect backgroundRect = NSMakeRect(NSMinX(self.bounds), NSMinY(self.bounds), NSWidth(self.bounds), NSHeight(self.bounds) - arrowHeight);
 

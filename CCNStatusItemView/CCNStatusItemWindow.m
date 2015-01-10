@@ -100,7 +100,7 @@
 }
 
 - (NSRect)frameRectForContentRect:(NSRect)contentRect {
-    return NSMakeRect(NSMinX(contentRect), NSMinY(contentRect), NSWidth(contentRect), NSHeight(contentRect) + _style.arrowHeight);
+    return NSMakeRect(NSMinX(contentRect), NSMinY(contentRect), NSWidth(contentRect), NSHeight(contentRect) + CCNDefaultArrowHeight);
 }
 
 @end

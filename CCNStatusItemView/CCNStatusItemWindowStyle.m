@@ -31,13 +31,10 @@
 #import "CCNStatusItemWindowStyle.h"
 
 
-static const CGFloat CCNDefaultArrowHeight              = 11.0;
-static const CGFloat CCNDefaultArrowWidth               = 42.0;
 static const CGFloat CCNDefaultCornerRadius             = 5.0;
 static const CGFloat CCNDefaultStatusItemMargin         = 2.0;
 static const NSTimeInterval CCNDefaultAnimationDuration = 0.21;
 static NSColor *CCNDefaultBackgroundColor;
-static const CGFloat CCNDefaultHorizontalEdgeSpacing    = 10.0;
 
 
 @implementation CCNStatusItemWindowStyle
@@ -53,15 +50,12 @@ static const CGFloat CCNDefaultHorizontalEdgeSpacing    = 10.0;
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.arrowHeight               = CCNDefaultArrowHeight;
-        self.arrowWidth                = CCNDefaultArrowWidth;
         self.cornerRadius              = CCNDefaultCornerRadius;
         self.windowToStatusItemMargin  = CCNDefaultStatusItemMargin;
         self.animationDuration         = CCNDefaultAnimationDuration;
         self.backgroundColor           = CCNDefaultBackgroundColor;
         self.presentationTransition    = CCNPresentationTransitionFade;
         self.toolTip                   = nil;
-        self.iconHorizontalEdgeSpacing = CCNDefaultHorizontalEdgeSpacing;
     }
     return self;
 }
