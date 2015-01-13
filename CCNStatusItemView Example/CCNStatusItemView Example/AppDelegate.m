@@ -19,8 +19,8 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 
     CCNStatusItemWindowStyle *style = [CCNStatusItemWindowStyle defaultStyle];
-    style.backgroundColor = [NSColor colorWithCalibratedRed:0.780 green:0.807 blue:0.818 alpha:1.000];
-    style.cornerRadius = 13.0;
+//    style.backgroundColor = [NSColor colorWithCalibratedRed:0.780 green:0.807 blue:0.818 alpha:1.000];
+//    style.cornerRadius = 13.0;
     style.presentationTransition = CCNPresentationTransitionSlideAndFade;
     [CCNStatusItemView setWindowStyle:style];
 

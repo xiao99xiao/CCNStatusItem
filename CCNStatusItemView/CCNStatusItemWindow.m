@@ -53,7 +53,8 @@
         self.alphaValue = 0.0;
         self.opaque = NO;
         self.hasShadow = YES;
-        self.level = NSFloatingWindowLevel;
+        self.level = NSScreenSaverWindowLevel;
+//        self.styleMask = NSNonactivatingPanelMask;
         self.backgroundColor = [NSColor clearColor];
     }
     return self;

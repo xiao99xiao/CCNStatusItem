@@ -169,13 +169,13 @@ typedef NS_ENUM(NSUInteger, CCNFadeDirection) {
     CGRect windowStartFrame, windowEndFrame;
     switch (fadeDirection) {
         case CCNFadeDirectionFadeIn: {
-            windowStartFrame = NSMakeRect(NSMinX(window.frame), NSMinY(window.frame) - CCNTransitionDistance, NSWidth(window.frame), NSHeight(window.frame));
+            windowStartFrame = NSMakeRect(NSMinX(window.frame), NSMinY(window.frame) + CCNTransitionDistance, NSWidth(window.frame), NSHeight(window.frame));
             windowEndFrame = window.frame;
             break;
         }
         case CCNFadeDirectionFadeOut: {
             windowStartFrame = window.frame;
-            windowEndFrame = NSMakeRect(NSMinX(window.frame), NSMinY(window.frame) - CCNTransitionDistance, NSWidth(window.frame), NSHeight(window.frame));
+            windowEndFrame = NSMakeRect(NSMinX(window.frame), NSMinY(window.frame) + CCNTransitionDistance, NSWidth(window.frame), NSHeight(window.frame));
             break;
         }
     }
