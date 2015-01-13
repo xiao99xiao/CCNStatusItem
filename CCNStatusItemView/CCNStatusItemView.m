@@ -27,6 +27,7 @@
  THE SOFTWARE.
  */
 
+#import <Availability.h>
 #import "CCNStatusItemView.h"
 #import "CCNStatusItemWindowController.h"
 
@@ -45,7 +46,6 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemViewInterfaceStyle) {
 @property (strong) NSStatusItem *statusItem;
 @property (strong, nonatomic) NSImage *image;
 @property (strong, nonatomic) NSImage *alternateImage;
-@property (readonly, nonatomic) BOOL hasStatusBarButton;
 
 @property (readonly) CCNStatusItemViewInterfaceStyle interfaceStyle;
 @property (assign, nonatomic, getter = isHighlighted) BOOL highlighted;
@@ -119,15 +119,15 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemViewInterfaceStyle) {
         _alternateItemImage = alternateImage;
 
         sharedItem.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
-        if ([sharedItem.statusItem respondsToSelector:@selector(button)]) {
-            [self configureStatusItemButton];
-        }
-        else {
-            [self configureCustomStatusItem];
-        }
+#if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_9
+        [self configureStatusItemButton];
+#else
+        [self configureCustomStatusItem];
+#endif
     }
 }
 
+#if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_9
 - (void)configureStatusItemButton {
     [self.image setTemplate:YES];
 
@@ -135,6 +135,7 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemViewInterfaceStyle) {
     self.statusItem.button.target = self;
     self.statusItem.button.action = @selector(handleStatusItemButtonAction:);
 }
+#endif
 
 - (void)configureCustomStatusItem {
     self.image = [self imageForCurrentInterfaceStyle];
@@ -191,6 +192,7 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemViewInterfaceStyle) {
 
 #pragma mark - Button Action Handling
 
+#if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_9
 - (void)handleStatusItemButtonAction:(id)sender {
     [self.statusItem.button highlight:YES];
     self.statusItem.button.highlighted = YES;
@@ -198,7 +200,7 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemViewInterfaceStyle) {
         self.leftMouseDownActionHandler(self);
     }
 }
-
+#endif
 
 #pragma mark - Custom Accessors
 
@@ -256,23 +258,17 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemViewInterfaceStyle) {
 - (void)setAppearsDisabled:(BOOL)appearsDisabled {
     if (_appearsDisabled != appearsDisabled) {
         _appearsDisabled = appearsDisabled;
-        if (self.statusItem.view) {
-            [self setNeedsDisplay:YES];
-        }
-        else {
-            self.statusItem.button.appearsDisabled = _appearsDisabled;
-        }
+#if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_9
+        self.statusItem.button.appearsDisabled = _appearsDisabled;
+#else
+        [self setNeedsDisplay:YES];
+#endif
     }
 }
 
 - (CCNStatusItemViewInterfaceStyle)interfaceStyle {
     NSString *style = [[NSUserDefaults standardUserDefaults] stringForKey:CCNInterfaceStyleDefaultsKey];
     return ([style isEqualToString:@"Dark"] ? CCNStatusItemViewInterfaceStyleDark : CCNStatusItemViewInterfaceStyleLight);
-}
-
-- (BOOL)hasStatusBarButton {
-    id statusItem = [[NSStatusItem alloc] init];
-    return [statusItem respondsToSelector:@selector(button)];
 }
 
 #pragma mark - Helper

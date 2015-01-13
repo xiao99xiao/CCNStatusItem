@@ -40,7 +40,6 @@
             contentViewController:(NSViewController *)contentViewController
                             style:(CCNStatusItemWindowStyle *)style;
 
-@property (strong) CCNStatusItemWindow *window;
 @property (assign) BOOL windowIsOpen;
 @property (assign) BOOL animationIsRunning;
 
