@@ -42,6 +42,39 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemViewInterfaceStyle) {
 };
 
 
+#pragma mark NSImage (TintAddition)
+#pragma mark -
+// =====================================================================================================================
+@interface NSImage (TintAddition)
+- (NSImage *)tintedImageWithTintColor:(NSColor *)tintColor;
+@end
+
+@implementation NSImage (TintAddition)
+
+- (NSImage *)tintedImageWithTintColor:(NSColor *)tintColor {
+    if (tintColor) {
+        NSImage *tintedImage = [self copy];
+        NSSize iconSize = [tintedImage size];
+        NSRect iconRect = {NSZeroPoint, iconSize};
+
+        [tintedImage lockFocus];
+        [tintColor set];
+        NSRectFillUsingOperation(iconRect, NSCompositeSourceAtop);
+        [tintedImage unlockFocus];
+
+        return tintedImage;
+    }
+    else {
+        return self;
+    }
+}
+
+@end
+
+
+#pragma mark - CCNStatusItemView
+#pragma mark -
+// =====================================================================================================================
 @interface CCNStatusItemView () <NSWindowDelegate>
 @property (strong) NSStatusItem *statusItem;
 @property (strong, nonatomic) NSImage *image;
@@ -273,48 +306,27 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemViewInterfaceStyle) {
 
 #pragma mark - Helper
 
-- (NSImage *)tintedImage:(NSImage *)image withColor:(NSColor *)tintColor  {
-    if (tintColor) {
-        NSImage *tintedImage = [image copy];
-        NSSize iconSize = [tintedImage size];
-        NSRect iconRect = {NSZeroPoint, iconSize};
-
-        [tintedImage lockFocus];
-        [tintColor set];
-        NSRectFillUsingOperation(iconRect, NSCompositeSourceAtop);
-        [tintedImage unlockFocus];
-
-        return tintedImage;
-    }
-    else {
-        return image;
-    }
-}
-
 - (NSImage *)tintedStatusItemImageForCurrentInterfaceStyle:(NSImage *)originalImage {
     NSImage *tintedImage;
     if (self.interfaceStyle == CCNStatusItemViewInterfaceStyleLight) {
         if (self.appearsDisabled) {
             if (self.isHighlighted) {
-                tintedImage = [self tintedImage:originalImage withColor:[NSColor colorWithCalibratedWhite:0.190 alpha:1.000]];
+                tintedImage = [originalImage tintedImageWithTintColor:[NSColor colorWithCalibratedWhite:1.000 alpha:0.100]];
+            } else {
+                tintedImage = [originalImage tintedImageWithTintColor:[NSColor colorWithCalibratedWhite:0.675 alpha:1.000]];
             }
-            else {
-                tintedImage = [self tintedImage:originalImage withColor:[NSColor colorWithCalibratedWhite:0.706 alpha:1.000]];
-            }
-        }
-        else {
+        } else {
             tintedImage = originalImage;
         }
     } else {
         if (self.appearsDisabled) {
             if (self.isHighlighted) {
-                tintedImage = [self tintedImage:originalImage withColor:[[NSColor whiteColor] colorWithAlphaComponent:0.30]];
+                tintedImage = [originalImage tintedImageWithTintColor:[NSColor colorWithCalibratedWhite:1.000 alpha:0.300]];
             } else {
-                tintedImage = [self tintedImage:originalImage withColor:[NSColor colorWithCalibratedWhite:0.322 alpha:1.000]];
+                tintedImage = [originalImage tintedImageWithTintColor:[NSColor colorWithCalibratedWhite:0.322 alpha:1.000]];
             }
-        }
-        else {
-            tintedImage = [self tintedImage:originalImage withColor:[NSColor whiteColor]];
+        } else {
+            tintedImage = [originalImage tintedImageWithTintColor:[NSColor whiteColor]];
         }
     }
     return tintedImage;
