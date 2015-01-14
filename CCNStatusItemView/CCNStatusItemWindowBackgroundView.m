@@ -32,15 +32,15 @@
 
 
 @interface CCNStatusItemWindowBackgroundView ()
-@property (strong) CCNStatusItemWindowStyle *style;
+@property (strong) CCNStatusItemWindowAppearance *windowAppearance;
 @end
 
 @implementation CCNStatusItemWindowBackgroundView
 
-- (instancetype)initWithFrame:(NSRect)frameRect style:(CCNStatusItemWindowStyle *)style {
+- (instancetype)initWithFrame:(NSRect)frameRect appearance:(CCNStatusItemWindowAppearance *)appearance {
     self = [super initWithFrame:frameRect];
     if (self) {
-        self.style = style;
+        self.windowAppearance = appearance;
     }
     return self;
 }
@@ -48,7 +48,7 @@
 - (void)drawRect:(NSRect)dirtyRect {
     CGFloat arrowHeight   = CCNDefaultArrowHeight;
     CGFloat arrowWidth    = CCNDefaultArrowWidth;
-    CGFloat cornerRadius  = self.style.cornerRadius;
+    CGFloat cornerRadius  = self.windowAppearance.cornerRadius;
     NSRect backgroundRect = NSMakeRect(NSMinX(self.bounds), NSMinY(self.bounds), NSWidth(self.bounds), NSHeight(self.bounds) - arrowHeight);
 
     NSBezierPath *windowPath     = [NSBezierPath bezierPath];
@@ -76,7 +76,7 @@
     [windowPath appendBezierPath:arrowPath];
     [windowPath appendBezierPath:backgroundPath];
 
-    [self.style.backgroundColor setFill];
+    [self.windowAppearance.backgroundColor setFill];
     [windowPath fill];
 }
 

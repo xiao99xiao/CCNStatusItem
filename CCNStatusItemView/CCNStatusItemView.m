@@ -89,7 +89,7 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemViewInterfaceStyle) {
 @property (assign, nonatomic) BOOL isStatusItemWindowVisible;
 
 @property (strong, nonatomic) CCNStatusItemWindowController *statusItemWindowController;
-@property (strong, nonatomic) CCNStatusItemWindowStyle *style;
+@property (strong, nonatomic) CCNStatusItemWindowAppearance *windowAppearance;
 @end
 
 @implementation CCNStatusItemView
@@ -109,7 +109,7 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemViewInterfaceStyle) {
         _canHandleMouseEvent = YES;
         _isStatusItemWindowVisible = NO;
         _statusItemWindowController = nil;
-        _style = [CCNStatusItemWindowStyle defaultStyle];
+        _windowAppearance = [CCNStatusItemWindowAppearance defaultAppearance];
         _appearsDisabled = NO;
     }
     return self;
@@ -118,7 +118,7 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemViewInterfaceStyle) {
 - (void)dealloc {
     _leftMouseDownActionHandler = nil;
     _statusItemWindowController = nil;
-    _style = nil;
+    _windowAppearance = nil;
 }
 
 + (instancetype)sharedInstance {
@@ -192,7 +192,7 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemViewInterfaceStyle) {
     sharedItem.presentationMode = CCNStatusItemPresentationModeImage;
     sharedItem.statusItemWindowController = [[CCNStatusItemWindowController alloc] initWithConnectedStatusItem:sharedItem
                                                                                          contentViewController:contentViewController
-                                                                                                         style:sharedItem.style];
+                                                                                                    appearance:sharedItem.windowAppearance];
 }
 
 #pragma mark - NSView Drawing
@@ -283,9 +283,9 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemViewInterfaceStyle) {
     }
 }
 
-- (void)setWindowStyle:(CCNStatusItemWindowStyle *)style {
-    _style = style;
-    self.toolTip = _style.toolTip;
+- (void)setWindowAppearance:(CCNStatusItemWindowAppearance *)appearance {
+    _windowAppearance = appearance;
+    self.toolTip = _windowAppearance.toolTip;
 }
 
 - (void)setAppearsDisabled:(BOOL)appearsDisabled {
@@ -342,9 +342,9 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemViewInterfaceStyle) {
 
 #pragma mark - Handling StatusItem Layout
 
-+ (void)setWindowStyle:(CCNStatusItemWindowStyle *)windowStyle {
++ (void)setWindowAppearance:(CCNStatusItemWindowAppearance *)appearance {
     CCNStatusItemView *sharedInstance = [CCNStatusItemView sharedInstance];
-    sharedInstance.windowStyle = windowStyle;
+    sharedInstance.windowAppearance = appearance;
 }
 
 #pragma mark - NSResponder

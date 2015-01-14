@@ -30,7 +30,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "CCNStatusItemWindowController.h"
-#import "CCNStatusItemWindowStyle.h"
+#import "CCNStatusItemWindowAppearance.h"
 
 
 static const CGFloat CCNTransitionDistance = 8.0;
@@ -58,7 +58,7 @@ typedef NS_ENUM(NSUInteger, CCNFadeDirection) {
     CCNStatusItemWindow *_window;
 }
 @property (strong) CCNStatusItemView *statusItemView;
-@property (strong) CCNStatusItemWindowStyle *style;
+@property (strong) CCNStatusItemWindowAppearance *windowAppearance;
 @property (strong) CCNStatusItemWindow *window;
 @end
 
@@ -66,8 +66,8 @@ typedef NS_ENUM(NSUInteger, CCNFadeDirection) {
 
 - (id)initWithConnectedStatusItem:(CCNStatusItemView *)statusItem
             contentViewController:(NSViewController *)contentViewController
-                            style:(CCNStatusItemWindowStyle *)style {
-    
+                       appearance:(CCNStatusItemWindowAppearance *)appearance {
+
     NSAssert(contentViewController.preferredContentSize.width != 0 && contentViewController.preferredContentSize.height != 0, @"[%@] The preferredContentSize of the contentViewController must not be NSZeroSize!", [self className]);
 
     self = [super init];
@@ -75,10 +75,10 @@ typedef NS_ENUM(NSUInteger, CCNFadeDirection) {
         [self setupDefaults];
 
         self.statusItemView = statusItem;
-        self.style = style;
+        self.windowAppearance = appearance;
 
         // StatusItem Window
-        self.window = [CCNStatusItemWindow statusItemWindowWithStyle:style];
+        self.window = [CCNStatusItemWindow statusItemWindowWithAppearance:appearance];
         self.window.contentViewController = contentViewController;
 
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleWindowDidResignKeyNotification:) name:NSWindowDidResignKeyNotification object:nil];
@@ -101,7 +101,7 @@ typedef NS_ENUM(NSUInteger, CCNFadeDirection) {
 #endif
 
     CGRect windowFrame = NSMakeRect(NSMinX(statusItemRect) - NSWidth(self.window.frame)/2 + NSWidth(statusItemRect)/2,
-                                    NSMinY(statusItemRect) - NSHeight(self.window.frame) - self.style.windowToStatusItemMargin,
+                                    NSMinY(statusItemRect) - NSHeight(self.window.frame) - self.windowAppearance.windowToStatusItemMargin,
                                     self.window.frame.size.width,
                                     self.window.frame.size.height);
     [self.window setFrame:windowFrame display:YES];
@@ -126,7 +126,7 @@ typedef NS_ENUM(NSUInteger, CCNFadeDirection) {
 }
 
 - (void)animateWindow:(CCNStatusItemWindow *)window withFadeDirection:(CCNFadeDirection)fadeDirection {
-    switch (self.style.presentationTransition) {
+    switch (self.windowAppearance.presentationTransition) {
         case CCNPresentationTransitionNone:
         case CCNPresentationTransitionFade: {
             [self animateWindow:window withFadeTransitionUsingFadeDirection:fadeDirection];
@@ -144,7 +144,7 @@ typedef NS_ENUM(NSUInteger, CCNFadeDirection) {
     self.animationIsRunning = YES;
 
     [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
-        context.duration = self.style.animationDuration;
+        context.duration = self.windowAppearance.animationDuration;
         context.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
         [[window animator] setAlphaValue:(fadeDirection == CCNFadeDirectionFadeIn ? 1.0 : 0.0)];
 
@@ -183,7 +183,7 @@ typedef NS_ENUM(NSUInteger, CCNFadeDirection) {
     [window setFrame:windowStartFrame display:NO];
 
     [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
-        context.duration = self.style.animationDuration;
+        context.duration = self.windowAppearance.animationDuration;
         context.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
         [[window animator] setFrame:windowEndFrame display:NO];
         [[window animator] setAlphaValue:(fadeDirection == CCNFadeDirectionFadeIn ? 1.0 : 0.0)];

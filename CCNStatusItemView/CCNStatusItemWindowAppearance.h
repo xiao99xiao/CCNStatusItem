@@ -42,9 +42,9 @@ static const CGFloat CCNDefaultArrowHeight = 11.0;
 static const CGFloat CCNDefaultArrowWidth = 42.0;
 
 
-@interface CCNStatusItemWindowStyle : NSObject
+@interface CCNStatusItemWindowAppearance : NSObject
 
-+ (instancetype)defaultStyle;
++ (instancetype)defaultAppearance;
 
 // status item window
 @property (assign, nonatomic) CGFloat cornerRadius;                                 // default: 5.0

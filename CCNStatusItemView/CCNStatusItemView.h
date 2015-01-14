@@ -28,7 +28,7 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#import "CCNStatusItemWindowStyle.h"
+#import "CCNStatusItemWindowAppearance.h"
 
 
 @class CCNStatusItemView;
@@ -65,7 +65,7 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemPresentationMode) {
 
 #pragma mark - Handling StatusItem Layout
 
-@property (readonly, nonatomic) CCNStatusItemWindowStyle *style;
-+ (void)setWindowStyle:(CCNStatusItemWindowStyle *)windowStyle;
+@property (readonly, nonatomic) CCNStatusItemWindowAppearance *windowAppearance;
++ (void)setWindowAppearance:(CCNStatusItemWindowAppearance *)appearance;
 
 @end

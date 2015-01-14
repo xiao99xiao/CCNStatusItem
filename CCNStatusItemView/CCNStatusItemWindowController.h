@@ -31,14 +31,14 @@
 #import <Cocoa/Cocoa.h>
 #import "CCNStatusItemView.h"
 #import "CCNStatusItemWindow.h"
-#import "CCNStatusItemWindowStyle.h"
+#import "CCNStatusItemWindowAppearance.h"
 
 
 @interface CCNStatusItemWindowController : NSWindowController
 
 - (id)initWithConnectedStatusItem:(CCNStatusItemView *)statusItem
             contentViewController:(NSViewController *)contentViewController
-                            style:(CCNStatusItemWindowStyle *)style;
+                       appearance:(CCNStatusItemWindowAppearance *)appearance;
 
 @property (assign) BOOL windowIsOpen;
 @property (assign) BOOL animationIsRunning;

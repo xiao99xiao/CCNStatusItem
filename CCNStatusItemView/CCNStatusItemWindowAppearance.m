@@ -28,7 +28,7 @@
  */
 
 
-#import "CCNStatusItemWindowStyle.h"
+#import "CCNStatusItemWindowAppearance.h"
 
 
 static const CGFloat CCNDefaultCornerRadius             = 5.0;
@@ -37,13 +37,13 @@ static const NSTimeInterval CCNDefaultAnimationDuration = 0.21;
 static NSColor *CCNDefaultBackgroundColor;
 
 
-@implementation CCNStatusItemWindowStyle
+@implementation CCNStatusItemWindowAppearance
 
 + (void)initialize {
     CCNDefaultBackgroundColor = [NSColor windowBackgroundColor];
 }
 
-+ (instancetype)defaultStyle {
++ (instancetype)defaultAppearance {
     return [[[self class] alloc] init];
 }
 

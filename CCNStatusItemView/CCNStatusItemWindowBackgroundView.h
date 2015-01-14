@@ -29,10 +29,10 @@
 
 
 #import <Cocoa/Cocoa.h>
-#import "CCNStatusItemWindowStyle.h"
+#import "CCNStatusItemWindowAppearance.h"
 
 @interface CCNStatusItemWindowBackgroundView : NSView
 
-- (instancetype)initWithFrame:(NSRect)frameRect style:(CCNStatusItemWindowStyle *)style;
+- (instancetype)initWithFrame:(NSRect)frameRect appearance:(CCNStatusItemWindowAppearance *)appearance;
 
 @end
