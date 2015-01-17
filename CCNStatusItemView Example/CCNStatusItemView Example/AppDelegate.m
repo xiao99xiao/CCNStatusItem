@@ -18,14 +18,13 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 
-    CCNStatusItemWindowAppearance *style = [CCNStatusItemWindowAppearance defaultAppearance];
-    style.backgroundColor = [NSColor colorWithCalibratedRed:0.577 green:0.818 blue:0.130 alpha:1.000];
-    style.cornerRadius = 115.0;
-    style.presentationTransition = CCNPresentationTransitionSlideAndFade;
-    [CCNStatusItemView setWindowAppearance:style];
+    CCNStatusItemWindowAppearance *appearance = [CCNStatusItemWindowAppearance defaultAppearance];
+//    style.backgroundColor = [NSColor colorWithCalibratedRed:0.577 green:0.818 blue:0.130 alpha:1.000];
+//    style.cornerRadius = 115.0;
+    appearance.presentationTransition = CCNPresentationTransitionSlideAndFade;
+    [CCNStatusItemView setWindowAppearance:appearance];
 
     [CCNStatusItemView presentStatusItemWithImage:[NSImage imageNamed:@"statusbar-icon"]
-                                   alternateImage:[NSImage imageNamed:@"statusbar-alternate-icon"]
                             contentViewController:[[ContentViewController alloc] initWithNibName:NSStringFromClass([ContentViewController class]) bundle:nil]];
 }
 

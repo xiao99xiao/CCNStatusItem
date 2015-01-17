@@ -53,7 +53,7 @@
         self.alphaValue = 0.0;
         self.opaque = NO;
         self.hasShadow = YES;
-        self.level = NSScreenSaverWindowLevel;
+        self.level = NSPopUpMenuWindowLevel;
         self.backgroundColor = [NSColor clearColor];
     }
     return self;
@@ -67,6 +67,7 @@
 
     NSView *userContentView = (NSView *)contentView;
     NSRect bounds = userContentView.bounds;
+    CAEdgeAntialiasingMask antialiasingMask = kCALayerLeftEdge | kCALayerRightEdge | kCALayerBottomEdge | kCALayerTopEdge;
 
     self.backgroundView = super.contentView;
     if (!self.backgroundView) {
@@ -75,7 +76,7 @@
         self.backgroundView.layer.frame = self.backgroundView.frame;
         self.backgroundView.layer.cornerRadius = _appearance.cornerRadius;
         self.backgroundView.layer.masksToBounds = YES;
-        self.backgroundView.layer.edgeAntialiasingMask = kCALayerLeftEdge | kCALayerRightEdge | kCALayerBottomEdge | kCALayerTopEdge;
+        self.backgroundView.layer.edgeAntialiasingMask = antialiasingMask;
         super.contentView = self.backgroundView;
     }
 
@@ -90,7 +91,7 @@
     self.userContentView.layer.frame = self.userContentView.frame;
     self.userContentView.layer.cornerRadius = _appearance.cornerRadius;
     self.userContentView.layer.masksToBounds = YES;
-    self.userContentView.layer.edgeAntialiasingMask = kCALayerLeftEdge | kCALayerRightEdge | kCALayerBottomEdge | kCALayerTopEdge;
+    self.userContentView.layer.edgeAntialiasingMask = antialiasingMask;
 
     [self.backgroundView addSubview:self.userContentView];
 }

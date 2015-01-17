@@ -40,20 +40,6 @@ typedef NS_ENUM(NSUInteger, CCNFadeDirection) {
 };
 
 
-#if MAC_OS_X_VERSION_MIN_REQUIRED <= MAC_OS_X_VERSION_10_9
-@interface NSViewController (Additions)
-@property NSSize preferredContentSize;
-@end
-
-@interface NSWindow (Additions)
-@property (strong) NSViewController *contentViewController;
-@end
-#endif
-
-
-
-#pragma mark - StatusItem Window Controller
-
 @interface CCNStatusItemWindowController () {
     CCNStatusItemWindow *_window;
 }
@@ -87,19 +73,14 @@ typedef NS_ENUM(NSUInteger, CCNFadeDirection) {
 }
 
 - (void)setupDefaults {
-    _windowIsOpen    = NO;
+    _windowIsOpen = NO;
 }
 
 #pragma mark - Helper
 
 - (void)updateWindowFrame {
     CGRect statusItemRect = NSZeroRect;
-#if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_9
     statusItemRect = [[self.statusItemView.statusItem.button window] frame];
-#else
-    statusItemRect = [[self.statusItemView window] frame];
-#endif
-
     CGRect windowFrame = NSMakeRect(NSMinX(statusItemRect) - NSWidth(self.window.frame)/2 + NSWidth(statusItemRect)/2,
                                     NSMinY(statusItemRect) - NSHeight(self.window.frame) - self.windowAppearance.windowToStatusItemMargin,
                                     self.window.frame.size.width,

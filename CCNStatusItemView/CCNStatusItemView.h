@@ -31,11 +31,6 @@
 #import "CCNStatusItemWindowAppearance.h"
 
 
-@class CCNStatusItemView;
-
-typedef void(^CCNStatusItemLeftMouseActionHandler)(CCNStatusItemView *statusItem);
-typedef void(^CCNStatusItemRightMouseActionHandler)(CCNStatusItemView *statusItem);
-
 typedef NS_ENUM(NSUInteger, CCNStatusItemPresentationMode) {
     CCNStatusItemPresentationModeUndefined = 0,
     CCNStatusItemPresentationModeImage,
@@ -45,12 +40,11 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemPresentationMode) {
 
 #pragma mark - CCNStatusItem
 
-@interface CCNStatusItemView : NSView
+@interface CCNStatusItemView : NSObject
 
 #pragma mark - Creating and Displaying a StatusBarItem
 
-+ (void)presentStatusItemWithImage:(NSImage *)defaultImage
-                    alternateImage:(NSImage *)alternateImage
++ (void)presentStatusItemWithImage:(NSImage *)itemImage
              contentViewController:(NSViewController *)contentViewController;
 
 + (instancetype)sharedInstance;

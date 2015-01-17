@@ -178,6 +178,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FD9AC0491A4F728600129381 /* Build configuration list for PBXNativeTarget "CCNStatusItemView Example" */;
 			buildPhases = (
+				FDA94B8D1A69D90100EB4169 /* Update Build Number */,
 				FD9AC0281A4F728600129381 /* Sources */,
 				FD9AC0291A4F728600129381 /* Frameworks */,
 				FD9AC02A1A4F728600129381 /* Resources */,
@@ -247,6 +248,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		FDA94B8D1A69D90100EB4169 /* Update Build Number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update Build Number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd \"${EXECUTABLE_NAME}\"\nBASE_PATH=$(pwd)\nPLIST_PATH=\"${BASE_PATH}/Info.plist\"\nBUNDLE_VERSION=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PLIST_PATH}\")\nBUNDLE_VERSION=$[$BUNDLE_VERSION + 1]\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $BUNDLE_VERSION\" \"${PLIST_PATH}\"";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FD1F33A51A538110007AFB67 /* Sources */ = {
@@ -417,7 +436,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "CCNStatusItemView Example/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 			};
@@ -430,7 +449,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "CCNStatusItemView Example/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 			};
