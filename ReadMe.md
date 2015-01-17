@@ -30,7 +30,7 @@ After it's integrated into your project you are just a four-liner away from your
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
    ...
    [CCNStatusItemView presentStatusItemWithImage:[NSImage imageNamed:@"statusbar-icon"]
-                            contentViewController:[[ContentViewController alloc] initWithNibName:NSStringFromClass([ContentViewController class]) bundle:nil]];
+                           contentViewController:[[ContentViewController alloc] initWithNibName:NSStringFromClass([ContentViewController class]) bundle:nil]];
    ...
 }
 ```
@@ -48,7 +48,7 @@ That's all! You will have some options to change the design of this statusItem p
     [CCNStatusItemView setWindowAppearance:appearance];
     
    [CCNStatusItemView presentStatusItemWithImage:[NSImage imageNamed:@"statusbar-icon"]
-                            contentViewController:[[ContentViewController alloc] initWithNibName:NSStringFromClass([ContentViewController class]) bundle:nil]];
+                           contentViewController:[[ContentViewController alloc] initWithNibName:NSStringFromClass([ContentViewController class]) bundle:nil]];
     ...
 }
 ```
