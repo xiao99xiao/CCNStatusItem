@@ -28,7 +28,7 @@
  */
 
 #import <Availability.h>
-#import "CCNStatusItemView.h"
+#import "CCNStatusItem.h"
 #import "CCNStatusItemWindowController.h"
 
 
@@ -44,7 +44,7 @@
 #pragma mark - CCNStatusItemView
 #pragma mark -
 
-@interface CCNStatusItemView () <NSWindowDelegate>
+@interface CCNStatusItem () <NSWindowDelegate>
 @property (strong) NSStatusItem *statusItem;
 
 @property (assign) CCNStatusItemPresentationMode presentationMode;
@@ -54,7 +54,7 @@
 @property (strong, nonatomic) CCNStatusItemWindowAppearance *windowAppearance;
 @end
 
-@implementation CCNStatusItemView
+@implementation CCNStatusItem
 
 #pragma mark - Initialization
 
@@ -79,7 +79,7 @@
 
 + (instancetype)sharedInstance {
     static dispatch_once_t _onceToken;
-    __strong static CCNStatusItemView *_sharedInstance;
+    __strong static CCNStatusItem *_sharedInstance;
     dispatch_once(&_onceToken, ^{
         _sharedInstance = [[[self class] alloc] init];
     });
@@ -102,7 +102,7 @@
 + (void)presentStatusItemWithImage:(NSImage *)itemImage
              contentViewController:(NSViewController *)contentViewController {
 
-    CCNStatusItemView *sharedItem = [CCNStatusItemView sharedInstance];
+    CCNStatusItem *sharedItem = [CCNStatusItem sharedInstance];
     [sharedItem configureWithImage:itemImage];
 
     sharedItem.presentationMode = CCNStatusItemPresentationModeImage;
@@ -141,7 +141,7 @@
 #pragma mark - Handling StatusItem Layout
 
 + (void)setWindowAppearance:(CCNStatusItemWindowAppearance *)appearance {
-    CCNStatusItemView *item = [CCNStatusItemView sharedInstance];
+    CCNStatusItem *item = [CCNStatusItem sharedInstance];
     item.windowAppearance = appearance;
 }
 

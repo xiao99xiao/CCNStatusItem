@@ -4,7 +4,7 @@
 //
 
 #import "AppDelegate.h"
-#import "CCNStatusItemView.h"
+#import "CCNStatusItem.h"
 #import "CCNStatusItemWindowAppearance.h"
 #import "ContentViewController.h"
 
@@ -22,14 +22,14 @@
 //    style.backgroundColor = [NSColor colorWithCalibratedRed:0.577 green:0.818 blue:0.130 alpha:1.000];
 //    style.cornerRadius = 115.0;
     appearance.presentationTransition = CCNPresentationTransitionSlideAndFade;
-    [CCNStatusItemView setWindowAppearance:appearance];
+    [CCNStatusItem setWindowAppearance:appearance];
 
-    [CCNStatusItemView presentStatusItemWithImage:[NSImage imageNamed:@"statusbar-icon"]
-                            contentViewController:[[ContentViewController alloc] initWithNibName:NSStringFromClass([ContentViewController class]) bundle:nil]];
+    [CCNStatusItem presentStatusItemWithImage:[NSImage imageNamed:@"statusbar-icon"]
+                        contentViewController:[[ContentViewController alloc] initWithNibName:NSStringFromClass([ContentViewController class]) bundle:nil]];
 }
 
 - (IBAction)enableDisableCheckboxAction:(id)sender {
-    [CCNStatusItemView sharedInstance].appearsDisabled = (self.enableDisableCheckbox.state == NSOnState);
+    [CCNStatusItem sharedInstance].appearsDisabled = (self.enableDisableCheckbox.state == NSOnState);
 }
 
 @end

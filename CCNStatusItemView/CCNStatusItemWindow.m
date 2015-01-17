@@ -30,7 +30,7 @@
 
 #import "CCNStatusItemWindow.h"
 #import "CCNStatusItemWindowBackgroundView.h"
-#import "CCNStatusItemView.h"
+#import "CCNStatusItem.h"
 #import "CCNStatusItemWindowAppearance.h"
 
 @interface CCNStatusItemWindow () {

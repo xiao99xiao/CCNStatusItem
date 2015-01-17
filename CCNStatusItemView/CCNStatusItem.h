@@ -40,7 +40,7 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemPresentationMode) {
 
 #pragma mark - CCNStatusItem
 
-@interface CCNStatusItemView : NSObject
+@interface CCNStatusItem : NSObject
 
 #pragma mark - Creating and Displaying a StatusBarItem
 

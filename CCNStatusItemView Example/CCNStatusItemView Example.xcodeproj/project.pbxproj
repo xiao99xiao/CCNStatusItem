@@ -12,7 +12,7 @@
 		FD9AC0351A4F728600129381 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FD9AC0341A4F728600129381 /* main.m */; };
 		FD9AC0371A4F728600129381 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD9AC0361A4F728600129381 /* Images.xcassets */; };
 		FD9AC03A1A4F728600129381 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD9AC0381A4F728600129381 /* MainMenu.xib */; };
-		FD9AC05A1A4F72F700129381 /* CCNStatusItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD9AC0511A4F72F700129381 /* CCNStatusItemView.m */; };
+		FD9AC05A1A4F72F700129381 /* CCNStatusItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FD9AC0511A4F72F700129381 /* CCNStatusItem.m */; };
 		FD9AC05B1A4F72F700129381 /* CCNStatusItemWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = FD9AC0531A4F72F700129381 /* CCNStatusItemWindow.m */; };
 		FD9AC05C1A4F72F700129381 /* CCNStatusItemWindowBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD9AC0551A4F72F700129381 /* CCNStatusItemWindowBackgroundView.m */; };
 		FD9AC05D1A4F72F700129381 /* CCNStatusItemWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD9AC0571A4F72F700129381 /* CCNStatusItemWindowController.m */; };
@@ -42,8 +42,8 @@
 		FD9AC0341A4F728600129381 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FD9AC0361A4F728600129381 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		FD9AC0391A4F728600129381 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		FD9AC0501A4F72F700129381 /* CCNStatusItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNStatusItemView.h; sourceTree = "<group>"; };
-		FD9AC0511A4F72F700129381 /* CCNStatusItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCNStatusItemView.m; sourceTree = "<group>"; };
+		FD9AC0501A4F72F700129381 /* CCNStatusItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNStatusItem.h; sourceTree = "<group>"; };
+		FD9AC0511A4F72F700129381 /* CCNStatusItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCNStatusItem.m; sourceTree = "<group>"; };
 		FD9AC0521A4F72F700129381 /* CCNStatusItemWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNStatusItemWindow.h; sourceTree = "<group>"; };
 		FD9AC0531A4F72F700129381 /* CCNStatusItemWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCNStatusItemWindow.m; sourceTree = "<group>"; };
 		FD9AC0541A4F72F700129381 /* CCNStatusItemWindowBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNStatusItemWindowBackgroundView.h; sourceTree = "<group>"; };
@@ -138,8 +138,8 @@
 		FD9AC04F1A4F72F700129381 /* CCNStatusItemView */ = {
 			isa = PBXGroup;
 			children = (
-				FD9AC0501A4F72F700129381 /* CCNStatusItemView.h */,
-				FD9AC0511A4F72F700129381 /* CCNStatusItemView.m */,
+				FD9AC0501A4F72F700129381 /* CCNStatusItem.h */,
+				FD9AC0511A4F72F700129381 /* CCNStatusItem.m */,
 				FD9AC0521A4F72F700129381 /* CCNStatusItemWindow.h */,
 				FD9AC0531A4F72F700129381 /* CCNStatusItemWindow.m */,
 				FD9AC0541A4F72F700129381 /* CCNStatusItemWindowBackgroundView.h */,
@@ -280,7 +280,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD9AC05A1A4F72F700129381 /* CCNStatusItemView.m in Sources */,
+				FD9AC05A1A4F72F700129381 /* CCNStatusItem.m in Sources */,
 				FD9AC05C1A4F72F700129381 /* CCNStatusItemWindowBackgroundView.m in Sources */,
 				FD9AC0351A4F728600129381 /* main.m in Sources */,
 				FD9AC0331A4F728600129381 /* AppDelegate.m in Sources */,

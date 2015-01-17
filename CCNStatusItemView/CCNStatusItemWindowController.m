@@ -43,14 +43,14 @@ typedef NS_ENUM(NSUInteger, CCNFadeDirection) {
 @interface CCNStatusItemWindowController () {
     CCNStatusItemWindow *_window;
 }
-@property (strong) CCNStatusItemView *statusItemView;
+@property (strong) CCNStatusItem *statusItemView;
 @property (strong) CCNStatusItemWindowAppearance *windowAppearance;
 @property (strong) CCNStatusItemWindow *window;
 @end
 
 @implementation CCNStatusItemWindowController
 
-- (id)initWithConnectedStatusItem:(CCNStatusItemView *)statusItem
+- (id)initWithConnectedStatusItem:(CCNStatusItem *)statusItem
             contentViewController:(NSViewController *)contentViewController
                        appearance:(CCNStatusItemWindowAppearance *)appearance {
 

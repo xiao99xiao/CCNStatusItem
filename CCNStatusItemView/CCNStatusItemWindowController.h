@@ -29,14 +29,14 @@
 
 
 #import <Cocoa/Cocoa.h>
-#import "CCNStatusItemView.h"
+#import "CCNStatusItem.h"
 #import "CCNStatusItemWindow.h"
 #import "CCNStatusItemWindowAppearance.h"
 
 
 @interface CCNStatusItemWindowController : NSWindowController
 
-- (id)initWithConnectedStatusItem:(CCNStatusItemView *)statusItem
+- (id)initWithConnectedStatusItem:(CCNStatusItem *)statusItem
             contentViewController:(NSViewController *)contentViewController
                        appearance:(CCNStatusItemWindowAppearance *)appearance;
 
