@@ -5,7 +5,7 @@
 
 ## Overview
 
-`CCNStatusItem` is a subclass of `NSView` to act as a custom view for `NSStatusItem`. Running on Yosemite it has full support for the class `NSStatusBarButton` which is provided by `NSStatusItem` via the `button` property. Yosemite's dark menu mode will be automatically handled.<br />
+`CCNStatusItem` is a subclass of `NSObject` to act as a custom view for `NSStatusItem`. Running on Yosemite it has full support for the class `NSStatusBarButton` which is provided by `NSStatusItem` via the `button` property. Yosemite's dark menu mode will be automatically handled.<br />
 It supports a customizable statusItemWindow that will manage any `NSViewController` instance for presenting the content.
 
 Here is a shot of the included example application:
