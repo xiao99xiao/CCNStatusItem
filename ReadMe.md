@@ -29,9 +29,8 @@ After it's integrated into your project you are just a four-liner away from your
 ```Objective-C
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
    ...
-   [CCNStatusItemView presentStatusItemWithImage:[NSImage imageNamed:@"statusBarIcon"]
-                                  alternateImage:[NSImage imageNamed:@"statusBarAlternateIcon"]
-                           contentViewController:[[MyContentViewController alloc] initWithNibName:NSStringFromClass([MyContentViewController class]) bundle:nil]];
+   [CCNStatusItemView presentStatusItemWithImage:[NSImage imageNamed:@"statusbar-icon"]
+                            contentViewController:[[ContentViewController alloc] initWithNibName:NSStringFromClass([ContentViewController class]) bundle:nil]];
    ...
 }
 ```
@@ -42,15 +41,14 @@ That's all! You will have some options to change the design of this statusItem p
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     ...
     
-    CCNStatusItemWindowStyle *style = [CCNStatusItemWindowStyle defaultStyle];
-    style.backgroundColor = [NSColor colorWithCalibratedRed:0.780 green:0.807 blue:0.818 alpha:1.000];
-    style.cornerRadius = 13.0;
-    style.presentationTransition = CCNPresentationTransitionSlideAndFade;
-    [CCNStatusItemView setWindowStyle:style];
+    CCNStatusItemWindowAppearance *appearance = [CCNStatusItemWindowAppearance defaultAppearance];
+    style.backgroundColor = [NSColor colorWithCalibratedRed:0.577 green:0.818 blue:0.130 alpha:1.000];
+    style.cornerRadius = 115.0;
+    appearance.presentationTransition = CCNPresentationTransitionSlideAndFade;
+    [CCNStatusItemView setWindowAppearance:appearance];
     
-    [CCNStatusItemView presentStatusItemWithImage:[NSImage imageNamed:@"statusBarIcon"]
-                                   alternateImage:[NSImage imageNamed:@"statusBarAlternateIcon"]
-                            contentViewController:[[MyContentViewController alloc] initWithNibName:NSStringFromClass([MyContentViewController class]) bundle:nil]];
+   [CCNStatusItemView presentStatusItemWithImage:[NSImage imageNamed:@"statusbar-icon"]
+                            contentViewController:[[ContentViewController alloc] initWithNibName:NSStringFromClass([ContentViewController class]) bundle:nil]];
     ...
 }
 ```
