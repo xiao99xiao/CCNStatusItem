@@ -7,64 +7,43 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FD1F33AE1A538111007AFB67 /* CCNStatusItemView_ExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1F33AD1A538111007AFB67 /* CCNStatusItemView_ExampleTests.m */; };
 		FD9AC0331A4F728600129381 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FD9AC0321A4F728600129381 /* AppDelegate.m */; };
 		FD9AC0351A4F728600129381 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FD9AC0341A4F728600129381 /* main.m */; };
 		FD9AC0371A4F728600129381 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD9AC0361A4F728600129381 /* Images.xcassets */; };
 		FD9AC03A1A4F728600129381 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD9AC0381A4F728600129381 /* MainMenu.xib */; };
-		FD9AC05A1A4F72F700129381 /* CCNStatusItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FD9AC0511A4F72F700129381 /* CCNStatusItem.m */; };
-		FD9AC05B1A4F72F700129381 /* CCNStatusItemWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = FD9AC0531A4F72F700129381 /* CCNStatusItemWindow.m */; };
-		FD9AC05C1A4F72F700129381 /* CCNStatusItemWindowBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD9AC0551A4F72F700129381 /* CCNStatusItemWindowBackgroundView.m */; };
-		FD9AC05D1A4F72F700129381 /* CCNStatusItemWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD9AC0571A4F72F700129381 /* CCNStatusItemWindowController.m */; };
-		FD9AC05E1A4F72F700129381 /* CCNStatusItemWindowAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = FD9AC0591A4F72F700129381 /* CCNStatusItemWindowAppearance.m */; };
 		FD9AC0621A4F74BC00129381 /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD9AC0601A4F74BC00129381 /* ContentViewController.m */; };
 		FD9AC0631A4F74BC00129381 /* ContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD9AC0611A4F74BC00129381 /* ContentViewController.xib */; };
+		FDA94B991A69F9D000EB4169 /* CCNStatusItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA94B901A69F9D000EB4169 /* CCNStatusItem.m */; };
+		FDA94B9A1A69F9D000EB4169 /* CCNStatusItemWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA94B921A69F9D000EB4169 /* CCNStatusItemWindow.m */; };
+		FDA94B9B1A69F9D000EB4169 /* CCNStatusItemWindowAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA94B941A69F9D000EB4169 /* CCNStatusItemWindowAppearance.m */; };
+		FDA94B9C1A69F9D000EB4169 /* CCNStatusItemWindowBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA94B961A69F9D000EB4169 /* CCNStatusItemWindowBackgroundView.m */; };
+		FDA94B9D1A69F9D000EB4169 /* CCNStatusItemWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA94B981A69F9D000EB4169 /* CCNStatusItemWindowController.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		FD1F33AF1A538111007AFB67 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = FD9AC0241A4F728600129381 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = FD9AC02B1A4F728600129381;
-			remoteInfo = "CCNStatusItemView Example";
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		FD1F33A91A538110007AFB67 /* CCNStatusItemView ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CCNStatusItemView ExampleTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FD1F33AC1A538111007AFB67 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FD1F33AD1A538111007AFB67 /* CCNStatusItemView_ExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CCNStatusItemView_ExampleTests.m; sourceTree = "<group>"; };
-		FD9AC02C1A4F728600129381 /* CCNStatusItemView Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CCNStatusItemView Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD9AC02C1A4F728600129381 /* CCNStatusItem Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CCNStatusItem Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD9AC0301A4F728600129381 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FD9AC0311A4F728600129381 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FD9AC0321A4F728600129381 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		FD9AC0341A4F728600129381 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FD9AC0361A4F728600129381 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		FD9AC0391A4F728600129381 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		FD9AC0501A4F72F700129381 /* CCNStatusItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNStatusItem.h; sourceTree = "<group>"; };
-		FD9AC0511A4F72F700129381 /* CCNStatusItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCNStatusItem.m; sourceTree = "<group>"; };
-		FD9AC0521A4F72F700129381 /* CCNStatusItemWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNStatusItemWindow.h; sourceTree = "<group>"; };
-		FD9AC0531A4F72F700129381 /* CCNStatusItemWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCNStatusItemWindow.m; sourceTree = "<group>"; };
-		FD9AC0541A4F72F700129381 /* CCNStatusItemWindowBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNStatusItemWindowBackgroundView.h; sourceTree = "<group>"; };
-		FD9AC0551A4F72F700129381 /* CCNStatusItemWindowBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCNStatusItemWindowBackgroundView.m; sourceTree = "<group>"; };
-		FD9AC0561A4F72F700129381 /* CCNStatusItemWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNStatusItemWindowController.h; sourceTree = "<group>"; };
-		FD9AC0571A4F72F700129381 /* CCNStatusItemWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCNStatusItemWindowController.m; sourceTree = "<group>"; };
-		FD9AC0581A4F72F700129381 /* CCNStatusItemWindowAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNStatusItemWindowAppearance.h; sourceTree = "<group>"; };
-		FD9AC0591A4F72F700129381 /* CCNStatusItemWindowAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCNStatusItemWindowAppearance.m; sourceTree = "<group>"; };
 		FD9AC05F1A4F74BC00129381 /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
 		FD9AC0601A4F74BC00129381 /* ContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewController.m; sourceTree = "<group>"; };
 		FD9AC0611A4F74BC00129381 /* ContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentViewController.xib; sourceTree = "<group>"; };
+		FDA94B8F1A69F9D000EB4169 /* CCNStatusItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNStatusItem.h; sourceTree = "<group>"; };
+		FDA94B901A69F9D000EB4169 /* CCNStatusItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCNStatusItem.m; sourceTree = "<group>"; };
+		FDA94B911A69F9D000EB4169 /* CCNStatusItemWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNStatusItemWindow.h; sourceTree = "<group>"; };
+		FDA94B921A69F9D000EB4169 /* CCNStatusItemWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCNStatusItemWindow.m; sourceTree = "<group>"; };
+		FDA94B931A69F9D000EB4169 /* CCNStatusItemWindowAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNStatusItemWindowAppearance.h; sourceTree = "<group>"; };
+		FDA94B941A69F9D000EB4169 /* CCNStatusItemWindowAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCNStatusItemWindowAppearance.m; sourceTree = "<group>"; };
+		FDA94B951A69F9D000EB4169 /* CCNStatusItemWindowBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNStatusItemWindowBackgroundView.h; sourceTree = "<group>"; };
+		FDA94B961A69F9D000EB4169 /* CCNStatusItemWindowBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCNStatusItemWindowBackgroundView.m; sourceTree = "<group>"; };
+		FDA94B971A69F9D000EB4169 /* CCNStatusItemWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNStatusItemWindowController.h; sourceTree = "<group>"; };
+		FDA94B981A69F9D000EB4169 /* CCNStatusItemWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCNStatusItemWindowController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		FD1F33A61A538110007AFB67 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		FD9AC0291A4F728600129381 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -75,28 +54,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		FD1F33AA1A538111007AFB67 /* CCNStatusItemView ExampleTests */ = {
-			isa = PBXGroup;
-			children = (
-				FD1F33AD1A538111007AFB67 /* CCNStatusItemView_ExampleTests.m */,
-				FD1F33AB1A538111007AFB67 /* Supporting Files */,
-			);
-			path = "CCNStatusItemView ExampleTests";
-			sourceTree = "<group>";
-		};
-		FD1F33AB1A538111007AFB67 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				FD1F33AC1A538111007AFB67 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		FD9AC0231A4F728600129381 = {
 			isa = PBXGroup;
 			children = (
-				FD9AC02E1A4F728600129381 /* CCNStatusItemView Example */,
-				FD1F33AA1A538111007AFB67 /* CCNStatusItemView ExampleTests */,
+				FD9AC02E1A4F728600129381 /* CCNStatusItem Example */,
 				FD9AC02D1A4F728600129381 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -104,13 +65,12 @@
 		FD9AC02D1A4F728600129381 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FD9AC02C1A4F728600129381 /* CCNStatusItemView Example.app */,
-				FD1F33A91A538110007AFB67 /* CCNStatusItemView ExampleTests.xctest */,
+				FD9AC02C1A4F728600129381 /* CCNStatusItem Example.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		FD9AC02E1A4F728600129381 /* CCNStatusItemView Example */ = {
+		FD9AC02E1A4F728600129381 /* CCNStatusItem Example */ = {
 			isa = PBXGroup;
 			children = (
 				FD9AC0311A4F728600129381 /* AppDelegate.h */,
@@ -120,10 +80,10 @@
 				FD9AC0611A4F74BC00129381 /* ContentViewController.xib */,
 				FD9AC0381A4F728600129381 /* MainMenu.xib */,
 				FD9AC0361A4F728600129381 /* Images.xcassets */,
-				FD9AC04F1A4F72F700129381 /* CCNStatusItemView */,
+				FDA94B8E1A69F9D000EB4169 /* CCNStatusItem */,
 				FD9AC02F1A4F728600129381 /* Supporting Files */,
 			);
-			path = "CCNStatusItemView Example";
+			path = "CCNStatusItem Example";
 			sourceTree = "<group>";
 		};
 		FD9AC02F1A4F728600129381 /* Supporting Files */ = {
@@ -135,48 +95,30 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		FD9AC04F1A4F72F700129381 /* CCNStatusItemView */ = {
+		FDA94B8E1A69F9D000EB4169 /* CCNStatusItem */ = {
 			isa = PBXGroup;
 			children = (
-				FD9AC0501A4F72F700129381 /* CCNStatusItem.h */,
-				FD9AC0511A4F72F700129381 /* CCNStatusItem.m */,
-				FD9AC0521A4F72F700129381 /* CCNStatusItemWindow.h */,
-				FD9AC0531A4F72F700129381 /* CCNStatusItemWindow.m */,
-				FD9AC0541A4F72F700129381 /* CCNStatusItemWindowBackgroundView.h */,
-				FD9AC0551A4F72F700129381 /* CCNStatusItemWindowBackgroundView.m */,
-				FD9AC0561A4F72F700129381 /* CCNStatusItemWindowController.h */,
-				FD9AC0571A4F72F700129381 /* CCNStatusItemWindowController.m */,
-				FD9AC0581A4F72F700129381 /* CCNStatusItemWindowAppearance.h */,
-				FD9AC0591A4F72F700129381 /* CCNStatusItemWindowAppearance.m */,
+				FDA94B8F1A69F9D000EB4169 /* CCNStatusItem.h */,
+				FDA94B901A69F9D000EB4169 /* CCNStatusItem.m */,
+				FDA94B911A69F9D000EB4169 /* CCNStatusItemWindow.h */,
+				FDA94B921A69F9D000EB4169 /* CCNStatusItemWindow.m */,
+				FDA94B931A69F9D000EB4169 /* CCNStatusItemWindowAppearance.h */,
+				FDA94B941A69F9D000EB4169 /* CCNStatusItemWindowAppearance.m */,
+				FDA94B951A69F9D000EB4169 /* CCNStatusItemWindowBackgroundView.h */,
+				FDA94B961A69F9D000EB4169 /* CCNStatusItemWindowBackgroundView.m */,
+				FDA94B971A69F9D000EB4169 /* CCNStatusItemWindowController.h */,
+				FDA94B981A69F9D000EB4169 /* CCNStatusItemWindowController.m */,
 			);
-			name = CCNStatusItemView;
-			path = ../../CCNStatusItemView;
+			name = CCNStatusItem;
+			path = ../../CCNStatusItem;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		FD1F33A81A538110007AFB67 /* CCNStatusItemView ExampleTests */ = {
+		FD9AC02B1A4F728600129381 /* CCNStatusItem Example */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FD1F33B11A538111007AFB67 /* Build configuration list for PBXNativeTarget "CCNStatusItemView ExampleTests" */;
-			buildPhases = (
-				FD1F33A51A538110007AFB67 /* Sources */,
-				FD1F33A61A538110007AFB67 /* Frameworks */,
-				FD1F33A71A538110007AFB67 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				FD1F33B01A538111007AFB67 /* PBXTargetDependency */,
-			);
-			name = "CCNStatusItemView ExampleTests";
-			productName = "CCNStatusItemView ExampleTests";
-			productReference = FD1F33A91A538110007AFB67 /* CCNStatusItemView ExampleTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		FD9AC02B1A4F728600129381 /* CCNStatusItemView Example */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = FD9AC0491A4F728600129381 /* Build configuration list for PBXNativeTarget "CCNStatusItemView Example" */;
+			buildConfigurationList = FD9AC0491A4F728600129381 /* Build configuration list for PBXNativeTarget "CCNStatusItem Example" */;
 			buildPhases = (
 				FDA94B8D1A69D90100EB4169 /* Update Build Number */,
 				FD9AC0281A4F728600129381 /* Sources */,
@@ -187,9 +129,9 @@
 			);
 			dependencies = (
 			);
-			name = "CCNStatusItemView Example";
+			name = "CCNStatusItem Example";
 			productName = "CCNStatusItemView Example";
-			productReference = FD9AC02C1A4F728600129381 /* CCNStatusItemView Example.app */;
+			productReference = FD9AC02C1A4F728600129381 /* CCNStatusItem Example.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -201,16 +143,12 @@
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "cocoa:naut";
 				TargetAttributes = {
-					FD1F33A81A538110007AFB67 = {
-						CreatedOnToolsVersion = 6.1.1;
-						TestTargetID = FD9AC02B1A4F728600129381;
-					};
 					FD9AC02B1A4F728600129381 = {
 						CreatedOnToolsVersion = 6.1.1;
 					};
 				};
 			};
-			buildConfigurationList = FD9AC0271A4F728600129381 /* Build configuration list for PBXProject "CCNStatusItemView Example" */;
+			buildConfigurationList = FD9AC0271A4F728600129381 /* Build configuration list for PBXProject "CCNStatusItem Example" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -223,20 +161,12 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				FD9AC02B1A4F728600129381 /* CCNStatusItemView Example */,
-				FD1F33A81A538110007AFB67 /* CCNStatusItemView ExampleTests */,
+				FD9AC02B1A4F728600129381 /* CCNStatusItem Example */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		FD1F33A71A538110007AFB67 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		FD9AC02A1A4F728600129381 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -268,38 +198,22 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		FD1F33A51A538110007AFB67 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FD1F33AE1A538111007AFB67 /* CCNStatusItemView_ExampleTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		FD9AC0281A4F728600129381 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD9AC05A1A4F72F700129381 /* CCNStatusItem.m in Sources */,
-				FD9AC05C1A4F72F700129381 /* CCNStatusItemWindowBackgroundView.m in Sources */,
+				FDA94B9C1A69F9D000EB4169 /* CCNStatusItemWindowBackgroundView.m in Sources */,
 				FD9AC0351A4F728600129381 /* main.m in Sources */,
+				FDA94B9A1A69F9D000EB4169 /* CCNStatusItemWindow.m in Sources */,
+				FDA94B991A69F9D000EB4169 /* CCNStatusItem.m in Sources */,
 				FD9AC0331A4F728600129381 /* AppDelegate.m in Sources */,
+				FDA94B9D1A69F9D000EB4169 /* CCNStatusItemWindowController.m in Sources */,
 				FD9AC0621A4F74BC00129381 /* ContentViewController.m in Sources */,
-				FD9AC05B1A4F72F700129381 /* CCNStatusItemWindow.m in Sources */,
-				FD9AC05E1A4F72F700129381 /* CCNStatusItemWindowAppearance.m in Sources */,
-				FD9AC05D1A4F72F700129381 /* CCNStatusItemWindowController.m in Sources */,
+				FDA94B9B1A69F9D000EB4169 /* CCNStatusItemWindowAppearance.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		FD1F33B01A538111007AFB67 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = FD9AC02B1A4F728600129381 /* CCNStatusItemView Example */;
-			targetProxy = FD1F33AF1A538111007AFB67 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		FD9AC0381A4F728600129381 /* MainMenu.xib */ = {
@@ -313,46 +227,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		FD1F33B21A538111007AFB67 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "CCNStatusItemView ExampleTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx10.9;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CCNStatusItemView Example.app/Contents/MacOS/CCNStatusItemView Example";
-			};
-			name = Debug;
-		};
-		FD1F33B31A538111007AFB67 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "CCNStatusItemView ExampleTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx10.9;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CCNStatusItemView Example.app/Contents/MacOS/CCNStatusItemView Example";
-			};
-			name = Release;
-		};
 		FD9AC0471A4F728600129381 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -387,7 +261,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -423,7 +297,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 			};
@@ -434,10 +308,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = "CCNStatusItemView Example/Info.plist";
+				INFOPLIST_FILE = "CCNStatusItem Example/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "CCNStatusItem Example";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -447,10 +321,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = "CCNStatusItemView Example/Info.plist";
+				INFOPLIST_FILE = "CCNStatusItem Example/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "CCNStatusItem Example";
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -458,16 +332,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		FD1F33B11A538111007AFB67 /* Build configuration list for PBXNativeTarget "CCNStatusItemView ExampleTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				FD1F33B21A538111007AFB67 /* Debug */,
-				FD1F33B31A538111007AFB67 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		FD9AC0271A4F728600129381 /* Build configuration list for PBXProject "CCNStatusItemView Example" */ = {
+		FD9AC0271A4F728600129381 /* Build configuration list for PBXProject "CCNStatusItem Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FD9AC0471A4F728600129381 /* Debug */,
@@ -476,7 +341,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FD9AC0491A4F728600129381 /* Build configuration list for PBXNativeTarget "CCNStatusItemView Example" */ = {
+		FD9AC0491A4F728600129381 /* Build configuration list for PBXNativeTarget "CCNStatusItem Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FD9AC04A1A4F728600129381 /* Debug */,

@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "FD9AC02B1A4F728600129381"
-               BuildableName = "CCNStatusItemView Example.app"
-               BlueprintName = "CCNStatusItemView Example"
-               ReferencedContainer = "container:CCNStatusItemView Example.xcodeproj">
+               BuildableName = "CCNStatusItem Example.app"
+               BlueprintName = "CCNStatusItem Example"
+               ReferencedContainer = "container:CCNStatusItem Example.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "FD1F33A81A538110007AFB67"
-               BuildableName = "CCNStatusItemView ExampleTests.xctest"
-               BlueprintName = "CCNStatusItemView ExampleTests"
-               ReferencedContainer = "container:CCNStatusItemView Example.xcodeproj">
+               BuildableName = "CCNStatusItem ExampleTests.xctest"
+               BlueprintName = "CCNStatusItem ExampleTests"
+               ReferencedContainer = "container:CCNStatusItem Example.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -45,7 +45,7 @@
                BlueprintIdentifier = "FD1F33991A53791F007AFB67"
                BuildableName = "CCNStatusItemView Example Tests.xctest"
                BlueprintName = "CCNStatusItemView Example Tests"
-               ReferencedContainer = "container:CCNStatusItemView Example.xcodeproj">
+               ReferencedContainer = "container:CCNStatusItem Example.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -61,9 +61,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "FD1F33A81A538110007AFB67"
-               BuildableName = "CCNStatusItemView ExampleTests.xctest"
-               BlueprintName = "CCNStatusItemView ExampleTests"
-               ReferencedContainer = "container:CCNStatusItemView Example.xcodeproj">
+               BuildableName = "CCNStatusItem ExampleTests.xctest"
+               BlueprintName = "CCNStatusItem ExampleTests"
+               ReferencedContainer = "container:CCNStatusItem Example.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -71,9 +71,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FD9AC02B1A4F728600129381"
-            BuildableName = "CCNStatusItemView Example.app"
-            BlueprintName = "CCNStatusItemView Example"
-            ReferencedContainer = "container:CCNStatusItemView Example.xcodeproj">
+            BuildableName = "CCNStatusItem Example.app"
+            BlueprintName = "CCNStatusItem Example"
+            ReferencedContainer = "container:CCNStatusItem Example.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -90,9 +90,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FD9AC02B1A4F728600129381"
-            BuildableName = "CCNStatusItemView Example.app"
-            BlueprintName = "CCNStatusItemView Example"
-            ReferencedContainer = "container:CCNStatusItemView Example.xcodeproj">
+            BuildableName = "CCNStatusItem Example.app"
+            BlueprintName = "CCNStatusItem Example"
+            ReferencedContainer = "container:CCNStatusItem Example.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -108,9 +108,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FD9AC02B1A4F728600129381"
-            BuildableName = "CCNStatusItemView Example.app"
-            BlueprintName = "CCNStatusItemView Example"
-            ReferencedContainer = "container:CCNStatusItemView Example.xcodeproj">
+            BuildableName = "CCNStatusItem Example.app"
+            BlueprintName = "CCNStatusItem Example"
+            ReferencedContainer = "container:CCNStatusItem Example.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
