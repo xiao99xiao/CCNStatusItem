@@ -68,7 +68,7 @@ The statusItem window's frame size will be determined automatically by calling `
 
 ## Requirements
 
-`CCNStatusItemView` was written using ARC and "modern" Objective-C 2. At the moment it has been tested only on OS X 10.10 Yosemite and 10.9 Mavericks.
+`CCNStatusItemView` was written using ARC and "modern" Objective-C 2. At the moment it has only support for OS X 10.10 Yosemite.
 
 
 ## Contribution
