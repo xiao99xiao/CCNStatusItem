@@ -19,13 +19,12 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 
     CCNStatusItemWindowAppearance *appearance = [CCNStatusItemWindowAppearance defaultAppearance];
-//    style.backgroundColor = [NSColor colorWithCalibratedRed:0.577 green:0.818 blue:0.130 alpha:1.000];
-//    style.cornerRadius = 115.0;
+//    appearance.cornerRadius = 85.0;
     appearance.presentationTransition = CCNPresentationTransitionSlideAndFade;
     [CCNStatusItem setWindowAppearance:appearance];
 
     [CCNStatusItem presentStatusItemWithImage:[NSImage imageNamed:@"statusbar-icon"]
-                        contentViewController:[[ContentViewController alloc] initWithNibName:NSStringFromClass([ContentViewController class]) bundle:nil]];
+                        contentViewController:[ContentViewController viewController]];
 }
 
 - (IBAction)enableDisableCheckboxAction:(id)sender {

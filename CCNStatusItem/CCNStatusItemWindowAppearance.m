@@ -34,14 +34,9 @@
 static const CGFloat CCNDefaultCornerRadius             = 5.0;
 static const CGFloat CCNDefaultStatusItemMargin         = 2.0;
 static const NSTimeInterval CCNDefaultAnimationDuration = 0.21;
-static NSColor *CCNDefaultBackgroundColor;
 
 
 @implementation CCNStatusItemWindowAppearance
-
-+ (void)initialize {
-    CCNDefaultBackgroundColor = [NSColor windowBackgroundColor];
-}
 
 + (instancetype)defaultAppearance {
     return [[[self class] alloc] init];
@@ -53,7 +48,6 @@ static NSColor *CCNDefaultBackgroundColor;
         self.cornerRadius              = CCNDefaultCornerRadius;
         self.windowToStatusItemMargin  = CCNDefaultStatusItemMargin;
         self.animationDuration         = CCNDefaultAnimationDuration;
-        self.backgroundColor           = CCNDefaultBackgroundColor;
         self.presentationTransition    = CCNPresentationTransitionFade;
         self.toolTip                   = nil;
     }

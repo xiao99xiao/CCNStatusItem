@@ -33,6 +33,7 @@
 
 @interface CCNStatusItemWindowBackgroundView ()
 @property (strong) CCNStatusItemWindowAppearance *windowAppearance;
+@property (strong) NSColor *backgroundColor;
 @end
 
 @implementation CCNStatusItemWindowBackgroundView
@@ -41,6 +42,13 @@
     self = [super initWithFrame:frameRect];
     if (self) {
         self.windowAppearance = appearance;
+        self.backgroundColor = [NSColor windowBackgroundColor];
+        
+        self.wantsLayer = YES;
+        self.layer.frame = NSMakeRect(NSMinX(self.frame), NSMinY(self.frame), NSWidth(self.frame), NSHeight(self.frame)-CCNDefaultArrowHeight);
+        self.layer.cornerRadius = appearance.cornerRadius;
+        self.layer.masksToBounds = YES;
+        self.layer.edgeAntialiasingMask = kCALayerLeftEdge | kCALayerRightEdge | kCALayerBottomEdge | kCALayerTopEdge;
     }
     return self;
 }
@@ -76,7 +84,7 @@
     [windowPath appendBezierPath:arrowPath];
     [windowPath appendBezierPath:backgroundPath];
 
-    [self.windowAppearance.backgroundColor setFill];
+    [self.backgroundColor setFill];
     [windowPath fill];
 }
 

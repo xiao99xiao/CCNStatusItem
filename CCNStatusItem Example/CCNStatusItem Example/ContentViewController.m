@@ -14,6 +14,10 @@
 
 @implementation ContentViewController
 
++ (instancetype)viewController {
+    return [[[self class] alloc] initWithNibName:NSStringFromClass([self class]) bundle:nil];
+}
+
 - (IBAction)quitButtonAction:(id)sender {
     [[NSApplication sharedApplication] terminate:self];
 }

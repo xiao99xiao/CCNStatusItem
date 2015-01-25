@@ -9,6 +9,9 @@
 #import <Cocoa/Cocoa.h>
 
 @interface ContentViewController : NSViewController
+
++ (instancetype)viewController;
+
 @property (weak) IBOutlet NSButton *quitButton;
 @property (weak) IBOutlet NSTabView *tabview;
 
