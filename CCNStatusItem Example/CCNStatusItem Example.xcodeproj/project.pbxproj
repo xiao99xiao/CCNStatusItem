@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD38FB4A1A755AE700DBAF51 /* CCNStatusItem_ExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FD38FB491A755AE700DBAF51 /* CCNStatusItem_ExampleTests.m */; };
 		FD9AC0331A4F728600129381 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FD9AC0321A4F728600129381 /* AppDelegate.m */; };
 		FD9AC0351A4F728600129381 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FD9AC0341A4F728600129381 /* main.m */; };
 		FD9AC0371A4F728600129381 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD9AC0361A4F728600129381 /* Images.xcassets */; };
@@ -20,7 +21,20 @@
 		FDA94B9D1A69F9D000EB4169 /* CCNStatusItemWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA94B981A69F9D000EB4169 /* CCNStatusItemWindowController.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		FD38FB4B1A755AE700DBAF51 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FD9AC0241A4F728600129381 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FD9AC02B1A4F728600129381;
+			remoteInfo = "CCNStatusItem Example";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		FD38FB451A755AE700DBAF51 /* CCNStatusItem ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CCNStatusItem ExampleTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD38FB481A755AE700DBAF51 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FD38FB491A755AE700DBAF51 /* CCNStatusItem_ExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CCNStatusItem_ExampleTests.m; sourceTree = "<group>"; };
 		FD9AC02C1A4F728600129381 /* CCNStatusItem Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CCNStatusItem Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD9AC0301A4F728600129381 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FD9AC0311A4F728600129381 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -44,6 +58,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		FD38FB421A755AE700DBAF51 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FD9AC0291A4F728600129381 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -54,10 +75,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FD38FB461A755AE700DBAF51 /* CCNStatusItem ExampleTests */ = {
+			isa = PBXGroup;
+			children = (
+				FD38FB491A755AE700DBAF51 /* CCNStatusItem_ExampleTests.m */,
+				FD38FB471A755AE700DBAF51 /* Supporting Files */,
+			);
+			path = "CCNStatusItem ExampleTests";
+			sourceTree = "<group>";
+		};
+		FD38FB471A755AE700DBAF51 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FD38FB481A755AE700DBAF51 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		FD9AC0231A4F728600129381 = {
 			isa = PBXGroup;
 			children = (
 				FD9AC02E1A4F728600129381 /* CCNStatusItem Example */,
+				FD38FB461A755AE700DBAF51 /* CCNStatusItem ExampleTests */,
 				FD9AC02D1A4F728600129381 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -66,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				FD9AC02C1A4F728600129381 /* CCNStatusItem Example.app */,
+				FD38FB451A755AE700DBAF51 /* CCNStatusItem ExampleTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -116,6 +156,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		FD38FB441A755AE700DBAF51 /* CCNStatusItem ExampleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FD38FB4F1A755AE700DBAF51 /* Build configuration list for PBXNativeTarget "CCNStatusItem ExampleTests" */;
+			buildPhases = (
+				FD38FB411A755AE700DBAF51 /* Sources */,
+				FD38FB421A755AE700DBAF51 /* Frameworks */,
+				FD38FB431A755AE700DBAF51 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FD38FB4C1A755AE700DBAF51 /* PBXTargetDependency */,
+			);
+			name = "CCNStatusItem ExampleTests";
+			productName = "CCNStatusItem ExampleTests";
+			productReference = FD38FB451A755AE700DBAF51 /* CCNStatusItem ExampleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		FD9AC02B1A4F728600129381 /* CCNStatusItem Example */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = FD9AC0491A4F728600129381 /* Build configuration list for PBXNativeTarget "CCNStatusItem Example" */;
@@ -143,6 +201,10 @@
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "cocoa:naut";
 				TargetAttributes = {
+					FD38FB441A755AE700DBAF51 = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = FD9AC02B1A4F728600129381;
+					};
 					FD9AC02B1A4F728600129381 = {
 						CreatedOnToolsVersion = 6.1.1;
 					};
@@ -162,11 +224,19 @@
 			projectRoot = "";
 			targets = (
 				FD9AC02B1A4F728600129381 /* CCNStatusItem Example */,
+				FD38FB441A755AE700DBAF51 /* CCNStatusItem ExampleTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		FD38FB431A755AE700DBAF51 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FD9AC02A1A4F728600129381 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -198,6 +268,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		FD38FB411A755AE700DBAF51 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FD38FB4A1A755AE700DBAF51 /* CCNStatusItem_ExampleTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FD9AC0281A4F728600129381 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -215,6 +293,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		FD38FB4C1A755AE700DBAF51 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FD9AC02B1A4F728600129381 /* CCNStatusItem Example */;
+			targetProxy = FD38FB4B1A755AE700DBAF51 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		FD9AC0381A4F728600129381 /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
@@ -227,6 +313,42 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		FD38FB4D1A755AE700DBAF51 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "CCNStatusItem ExampleTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CCNStatusItem Example.app/Contents/MacOS/CCNStatusItem Example";
+			};
+			name = Debug;
+		};
+		FD38FB4E1A755AE700DBAF51 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "CCNStatusItem ExampleTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CCNStatusItem Example.app/Contents/MacOS/CCNStatusItem Example";
+			};
+			name = Release;
+		};
 		FD9AC0471A4F728600129381 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -332,6 +454,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		FD38FB4F1A755AE700DBAF51 /* Build configuration list for PBXNativeTarget "CCNStatusItem ExampleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FD38FB4D1A755AE700DBAF51 /* Debug */,
+				FD38FB4E1A755AE700DBAF51 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		FD9AC0271A4F728600129381 /* Build configuration list for PBXProject "CCNStatusItem Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
