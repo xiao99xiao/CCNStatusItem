@@ -71,6 +71,7 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemPresentationMode) {
 
 
 
+// Each notification has the statusItemWindow as notification object. The userInfo dictionary is nil.
 FOUNDATION_EXPORT NSString *const CCNStatusItemWindowWillShowNotification;
 FOUNDATION_EXPORT NSString *const CCNStatusItemWindowDidShowNotification;
 FOUNDATION_EXPORT NSString *const CCNStatusItemWindowWillDismissNotification;
