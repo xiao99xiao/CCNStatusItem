@@ -72,6 +72,11 @@
     self.backgroundView = super.contentView;
     if (!self.backgroundView) {
         self.backgroundView = [[CCNStatusItemWindowBackgroundView alloc] initWithFrame:bounds appearance:_appearance];
+        self.backgroundView.wantsLayer = YES;
+        self.backgroundView.layer.frame = self.backgroundView.frame;
+        self.backgroundView.layer.cornerRadius = _appearance.cornerRadius;
+        self.backgroundView.layer.masksToBounds = YES;
+        self.backgroundView.layer.edgeAntialiasingMask = antialiasingMask;
         super.contentView = self.backgroundView;
     }
 
