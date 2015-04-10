@@ -54,7 +54,7 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemPresentationMode) {
 
 @property (readonly, nonatomic) BOOL isStatusItemWindowVisible;
 @property (readonly, nonatomic) CCNStatusItemPresentationMode presentationMode;
-@property (assign, nonatomic) BOOL appearsDisabled;
+@property (readonly, nonatomic) BOOL isDarkMode;
 
 #pragma mark - Handling the Status Item Window
 
@@ -64,8 +64,8 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemPresentationMode) {
 
 #pragma mark - Handling StatusItem Layout
 
-@property (readonly, nonatomic) CCNStatusItemWindowAppearance *windowAppearance;
 + (void)setWindowAppearance:(CCNStatusItemWindowAppearance *)appearance;
+@property (readonly, nonatomic) CCNStatusItemWindowAppearance *windowAppearance;
 
 @end
 
@@ -76,3 +76,5 @@ FOUNDATION_EXPORT NSString *const CCNStatusItemWindowWillShowNotification;
 FOUNDATION_EXPORT NSString *const CCNStatusItemWindowDidShowNotification;
 FOUNDATION_EXPORT NSString *const CCNStatusItemWindowWillDismissNotification;
 FOUNDATION_EXPORT NSString *const CCNStatusItemWindowDidDismissNotification;
+
+FOUNDATION_EXPORT NSString *const CCNSystemInterfaceThemeChangedNotification;			// sent every time when system theme toggles between dark menu mode and mormal menu mode

@@ -66,7 +66,6 @@
         self.isStatusItemWindowVisible = NO;
         self.statusItemWindowController = nil;
         self.windowAppearance = [CCNStatusItemWindowAppearance defaultAppearance];
-        self.appearsDisabled = NO;
     }
     return self;
 }
@@ -132,8 +131,10 @@
     self.statusItem.button.toolTip = appearance.toolTip;
 }
 
-- (void)setAppearsDisabled:(BOOL)appearsDisabled {
-    self.statusItem.button.appearsDisabled = appearsDisabled;
+- (BOOL)isDarkMode {
+    NSDictionary *dict = [[NSUserDefaults standardUserDefaults] persistentDomainForName:NSGlobalDomain];
+    id style = [dict objectForKey:@"AppleInterfaceStyle"];
+    return ( style && [style isKindOfClass:[NSString class]] && NSOrderedSame == [style caseInsensitiveCompare:@"dark"] );
 }
 
 #pragma mark - Handling the Status Item Window
@@ -149,8 +150,8 @@
 #pragma mark - Handling StatusItem Layout
 
 + (void)setWindowAppearance:(CCNStatusItemWindowAppearance *)appearance {
-    CCNStatusItem *item = [CCNStatusItem sharedInstance];
-    item.windowAppearance = appearance;
+    CCNStatusItem *sharedItem = [CCNStatusItem sharedInstance];
+    sharedItem.windowAppearance = appearance;
 }
 
 @end
