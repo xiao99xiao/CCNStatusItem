@@ -36,6 +36,8 @@ NSString *const CCNStatusItemWindowWillShowNotification    = @"CCNStatusItemWind
 NSString *const CCNStatusItemWindowDidShowNotification     = @"CCNStatusItemWindowDidShowNotification";
 NSString *const CCNStatusItemWindowWillDismissNotification = @"CCNStatusItemWindowWillDismissNotification";
 NSString *const CCNStatusItemWindowDidDismissNotification  = @"CCNStatusItemWindowDidDismissNotification";
+NSString *const CCNSystemInterfaceThemeChangedNotification = @"CCNSystemInterfaceThemeChangedNotification";
+
 
 static const CGFloat CCNTransitionDistance = 8.0;
 typedef NS_ENUM(NSUInteger, CCNFadeDirection) {
@@ -46,12 +48,9 @@ typedef NS_ENUM(NSUInteger, CCNFadeDirection) {
 typedef void (^CCNStatusItemWindowAnimationCompletion)(void);
 
 
-@interface CCNStatusItemWindowController () {
-    CCNStatusItemWindow *_window;
-}
+@interface CCNStatusItemWindowController ()
 @property (strong) CCNStatusItem *statusItemView;
 @property (strong) CCNStatusItemWindowAppearance *windowAppearance;
-@property (strong) CCNStatusItemWindow *window;
 @end
 
 @implementation CCNStatusItemWindowController
@@ -64,35 +63,30 @@ typedef void (^CCNStatusItemWindowAnimationCompletion)(void);
 
     self = [super init];
     if (self) {
-        [self setupDefaults];
-
+        self.windowIsOpen = NO;
         self.statusItemView = statusItem;
         self.windowAppearance = appearance;
 
         // StatusItem Window
         self.window = [CCNStatusItemWindow statusItemWindowWithAppearance:appearance];
-        self.window.contentViewController = contentViewController;
+        self.contentViewController = contentViewController;
 
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleWindowDidResignKeyNotification:) name:NSWindowDidResignKeyNotification object:nil];
+        [[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(handleAppleInterfaceThemeChangedNotification:) name:@"AppleInterfaceThemeChangedNotification" object:nil];
     }
     return self;
-}
-
-- (void)setupDefaults {
-    _windowIsOpen = NO;
 }
 
 #pragma mark - Helper
 
 - (void)updateWindowFrame {
-    CGRect statusItemRect = NSZeroRect;
-    statusItemRect = [[self.statusItemView.statusItem.button window] frame];
+    CGRect statusItemRect = [[self.statusItemView.statusItem.button window] frame];
     CGRect windowFrame = NSMakeRect(NSMinX(statusItemRect) - NSWidth(self.window.frame)/2 + NSWidth(statusItemRect)/2,
                                     NSMinY(statusItemRect) - NSHeight(self.window.frame) - self.windowAppearance.windowToStatusItemMargin,
                                     self.window.frame.size.width,
                                     self.window.frame.size.height);
     [self.window setFrame:windowFrame display:YES];
-
+    [self.window setAppearance:[NSAppearance currentAppearance]];
 }
 
 #pragma mark - Handling Window Visibility
@@ -103,13 +97,13 @@ typedef void (^CCNStatusItemWindowAnimationCompletion)(void);
     [self updateWindowFrame];
     [self showWindow:nil];
 
-    [self animateWindow:self.window withFadeDirection:CCNFadeDirectionFadeIn];
+    [self animateWindow:(CCNStatusItemWindow *)self.window withFadeDirection:CCNFadeDirectionFadeIn];
 }
 
 - (void)dismissStatusItemWindow {
     if (self.animationIsRunning) return;
 
-    [self animateWindow:self.window withFadeDirection:CCNFadeDirectionFadeOut];
+    [self animateWindow:(CCNStatusItemWindow *)self.window withFadeDirection:CCNFadeDirectionFadeOut];
 }
 
 - (void)animateWindow:(CCNStatusItemWindow *)window withFadeDirection:(CCNFadeDirection)fadeDirection {
@@ -127,13 +121,10 @@ typedef void (^CCNStatusItemWindowAnimationCompletion)(void);
 }
 
 - (void)animateWindow:(CCNStatusItemWindow *)window withFadeTransitionUsingFadeDirection:(CCNFadeDirection)fadeDirection {
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     self.animationIsRunning = YES;
 
-
-    if (fadeDirection == CCNFadeDirectionFadeIn)    [nc postNotificationName:CCNStatusItemWindowWillShowNotification object:window];
-    else                                            [nc postNotificationName:CCNStatusItemWindowWillDismissNotification object:window];
-
+    NSString *notificationName = (fadeDirection == CCNFadeDirectionFadeIn ? CCNStatusItemWindowWillShowNotification : CCNStatusItemWindowWillDismissNotification);
+    [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:window];
 
     [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
         context.duration = self.windowAppearance.animationDuration;
@@ -144,29 +135,27 @@ typedef void (^CCNStatusItemWindowAnimationCompletion)(void);
 }
 
 - (void)animateWindow:(CCNStatusItemWindow *)window withSlideAndFadeTransitionUsingFadeDirection:(CCNFadeDirection)fadeDirection {
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     self.animationIsRunning = YES;
 
+    NSString *notificationName = (fadeDirection == CCNFadeDirectionFadeIn ? CCNStatusItemWindowWillShowNotification : CCNStatusItemWindowWillDismissNotification);
+    [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:window];
+
     CGRect windowStartFrame, windowEndFrame;
+    CGRect calculatedFrame = NSMakeRect(NSMinX(window.frame), NSMinY(window.frame) + CCNTransitionDistance, NSWidth(window.frame), NSHeight(window.frame));
+
     switch (fadeDirection) {
         case CCNFadeDirectionFadeIn: {
-            windowStartFrame = NSMakeRect(NSMinX(window.frame), NSMinY(window.frame) + CCNTransitionDistance, NSWidth(window.frame), NSHeight(window.frame));
+            windowStartFrame = calculatedFrame;
             windowEndFrame = window.frame;
             break;
         }
         case CCNFadeDirectionFadeOut: {
             windowStartFrame = window.frame;
-            windowEndFrame = NSMakeRect(NSMinX(window.frame), NSMinY(window.frame) + CCNTransitionDistance, NSWidth(window.frame), NSHeight(window.frame));
+            windowEndFrame = calculatedFrame;
             break;
         }
     }
     [window setFrame:windowStartFrame display:NO];
-
-
-    if (fadeDirection == CCNFadeDirectionFadeIn)    [nc postNotificationName:CCNStatusItemWindowWillShowNotification object:window];
-    else                                            [nc postNotificationName:CCNStatusItemWindowWillDismissNotification object:window];
-
-//    [window setAppearance:[NSAppearance appearanceNamed:NSAppearanceNameVibrantDark]];
 
     [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
         context.duration = self.windowAppearance.animationDuration;
@@ -201,6 +190,12 @@ typedef void (^CCNStatusItemWindowAnimationCompletion)(void);
 
 - (void)handleWindowDidResignKeyNotification:(NSNotification *)note {
     [self dismissStatusItemWindow];
+}
+
+#pragma mark - NSDistributedNotificationCenter
+
+- (void)handleAppleInterfaceThemeChangedNotification:(NSNotification *)note {
+    [[NSNotificationCenter defaultCenter] postNotificationName:CCNSystemInterfaceThemeChangedNotification object:nil];
 }
 
 @end
