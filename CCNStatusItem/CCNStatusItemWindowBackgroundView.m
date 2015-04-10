@@ -55,8 +55,8 @@
     NSBezierPath *arrowPath      = [NSBezierPath bezierPath];
     NSBezierPath *backgroundPath = [NSBezierPath bezierPathWithRoundedRect:backgroundRect xRadius:cornerRadius yRadius:cornerRadius];
 
-    NSPoint leftPoint = {NSWidth(backgroundRect)/2 - arrowWidth/2, NSMaxY(backgroundRect)};
-    NSPoint topPoint = {NSWidth(backgroundRect)/2, NSMaxY(backgroundRect) + arrowHeight};
+    NSPoint leftPoint  = {NSWidth(backgroundRect)/2 - arrowWidth/2, NSMaxY(backgroundRect)};
+    NSPoint topPoint   = {NSWidth(backgroundRect)/2, NSMaxY(backgroundRect) + arrowHeight};
     NSPoint rightPoint = {NSWidth(backgroundRect)/2 + arrowWidth/2, NSMaxY(backgroundRect)};
 
     [arrowPath moveToPoint:leftPoint];
@@ -69,14 +69,10 @@
     [arrowPath lineToPoint:leftPoint];
     [arrowPath closePath];
 
-    [arrowPath setLineCapStyle: NSRoundLineCapStyle];
-    [arrowPath setLineJoinStyle: NSBevelLineJoinStyle];
-
-
     [windowPath appendBezierPath:arrowPath];
     [windowPath appendBezierPath:backgroundPath];
 
-    [self.windowAppearance.backgroundColor setFill];
+    [[NSColor windowBackgroundColor] setFill];
     [windowPath fill];
 }
 
