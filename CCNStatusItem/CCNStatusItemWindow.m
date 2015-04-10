@@ -33,6 +33,7 @@
 #import "CCNStatusItem.h"
 #import "CCNStatusItemWindowAppearance.h"
 
+
 @interface CCNStatusItemWindow () {
     CCNStatusItemWindowAppearance *_appearance;
 }
@@ -43,19 +44,19 @@
 @implementation CCNStatusItemWindow
 
 + (instancetype)statusItemWindowWithAppearance:(CCNStatusItemWindowAppearance *)appearance {
-    return [[[self class] alloc] initWithContentRect:NSZeroRect styleMask:NSNonactivatingPanelMask backing:NSBackingStoreBuffered defer:YES appearance:appearance];
+    return [[[self class] alloc] initWithContentRect:NSZeroRect styleMask:(NSBorderlessWindowMask | NSNonactivatingPanelMask) backing:NSBackingStoreBuffered defer:YES appearance:appearance];
 }
 
 - (instancetype)initWithContentRect:(NSRect)contentRect styleMask:(NSUInteger)styleMask backing:(NSBackingStoreType)bufferingType defer:(BOOL)flag appearance:(CCNStatusItemWindowAppearance *)appearance {
     _appearance = appearance;
     self = [super initWithContentRect:contentRect styleMask:styleMask backing:bufferingType defer:flag];
     if (self) {
-        self.alphaValue = 0.0;
         self.opaque = NO;
         self.hasShadow = YES;
-        self.level = NSPopUpMenuWindowLevel;
+        self.level = NSMainMenuWindowLevel;
         self.backgroundColor = [NSColor clearColor];
-    }
+        [self setAppearance:[NSAppearance currentAppearance]];
+	}
     return self;
 }
 
@@ -73,7 +74,7 @@
     if (!self.backgroundView) {
         self.backgroundView = [[CCNStatusItemWindowBackgroundView alloc] initWithFrame:bounds appearance:_appearance];
         self.backgroundView.wantsLayer = YES;
-        self.backgroundView.layer.frame = self.backgroundView.frame;
+        self.backgroundView.layer.frame = bounds;
         self.backgroundView.layer.cornerRadius = _appearance.cornerRadius;
         self.backgroundView.layer.masksToBounds = YES;
         self.backgroundView.layer.edgeAntialiasingMask = antialiasingMask;
@@ -88,7 +89,7 @@
     self.userContentView.frame = [self contentRectForFrameRect:bounds];
     self.userContentView.autoresizingMask = (NSViewWidthSizable | NSViewHeightSizable);
     self.userContentView.wantsLayer = YES;
-    self.userContentView.layer.frame = self.userContentView.frame;
+    self.userContentView.layer.frame = bounds;
     self.userContentView.layer.cornerRadius = _appearance.cornerRadius;
     self.userContentView.layer.masksToBounds = YES;
     self.userContentView.layer.edgeAntialiasingMask = antialiasingMask;
