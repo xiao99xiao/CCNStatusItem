@@ -42,7 +42,6 @@ That's all! You will have some options to change the design of this statusItem p
     ...
     
     CCNStatusItemWindowAppearance *appearance = [CCNStatusItemWindowAppearance defaultAppearance];
-    style.backgroundColor = [NSColor colorWithCalibratedRed:0.577 green:0.818 blue:0.130 alpha:1.000];
     style.cornerRadius = 115.0;
     appearance.presentationTransition = CCNPresentationTransitionSlideAndFade;
     [CCNStatusItem setWindowAppearance:appearance];
