@@ -28,7 +28,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FD1F33A81A538110007AFB67"
+               BlueprintIdentifier = "FD38FB441A755AE700DBAF51"
                BuildableName = "CCNStatusItem ExampleTests.xctest"
                BlueprintName = "CCNStatusItem ExampleTests"
                ReferencedContainer = "container:CCNStatusItem Example.xcodeproj">
@@ -56,16 +56,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FD1F33A81A538110007AFB67"
-               BuildableName = "CCNStatusItem ExampleTests.xctest"
-               BlueprintName = "CCNStatusItem ExampleTests"
-               ReferencedContainer = "container:CCNStatusItem Example.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
@@ -86,7 +76,8 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FD9AC02B1A4F728600129381"
@@ -104,7 +95,8 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FD9AC02B1A4F728600129381"

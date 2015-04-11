@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FD38FB4A1A755AE700DBAF51 /* CCNStatusItem_ExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FD38FB491A755AE700DBAF51 /* CCNStatusItem_ExampleTests.m */; };
 		FD9AC0331A4F728600129381 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FD9AC0321A4F728600129381 /* AppDelegate.m */; };
 		FD9AC0351A4F728600129381 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FD9AC0341A4F728600129381 /* main.m */; };
 		FD9AC0371A4F728600129381 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD9AC0361A4F728600129381 /* Images.xcassets */; };
@@ -33,8 +32,6 @@
 
 /* Begin PBXFileReference section */
 		FD38FB451A755AE700DBAF51 /* CCNStatusItem ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CCNStatusItem ExampleTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FD38FB481A755AE700DBAF51 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FD38FB491A755AE700DBAF51 /* CCNStatusItem_ExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CCNStatusItem_ExampleTests.m; sourceTree = "<group>"; };
 		FD9AC02C1A4F728600129381 /* CCNStatusItem Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CCNStatusItem Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD9AC0301A4F728600129381 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FD9AC0311A4F728600129381 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -75,28 +72,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		FD38FB461A755AE700DBAF51 /* CCNStatusItem ExampleTests */ = {
-			isa = PBXGroup;
-			children = (
-				FD38FB491A755AE700DBAF51 /* CCNStatusItem_ExampleTests.m */,
-				FD38FB471A755AE700DBAF51 /* Supporting Files */,
-			);
-			path = "CCNStatusItem ExampleTests";
-			sourceTree = "<group>";
-		};
-		FD38FB471A755AE700DBAF51 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				FD38FB481A755AE700DBAF51 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		FD9AC0231A4F728600129381 = {
 			isa = PBXGroup;
 			children = (
 				FD9AC02E1A4F728600129381 /* CCNStatusItem Example */,
-				FD38FB461A755AE700DBAF51 /* CCNStatusItem ExampleTests */,
 				FD9AC02D1A4F728600129381 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -272,7 +251,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD38FB4A1A755AE700DBAF51 /* CCNStatusItem_ExampleTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,6 +439,7 @@
 				FD38FB4E1A755AE700DBAF51 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FD9AC0271A4F728600129381 /* Build configuration list for PBXProject "CCNStatusItem Example" */ = {
 			isa = XCConfigurationList;
