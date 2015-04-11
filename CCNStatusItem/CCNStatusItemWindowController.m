@@ -189,7 +189,9 @@ typedef void (^CCNStatusItemWindowAnimationCompletion)(void);
 #pragma mark - Notifications
 
 - (void)handleWindowDidResignKeyNotification:(NSNotification *)note {
-    [self dismissStatusItemWindow];
+    if ([note.object isEqual:self.window]) {
+        [self dismissStatusItemWindow];
+    }
 }
 
 #pragma mark - NSDistributedNotificationCenter

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name                  = 'CCNStatusItem'
-  s.version               = '0.2.7'
+  s.version               = '0.2.8'
   s.summary               = 'CCNStatusItem is a subclass of NSObject for presenting a NSStatusItem with a custom Popover Window.'
   s.homepage              = 'https://github.com/phranck/CCNStatusItem'
   s.author                = { 'Frank Gregor' => 'phranck@cocoanaut.com' }
