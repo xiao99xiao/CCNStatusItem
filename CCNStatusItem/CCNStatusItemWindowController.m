@@ -175,7 +175,6 @@ typedef void (^CCNStatusItemWindowAnimationCompletion)(void);
         wSelf.windowIsOpen = (fadeDirection == CCNFadeDirectionFadeIn);
 
         if (fadeDirection == CCNFadeDirectionFadeIn) {
-            [window makeKeyAndOrderFront:nil];
             [nc postNotificationName:CCNStatusItemWindowDidShowNotification object:window];
         }
         else {

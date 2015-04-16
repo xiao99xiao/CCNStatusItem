@@ -29,13 +29,20 @@
 
 
 #import "CCNStatusItemWindowBackgroundView.h"
+#import "CCNStatusItem.h"
 
+static NSColor *lightBackgroundColor, *darkBackgroundColor;
 
 @interface CCNStatusItemWindowBackgroundView ()
 @property (strong) CCNStatusItemWindowAppearance *windowAppearance;
 @end
 
 @implementation CCNStatusItemWindowBackgroundView
+
++ (void)initialize {
+    lightBackgroundColor = [NSColor colorWithCalibratedWhite:0.969 alpha:0.950];
+    darkBackgroundColor = [NSColor colorWithCalibratedWhite:0.069 alpha:0.920];
+}
 
 - (instancetype)initWithFrame:(NSRect)frameRect appearance:(CCNStatusItemWindowAppearance *)appearance {
     self = [super initWithFrame:frameRect];
@@ -72,7 +79,8 @@
     [windowPath appendBezierPath:arrowPath];
     [windowPath appendBezierPath:backgroundPath];
 
-    [[NSColor windowBackgroundColor] setFill];
+    CCNStatusItem *sharedItem = [CCNStatusItem sharedInstance];
+    [(sharedItem.isDarkMode ? darkBackgroundColor : lightBackgroundColor) setFill];
     [windowPath fill];
 }
 

@@ -44,7 +44,7 @@
 @implementation CCNStatusItemWindow
 
 + (instancetype)statusItemWindowWithAppearance:(CCNStatusItemWindowAppearance *)appearance {
-    return [[[self class] alloc] initWithContentRect:NSZeroRect styleMask:(NSBorderlessWindowMask | NSNonactivatingPanelMask) backing:NSBackingStoreBuffered defer:YES appearance:appearance];
+    return [[[self class] alloc] initWithContentRect:NSZeroRect styleMask:NSNonactivatingPanelMask backing:NSBackingStoreBuffered defer:YES appearance:appearance];
 }
 
 - (instancetype)initWithContentRect:(NSRect)contentRect styleMask:(NSUInteger)styleMask backing:(NSBackingStoreType)bufferingType defer:(BOOL)flag appearance:(CCNStatusItemWindowAppearance *)appearance {
@@ -53,7 +53,7 @@
     if (self) {
         self.opaque = NO;
         self.hasShadow = YES;
-        self.level = NSMainMenuWindowLevel;
+        self.level = NSPopUpMenuWindowLevel;
         self.backgroundColor = [NSColor clearColor];
         [self setAppearance:[NSAppearance currentAppearance]];
 	}
