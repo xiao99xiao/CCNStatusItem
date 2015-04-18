@@ -42,17 +42,19 @@ static const CGFloat CCNDefaultArrowHeight = 11.0;
 static const CGFloat CCNDefaultArrowWidth = 42.0;
 
 
-@interface CCNStatusItemWindowAppearance : NSObject
+@interface CCNStatusItemWindowConfiguration : NSObject
 
-+ (instancetype)defaultAppearance;
++ (instancetype)defaultConfiguration;
 
 // status item window
 @property (assign, nonatomic) CGFloat cornerRadius;                                 // default: 5.0
 @property (assign, nonatomic) CGFloat windowToStatusItemMargin;                     // default: 2.0
 @property (assign, nonatomic) NSTimeInterval animationDuration;                     // default: 0.21
+@property (strong, nonatomic) NSColor *backgroundColor;								// default: [NSColor windowBackgroundColor]
 @property (assign, nonatomic) CCNPresentationTransition presentationTransition;     // default: CCNPresentationTransitionFade
                                                                                     // On setting the 'presentationTranstion' to case 'CCNPresentationTransitionNone' property 'animationDuration' will be set to 0
                                                                                     // status item
 @property (strong, nonatomic) NSString *toolTip;
+@property (assign, nonatomic) BOOL visibleOnResignKey;								// default: NO; If the window resigns beeing key window it will be dismissed. Setting this property to YES keeps th ewindow visible.
 
 @end

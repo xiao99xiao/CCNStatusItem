@@ -29,25 +29,18 @@
 
 
 #import "CCNStatusItemWindowBackgroundView.h"
-#import "CCNStatusItem.h"
 
-static NSColor *lightBackgroundColor, *darkBackgroundColor;
 
 @interface CCNStatusItemWindowBackgroundView ()
-@property (strong) CCNStatusItemWindowAppearance *windowAppearance;
+@property (strong) CCNStatusItemWindowConfiguration *windowConfiguration;
 @end
 
 @implementation CCNStatusItemWindowBackgroundView
 
-+ (void)initialize {
-    lightBackgroundColor = [NSColor colorWithCalibratedWhite:0.969 alpha:0.950];
-    darkBackgroundColor = [NSColor colorWithCalibratedWhite:0.069 alpha:0.920];
-}
-
-- (instancetype)initWithFrame:(NSRect)frameRect appearance:(CCNStatusItemWindowAppearance *)appearance {
+- (instancetype)initWithFrame:(NSRect)frameRect windowConfiguration:(CCNStatusItemWindowConfiguration *)configuration {
     self = [super initWithFrame:frameRect];
     if (self) {
-        self.windowAppearance = appearance;
+        self.windowConfiguration = configuration;
     }
     return self;
 }
@@ -55,7 +48,7 @@ static NSColor *lightBackgroundColor, *darkBackgroundColor;
 - (void)drawRect:(NSRect)dirtyRect {
     CGFloat arrowHeight   = CCNDefaultArrowHeight;
     CGFloat arrowWidth    = CCNDefaultArrowWidth;
-    CGFloat cornerRadius  = self.windowAppearance.cornerRadius;
+    CGFloat cornerRadius  = self.windowConfiguration.cornerRadius;
     NSRect backgroundRect = NSMakeRect(NSMinX(self.bounds), NSMinY(self.bounds), NSWidth(self.bounds), NSHeight(self.bounds) - arrowHeight);
 
     NSBezierPath *windowPath     = [NSBezierPath bezierPath];
@@ -79,8 +72,7 @@ static NSColor *lightBackgroundColor, *darkBackgroundColor;
     [windowPath appendBezierPath:arrowPath];
     [windowPath appendBezierPath:backgroundPath];
 
-    CCNStatusItem *sharedItem = [CCNStatusItem sharedInstance];
-    [(sharedItem.isDarkMode ? darkBackgroundColor : lightBackgroundColor) setFill];
+    [self.windowConfiguration.backgroundColor setFill];
     [windowPath fill];
 }
 

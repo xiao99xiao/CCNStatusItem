@@ -28,7 +28,7 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#import "CCNStatusItemWindowAppearance.h"
+#import "CCNStatusItemWindowConfiguration.h"
 
 
 typedef NS_ENUM(NSUInteger, CCNStatusItemPresentationMode) {
@@ -44,8 +44,8 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemPresentationMode) {
 
 #pragma mark - Creating and Displaying a StatusBarItem
 
-+ (void)presentStatusItemWithImage:(NSImage *)itemImage
-             contentViewController:(NSViewController *)contentViewController;
++ (void)presentStatusItemWithImage:(NSImage *)itemImage contentViewController:(NSViewController *)contentViewController;
++ (void)presentStatusItemWithView:(NSView *)itemView contentViewController:(NSViewController *)contentViewController;
 
 + (instancetype)sharedInstance;
 @property (strong, readonly) NSStatusItem *statusItem;
@@ -64,8 +64,8 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemPresentationMode) {
 
 #pragma mark - Handling StatusItem Layout
 
-+ (void)setWindowAppearance:(CCNStatusItemWindowAppearance *)appearance;
-@property (readonly, nonatomic) CCNStatusItemWindowAppearance *windowAppearance;
++ (void)setWindowConfiguration:(CCNStatusItemWindowConfiguration *)configuration;
+@property (readonly, nonatomic) CCNStatusItemWindowConfiguration *windowConfiguration;
 
 @end
 

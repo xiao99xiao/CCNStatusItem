@@ -5,10 +5,10 @@
 
 ## Overview
 
-`CCNStatusItem` is a subclass of `NSObject` to act as a custom view for `NSStatusItem`. Running on Yosemite it has full support for the class `NSStatusBarButton` which is provided by `NSStatusItem` via the `button` property. Yosemite's dark menu mode will be automatically handled.<br />
+`CCNStatusItem` is a subclass of `NSObject` to act as a custom `NSStatusItem`. Running on Yosemite it has full support for the class `NSStatusBarButton` which is provided by `NSStatusItem` via the `button` property. Yosemite's dark menu mode will be automatically handled.<br />
 It supports a customizable statusItemWindow that will manage any `NSViewController` instance for presenting the content.
 
-Here is a shot of the included example application:
+This screenshot presents the current example application:
 
 ![CCNStatusItem Example Application](https://dl.dropbox.com/u/34133216/WebImages/Github/CCNStatusItem.png)
 
@@ -24,30 +24,32 @@ pod 'CCNStatusItem'
 
 ## Usage
 
-After it's integrated into your project you are just a four-liner away from your (maybe) first `NSStatusItem` with a custom view and a beautiful looking popover window. A good place to add these lines of code is your AppDelegate:
+After it's integrated into your project you are just a few lines of code away from your (maybe) first `NSStatusItem` with a custom view and a beautiful looking popover window. A good place to add these lines of code is your AppDelegate:
 
 ```Objective-C
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
    ...
-   [CCNStatusItem presentStatusItemWithImage:[NSImage imageNamed:@"statusbar-icon"]
-                       contentViewController:[[ContentViewController alloc] initWithNibName:NSStringFromClass([ContentViewController class]) bundle:nil]];
+    [CCNStatusItem presentStatusItemWithImage:[NSImage imageNamed:@"statusbar-icon"]
+                        contentViewController:[ContentViewController viewController]];
+initWithNibName:NSStringFromClass([ContentViewController class]) bundle:nil]];
    ...
 }
 ```
 
-That's all! You will have some options to change the design of this statusItem popover window using `CCNStatusItemWindowDesign`. In the example above internally `CCNStatusItem` uses `[CCNStatusItemWindowDesign defaultDesign]` to set a default design. The next example will show you how to change the design of your statusItem popover window:
+That's all! You will have some options to change the design of this statusItem popover window using `CCNStatusItemWindowConfiguration`. In the example above internally `CCNStatusItem` uses `[CCNStatusItemWindowConfiguration defaultConfiguration]` to set a default design and behavior of the status bar popover window. The next example will show you how to change this design and behaviour:
 
 ```Objective-C
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     ...
     
-    CCNStatusItemWindowAppearance *appearance = [CCNStatusItemWindowAppearance defaultAppearance];
-    style.cornerRadius = 115.0;
-    appearance.presentationTransition = CCNPresentationTransitionSlideAndFade;
-    [CCNStatusItem setWindowAppearance:appearance];
-    
-   [CCNStatusItem presentStatusItemWithImage:[NSImage imageNamed:@"statusbar-icon"]
-                       contentViewController:[[ContentViewController alloc] initWithNibName:NSStringFromClass([ContentViewController class]) bundle:nil]];
+    CCNStatusItemWindowConfiguration *windowConfig = [CCNStatusItemWindowConfiguration defaultConfiguration];
+    windowConfig.presentationTransition = CCNPresentationTransitionSlideAndFade;
+//    windowConfig.cornerRadius = 85.0;
+//    windowConfig.visibleOnResignKey = YES;
+    [CCNStatusItem setWindowConfiguration:windowConfig];
+
+    [CCNStatusItem presentStatusItemWithImage:[NSImage imageNamed:@"statusbar-icon"]
+                        contentViewController:[ContentViewController viewController]];
     ...
 }
 ```
@@ -55,7 +57,7 @@ That's all! You will have some options to change the design of this statusItem p
 
 ## Some Side Notes
 
-The statusItem window's frame size will be determined automatically by calling `preferedContentSize` on the `contentViewController`. So you shouldn't forget to set it to a reasonable value. Using XIB's for building the content a good war to do so is returning:
+The statusItem popover's frame size will be determined automatically by calling `preferedContentSize` on the `contentViewController`. So you shouldn't forget to set it to a reasonable value. Using XIB's for building the content a good war to do so is returning:
 
 ```Objective-C
 - (CGSize)preferredContentSize {

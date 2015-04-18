@@ -28,7 +28,7 @@
  */
 
 
-#import "CCNStatusItemWindowAppearance.h"
+#import "CCNStatusItemWindowConfiguration.h"
 
 
 static const CGFloat CCNDefaultCornerRadius             = 5.0;
@@ -36,20 +36,22 @@ static const CGFloat CCNDefaultStatusItemMargin         = 2.0;
 static const NSTimeInterval CCNDefaultAnimationDuration = 0.21;
 
 
-@implementation CCNStatusItemWindowAppearance
+@implementation CCNStatusItemWindowConfiguration
 
-+ (instancetype)defaultAppearance {
++ (instancetype)defaultConfiguration {
     return [[[self class] alloc] init];
 }
 
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.cornerRadius              = CCNDefaultCornerRadius;
-        self.windowToStatusItemMargin  = CCNDefaultStatusItemMargin;
-        self.animationDuration         = CCNDefaultAnimationDuration;
-        self.presentationTransition    = CCNPresentationTransitionFade;
-        self.toolTip                   = nil;
+        self.cornerRadius             = CCNDefaultCornerRadius;
+        self.windowToStatusItemMargin = CCNDefaultStatusItemMargin;
+        self.animationDuration        = CCNDefaultAnimationDuration;
+        self.presentationTransition   = CCNPresentationTransitionFade;
+        self.toolTip                  = nil;
+        self.backgroundColor          = [NSColor windowBackgroundColor];
+        self.visibleOnResignKey       = NO;
     }
     return self;
 }

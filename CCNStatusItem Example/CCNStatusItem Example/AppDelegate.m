@@ -5,7 +5,7 @@
 
 #import "AppDelegate.h"
 #import "CCNStatusItem.h"
-#import "CCNStatusItemWindowAppearance.h"
+#import "CCNStatusItemWindowConfiguration.h"
 #import "ContentViewController.h"
 
 
@@ -18,10 +18,11 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 
-    CCNStatusItemWindowAppearance *appearance = [CCNStatusItemWindowAppearance defaultAppearance];
-//    appearance.cornerRadius = 85.0;
-    appearance.presentationTransition = CCNPresentationTransitionSlideAndFade;
-    [CCNStatusItem setWindowAppearance:appearance];
+    CCNStatusItemWindowConfiguration *windowConfig = [CCNStatusItemWindowConfiguration defaultConfiguration];
+    windowConfig.presentationTransition = CCNPresentationTransitionSlideAndFade;
+//    windowConfig.cornerRadius = 85.0;
+//    windowConfig.visibleOnResignKey = YES;
+    [CCNStatusItem setWindowConfiguration:windowConfig];
 
     [CCNStatusItem presentStatusItemWithImage:[NSImage imageNamed:@"statusbar-icon"]
                         contentViewController:[ContentViewController viewController]];

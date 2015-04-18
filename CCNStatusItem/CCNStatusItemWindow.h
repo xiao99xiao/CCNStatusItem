@@ -29,10 +29,10 @@
 
 
 #import <Cocoa/Cocoa.h>
-#import "CCNStatusItemWindowAppearance.h"
+#import "CCNStatusItemWindowConfiguration.h"
 
 @interface CCNStatusItemWindow : NSPanel
 
-+ (instancetype)statusItemWindowWithAppearance:(CCNStatusItemWindowAppearance *)appearance;
++ (instancetype)statusItemWindowWithConfiguration:(CCNStatusItemWindowConfiguration *)configuration;
 
 @end

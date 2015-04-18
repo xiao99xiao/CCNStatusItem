@@ -51,7 +51,7 @@
 @property (assign, nonatomic) BOOL isStatusItemWindowVisible;
 
 @property (strong, nonatomic) CCNStatusItemWindowController *statusItemWindowController;
-@property (strong, nonatomic) CCNStatusItemWindowAppearance *windowAppearance;
+@property (strong, nonatomic) CCNStatusItemWindowConfiguration *windowConfiguration;
 @end
 
 @implementation CCNStatusItem
@@ -65,7 +65,7 @@
         self.presentationMode = CCNStatusItemPresentationModeUndefined;
         self.isStatusItemWindowVisible = NO;
         self.statusItemWindowController = nil;
-        self.windowAppearance = [CCNStatusItemWindowAppearance defaultAppearance];
+        self.windowConfiguration = [CCNStatusItemWindowConfiguration defaultConfiguration];
     }
     return self;
 }
@@ -73,7 +73,7 @@
 - (void)dealloc {
     _statusItem = nil;
     _statusItemWindowController = nil;
-    _windowAppearance = nil;
+    _windowConfiguration = nil;
 }
 
 + (instancetype)sharedInstance {
@@ -91,23 +91,42 @@
     self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
 
     NSStatusBarButton *button = self.statusItem.button;
-    button.image = itemImage;
     button.target = self;
     button.action = @selector(handleStatusItemButtonAction:);
+    button.image = itemImage;
+}
+
+- (void)configureWithView:(NSView *)itemView {
+    self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSWidth(itemView.frame)];
+
+    NSStatusBarButton *button = self.statusItem.button;
+    button.frame = itemView.frame;
+    [button addSubview:itemView];
+    itemView.autoresizingMask = (NSViewWidthSizable | NSViewHeightSizable);
 }
 
 #pragma mark - Creating and Displaying a StatusBarItem
 
-+ (void)presentStatusItemWithImage:(NSImage *)itemImage
-             contentViewController:(NSViewController *)contentViewController {
-
++ (void)presentStatusItemWithImage:(NSImage *)itemImage contentViewController:(NSViewController *)contentViewController {
     CCNStatusItem *sharedItem = [CCNStatusItem sharedInstance];
-    [sharedItem configureWithImage:itemImage];
+    if (sharedItem.presentationMode == CCNStatusItemPresentationModeUndefined) {
+        [sharedItem configureWithImage:itemImage];
+        sharedItem.presentationMode = CCNStatusItemPresentationModeImage;
+        sharedItem.statusItemWindowController = [[CCNStatusItemWindowController alloc] initWithConnectedStatusItem:sharedItem
+                                                                                             contentViewController:contentViewController
+                                                                                                        windowConfiguration:sharedItem.windowConfiguration];
+    }
+}
 
-    sharedItem.presentationMode = CCNStatusItemPresentationModeImage;
-    sharedItem.statusItemWindowController = [[CCNStatusItemWindowController alloc] initWithConnectedStatusItem:sharedItem
-                                                                                         contentViewController:contentViewController
-                                                                                                    appearance:sharedItem.windowAppearance];
++ (void)presentStatusItemWithView:(NSView *)itemView contentViewController:(NSViewController *)contentViewController {
+    CCNStatusItem *sharedItem = [CCNStatusItem sharedInstance];
+    if (sharedItem.presentationMode == CCNStatusItemPresentationModeUndefined) {
+        [sharedItem configureWithView:itemView];
+        sharedItem.presentationMode = CCNStatusItemPresentationModeCustomView;
+        sharedItem.statusItemWindowController = [[CCNStatusItemWindowController alloc] initWithConnectedStatusItem:sharedItem
+                                                                                             contentViewController:contentViewController
+                                                                                                        windowConfiguration:sharedItem.windowConfiguration];
+    }
 }
 
 #pragma mark - Button Action Handling
@@ -126,9 +145,9 @@
     return (self.statusItemWindowController ? self.statusItemWindowController.windowIsOpen : NO);
 }
 
-- (void)setWindowAppearance:(CCNStatusItemWindowAppearance *)appearance {
-    _windowAppearance = appearance;
-    self.statusItem.button.toolTip = appearance.toolTip;
+- (void)setWindowConfiguration:(CCNStatusItemWindowConfiguration *)configuration {
+    _windowConfiguration = configuration;
+    self.statusItem.button.toolTip = configuration.toolTip;
 }
 
 - (BOOL)isDarkMode {
@@ -149,9 +168,9 @@
 
 #pragma mark - Handling StatusItem Layout
 
-+ (void)setWindowAppearance:(CCNStatusItemWindowAppearance *)appearance {
++ (void)setWindowConfiguration:(CCNStatusItemWindowConfiguration *)configuration {
     CCNStatusItem *sharedItem = [CCNStatusItem sharedInstance];
-    sharedItem.windowAppearance = appearance;
+    sharedItem.windowConfiguration = configuration;
 }
 
 @end

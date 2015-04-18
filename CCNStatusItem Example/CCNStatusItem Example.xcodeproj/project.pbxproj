@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD2CF54C1AE2E60A006F3D46 /* CCNStatusItemWindowConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2CF54B1AE2E60A006F3D46 /* CCNStatusItemWindowConfiguration.m */; };
 		FD9AC0331A4F728600129381 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FD9AC0321A4F728600129381 /* AppDelegate.m */; };
 		FD9AC0351A4F728600129381 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FD9AC0341A4F728600129381 /* main.m */; };
 		FD9AC0371A4F728600129381 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD9AC0361A4F728600129381 /* Images.xcassets */; };
@@ -15,12 +16,13 @@
 		FD9AC0631A4F74BC00129381 /* ContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD9AC0611A4F74BC00129381 /* ContentViewController.xib */; };
 		FDA94B991A69F9D000EB4169 /* CCNStatusItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA94B901A69F9D000EB4169 /* CCNStatusItem.m */; };
 		FDA94B9A1A69F9D000EB4169 /* CCNStatusItemWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA94B921A69F9D000EB4169 /* CCNStatusItemWindow.m */; };
-		FDA94B9B1A69F9D000EB4169 /* CCNStatusItemWindowAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA94B941A69F9D000EB4169 /* CCNStatusItemWindowAppearance.m */; };
 		FDA94B9C1A69F9D000EB4169 /* CCNStatusItemWindowBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA94B961A69F9D000EB4169 /* CCNStatusItemWindowBackgroundView.m */; };
 		FDA94B9D1A69F9D000EB4169 /* CCNStatusItemWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA94B981A69F9D000EB4169 /* CCNStatusItemWindowController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FD2CF54A1AE2E60A006F3D46 /* CCNStatusItemWindowConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNStatusItemWindowConfiguration.h; sourceTree = "<group>"; };
+		FD2CF54B1AE2E60A006F3D46 /* CCNStatusItemWindowConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCNStatusItemWindowConfiguration.m; sourceTree = "<group>"; };
 		FD9AC02C1A4F728600129381 /* CCNStatusItem Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CCNStatusItem Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD9AC0301A4F728600129381 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FD9AC0311A4F728600129381 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -35,8 +37,6 @@
 		FDA94B901A69F9D000EB4169 /* CCNStatusItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCNStatusItem.m; sourceTree = "<group>"; };
 		FDA94B911A69F9D000EB4169 /* CCNStatusItemWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNStatusItemWindow.h; sourceTree = "<group>"; };
 		FDA94B921A69F9D000EB4169 /* CCNStatusItemWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCNStatusItemWindow.m; sourceTree = "<group>"; };
-		FDA94B931A69F9D000EB4169 /* CCNStatusItemWindowAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNStatusItemWindowAppearance.h; sourceTree = "<group>"; };
-		FDA94B941A69F9D000EB4169 /* CCNStatusItemWindowAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCNStatusItemWindowAppearance.m; sourceTree = "<group>"; };
 		FDA94B951A69F9D000EB4169 /* CCNStatusItemWindowBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNStatusItemWindowBackgroundView.h; sourceTree = "<group>"; };
 		FDA94B961A69F9D000EB4169 /* CCNStatusItemWindowBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCNStatusItemWindowBackgroundView.m; sourceTree = "<group>"; };
 		FDA94B971A69F9D000EB4169 /* CCNStatusItemWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNStatusItemWindowController.h; sourceTree = "<group>"; };
@@ -102,10 +102,10 @@
 				FDA94B901A69F9D000EB4169 /* CCNStatusItem.m */,
 				FDA94B911A69F9D000EB4169 /* CCNStatusItemWindow.h */,
 				FDA94B921A69F9D000EB4169 /* CCNStatusItemWindow.m */,
-				FDA94B931A69F9D000EB4169 /* CCNStatusItemWindowAppearance.h */,
-				FDA94B941A69F9D000EB4169 /* CCNStatusItemWindowAppearance.m */,
 				FDA94B951A69F9D000EB4169 /* CCNStatusItemWindowBackgroundView.h */,
 				FDA94B961A69F9D000EB4169 /* CCNStatusItemWindowBackgroundView.m */,
+				FD2CF54A1AE2E60A006F3D46 /* CCNStatusItemWindowConfiguration.h */,
+				FD2CF54B1AE2E60A006F3D46 /* CCNStatusItemWindowConfiguration.m */,
 				FDA94B971A69F9D000EB4169 /* CCNStatusItemWindowController.h */,
 				FDA94B981A69F9D000EB4169 /* CCNStatusItemWindowController.m */,
 			);
@@ -202,6 +202,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD2CF54C1AE2E60A006F3D46 /* CCNStatusItemWindowConfiguration.m in Sources */,
 				FDA94B9C1A69F9D000EB4169 /* CCNStatusItemWindowBackgroundView.m in Sources */,
 				FD9AC0351A4F728600129381 /* main.m in Sources */,
 				FDA94B9A1A69F9D000EB4169 /* CCNStatusItemWindow.m in Sources */,
@@ -209,7 +210,6 @@
 				FD9AC0331A4F728600129381 /* AppDelegate.m in Sources */,
 				FDA94B9D1A69F9D000EB4169 /* CCNStatusItemWindowController.m in Sources */,
 				FD9AC0621A4F74BC00129381 /* ContentViewController.m in Sources */,
-				FDA94B9B1A69F9D000EB4169 /* CCNStatusItemWindowAppearance.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

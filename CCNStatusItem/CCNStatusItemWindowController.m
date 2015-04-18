@@ -30,7 +30,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "CCNStatusItemWindowController.h"
-#import "CCNStatusItemWindowAppearance.h"
+#import "CCNStatusItemWindowConfiguration.h"
 
 NSString *const CCNStatusItemWindowWillShowNotification    = @"CCNStatusItemWindowWillShowNotification";
 NSString *const CCNStatusItemWindowDidShowNotification     = @"CCNStatusItemWindowDidShowNotification";
@@ -50,14 +50,18 @@ typedef void (^CCNStatusItemWindowAnimationCompletion)(void);
 
 @interface CCNStatusItemWindowController ()
 @property (strong) CCNStatusItem *statusItemView;
-@property (strong) CCNStatusItemWindowAppearance *windowAppearance;
+@property (strong) CCNStatusItemWindowConfiguration *windowConfiguration;
 @end
 
 @implementation CCNStatusItemWindowController
 
 - (id)initWithConnectedStatusItem:(CCNStatusItem *)statusItem
             contentViewController:(NSViewController *)contentViewController
-                       appearance:(CCNStatusItemWindowAppearance *)appearance {
+              windowConfiguration:(CCNStatusItemWindowConfiguration *)windowConfiguration {
+
+    if (!contentViewController) {
+        return nil;
+    }
 
     NSAssert(contentViewController.preferredContentSize.width != 0 && contentViewController.preferredContentSize.height != 0, @"[%@] The preferredContentSize of the contentViewController must not be NSZeroSize!", [self className]);
 
@@ -65,10 +69,10 @@ typedef void (^CCNStatusItemWindowAnimationCompletion)(void);
     if (self) {
         self.windowIsOpen = NO;
         self.statusItemView = statusItem;
-        self.windowAppearance = appearance;
+        self.windowConfiguration = windowConfiguration;
 
         // StatusItem Window
-        self.window = [CCNStatusItemWindow statusItemWindowWithAppearance:appearance];
+        self.window = [CCNStatusItemWindow statusItemWindowWithConfiguration:windowConfiguration];
         self.contentViewController = contentViewController;
 
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleWindowDidResignKeyNotification:) name:NSWindowDidResignKeyNotification object:nil];
@@ -82,7 +86,7 @@ typedef void (^CCNStatusItemWindowAnimationCompletion)(void);
 - (void)updateWindowFrame {
     CGRect statusItemRect = [[self.statusItemView.statusItem.button window] frame];
     CGRect windowFrame = NSMakeRect(NSMinX(statusItemRect) - NSWidth(self.window.frame)/2 + NSWidth(statusItemRect)/2,
-                                    NSMinY(statusItemRect) - NSHeight(self.window.frame) - self.windowAppearance.windowToStatusItemMargin,
+                                    NSMinY(statusItemRect) - NSHeight(self.window.frame) - self.windowConfiguration.windowToStatusItemMargin,
                                     self.window.frame.size.width,
                                     self.window.frame.size.height);
     [self.window setFrame:windowFrame display:YES];
@@ -107,7 +111,7 @@ typedef void (^CCNStatusItemWindowAnimationCompletion)(void);
 }
 
 - (void)animateWindow:(CCNStatusItemWindow *)window withFadeDirection:(CCNFadeDirection)fadeDirection {
-    switch (self.windowAppearance.presentationTransition) {
+    switch (self.windowConfiguration.presentationTransition) {
         case CCNPresentationTransitionNone:
         case CCNPresentationTransitionFade: {
             [self animateWindow:window withFadeTransitionUsingFadeDirection:fadeDirection];
@@ -127,7 +131,7 @@ typedef void (^CCNStatusItemWindowAnimationCompletion)(void);
     [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:window];
 
     [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
-        context.duration = self.windowAppearance.animationDuration;
+        context.duration = self.windowConfiguration.animationDuration;
         context.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
         [[window animator] setAlphaValue:(fadeDirection == CCNFadeDirectionFadeIn ? 1.0 : 0.0)];
 
@@ -158,7 +162,7 @@ typedef void (^CCNStatusItemWindowAnimationCompletion)(void);
     [window setFrame:windowStartFrame display:NO];
 
     [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
-        context.duration = self.windowAppearance.animationDuration;
+        context.duration = self.windowConfiguration.animationDuration;
         context.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
         [[window animator] setFrame:windowEndFrame display:NO];
         [[window animator] setAlphaValue:(fadeDirection == CCNFadeDirectionFadeIn ? 1.0 : 0.0)];
@@ -175,6 +179,7 @@ typedef void (^CCNStatusItemWindowAnimationCompletion)(void);
         wSelf.windowIsOpen = (fadeDirection == CCNFadeDirectionFadeIn);
 
         if (fadeDirection == CCNFadeDirectionFadeIn) {
+            [window makeKeyAndOrderFront:nil];
             [nc postNotificationName:CCNStatusItemWindowDidShowNotification object:window];
         }
         else {
@@ -188,7 +193,7 @@ typedef void (^CCNStatusItemWindowAnimationCompletion)(void);
 #pragma mark - Notifications
 
 - (void)handleWindowDidResignKeyNotification:(NSNotification *)note {
-    if ([note.object isEqual:self.window]) {
+    if ([note.object isEqual:self.window] && !self.windowConfiguration.visibleOnResignKey) {
         [self dismissStatusItemWindow];
     }
 }
