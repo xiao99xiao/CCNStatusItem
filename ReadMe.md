@@ -88,3 +88,4 @@ This software is published under the [MIT License](http://cocoanaut.mit-license.
 ## Software that uses CCNStatusItem
 
 * [Review Times](http://reviewtimes.cocoanaut.com) - A small Mac tool that shows you the calculated average of the review times for both the Mac App Store and the iOS App Store
+* [SalesX](http://salesx.in) - SalesX is the simplest way to reach your iTC sales reports
