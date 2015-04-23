@@ -99,6 +99,7 @@ typedef void (^CCNStatusItemWindowAnimationCompletion)(void);
     if (self.animationIsRunning) return;
 
     [self updateWindowFrame];
+    [self.window setAlphaValue:0.0];
     [self showWindow:nil];
 
     [self animateWindow:(CCNStatusItemWindow *)self.window withFadeDirection:CCNFadeDirectionFadeIn];
@@ -125,8 +126,6 @@ typedef void (^CCNStatusItemWindowAnimationCompletion)(void);
 }
 
 - (void)animateWindow:(CCNStatusItemWindow *)window withFadeTransitionUsingFadeDirection:(CCNFadeDirection)fadeDirection {
-    self.animationIsRunning = YES;
-
     NSString *notificationName = (fadeDirection == CCNFadeDirectionFadeIn ? CCNStatusItemWindowWillShowNotification : CCNStatusItemWindowWillDismissNotification);
     [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:window];
 
@@ -139,8 +138,6 @@ typedef void (^CCNStatusItemWindowAnimationCompletion)(void);
 }
 
 - (void)animateWindow:(CCNStatusItemWindow *)window withSlideAndFadeTransitionUsingFadeDirection:(CCNFadeDirection)fadeDirection {
-    self.animationIsRunning = YES;
-
     NSString *notificationName = (fadeDirection == CCNFadeDirectionFadeIn ? CCNStatusItemWindowWillShowNotification : CCNStatusItemWindowWillDismissNotification);
     [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:window];
 
@@ -193,7 +190,7 @@ typedef void (^CCNStatusItemWindowAnimationCompletion)(void);
 #pragma mark - Notifications
 
 - (void)handleWindowDidResignKeyNotification:(NSNotification *)note {
-    if ([note.object isEqual:self.window] && !self.windowConfiguration.visibleOnResignKey) {
+    if ([note.object isEqual:self.window] && !self.windowConfiguration.isPinned) {
         [self dismissStatusItemWindow];
     }
 }
