@@ -51,7 +51,7 @@ static const NSTimeInterval CCNDefaultAnimationDuration = 0.21;
         self.presentationTransition   = CCNPresentationTransitionFade;
         self.toolTip                  = nil;
         self.backgroundColor          = [NSColor windowBackgroundColor];
-        self.visibleOnResignKey       = NO;
+        self.pinned                   = NO;
     }
     return self;
 }

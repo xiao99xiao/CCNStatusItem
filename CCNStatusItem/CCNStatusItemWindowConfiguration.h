@@ -55,6 +55,6 @@ static const CGFloat CCNDefaultArrowWidth = 42.0;
                                                                                     // On setting the 'presentationTranstion' to case 'CCNPresentationTransitionNone' property 'animationDuration' will be set to 0
                                                                                     // status item
 @property (strong, nonatomic) NSString *toolTip;
-@property (assign, nonatomic) BOOL visibleOnResignKey;								// default: NO; If the window resigns beeing key window it will be dismissed. Setting this property to YES keeps th ewindow visible.
+@property (assign, nonatomic, getter=isPinned) BOOL pinned;							// default: NO; Normally if the window loses its key window status it will be dismissed automatically. Setting this property to YES keeps the window visible.
 
 @end
