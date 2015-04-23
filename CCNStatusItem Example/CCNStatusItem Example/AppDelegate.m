@@ -21,7 +21,7 @@
     CCNStatusItemWindowConfiguration *windowConfig = [CCNStatusItemWindowConfiguration defaultConfiguration];
     windowConfig.presentationTransition = CCNPresentationTransitionSlideAndFade;
 //    windowConfig.cornerRadius = 85.0;
-//    windowConfig.visibleOnResignKey = YES;
+    windowConfig.pinned = YES;
     [CCNStatusItem setWindowConfiguration:windowConfig];
 
     [CCNStatusItem presentStatusItemWithImage:[NSImage imageNamed:@"statusbar-icon"]
