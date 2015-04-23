@@ -53,7 +53,7 @@
     if (self) {
         self.opaque = NO;
         self.hasShadow = YES;
-        self.level = NSMainMenuWindowLevel;
+        self.level = NSStatusWindowLevel;
         self.backgroundColor = [NSColor clearColor];
         [self setAppearance:[NSAppearance currentAppearance]];
 	}
