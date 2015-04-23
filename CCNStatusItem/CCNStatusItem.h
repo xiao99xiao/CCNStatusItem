@@ -30,12 +30,21 @@
 #import <Cocoa/Cocoa.h>
 #import "CCNStatusItemWindowConfiguration.h"
 
+@class CCNStatusItem;
 
 typedef NS_ENUM(NSUInteger, CCNStatusItemPresentationMode) {
     CCNStatusItemPresentationModeUndefined = 0,
     CCNStatusItemPresentationModeImage,
     CCNStatusItemPresentationModeCustomView
 };
+
+typedef void (^CCNStatusItemDropHandler)(CCNStatusItem *item);
+
+typedef NS_ENUM(NSInteger, CCNStatusItemProximityDragStatus) {
+    CCNProximityDragStatusEntered = 0,
+    CCNProximityDragStatusExited
+};
+typedef void (^CCNStatusItemProximityDragDetectionHandler)(CCNStatusItem *item, NSPoint eventLocation, CCNStatusItemProximityDragStatus dragStatus);
 
 
 #pragma mark - CCNStatusItem
@@ -45,7 +54,9 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemPresentationMode) {
 #pragma mark - Creating and Displaying a StatusBarItem
 
 + (void)presentStatusItemWithImage:(NSImage *)itemImage contentViewController:(NSViewController *)contentViewController;
++ (void)presentStatusItemWithImage:(NSImage *)itemImage contentViewController:(NSViewController *)contentViewController dropHandler:(CCNStatusItemDropHandler)dropHandler;
 + (void)presentStatusItemWithView:(NSView *)itemView contentViewController:(NSViewController *)contentViewController;
++ (void)presentStatusItemWithView:(NSView *)itemView contentViewController:(NSViewController *)contentViewController dropHandler:(CCNStatusItemDropHandler)dropHandler;
 
 + (instancetype)sharedInstance;
 @property (strong, readonly) NSStatusItem *statusItem;
@@ -55,6 +66,12 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemPresentationMode) {
 @property (readonly, nonatomic) BOOL isStatusItemWindowVisible;
 @property (readonly, nonatomic) CCNStatusItemPresentationMode presentationMode;
 @property (readonly, nonatomic) BOOL isDarkMode;
+
+# pragma mark - Handling drag events and proximity drag detection
+
+@property (assign, nonatomic, getter=isProximityDragDetectionEnabled) BOOL proximityDragDetectionEnabled;
+@property (assign, nonatomic) CGFloat proximityDragDistance;
+@property (copy, nonatomic) CCNStatusItemProximityDragDetectionHandler proximityDragDetectionHandler;
 
 #pragma mark - Handling the Status Item Window
 
