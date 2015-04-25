@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6800FB481AEB486700942B4E /* ContentView2Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 6800FB461AEB486700942B4E /* ContentView2Controller.m */; };
+		6800FB491AEB486700942B4E /* ContentView2Controller.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6800FB471AEB486700942B4E /* ContentView2Controller.xib */; };
 		FD2CF54C1AE2E60A006F3D46 /* CCNStatusItemWindowConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2CF54B1AE2E60A006F3D46 /* CCNStatusItemWindowConfiguration.m */; };
 		FD9AC0331A4F728600129381 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FD9AC0321A4F728600129381 /* AppDelegate.m */; };
 		FD9AC0351A4F728600129381 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FD9AC0341A4F728600129381 /* main.m */; };
@@ -21,6 +23,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6800FB451AEB486700942B4E /* ContentView2Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentView2Controller.h; sourceTree = "<group>"; };
+		6800FB461AEB486700942B4E /* ContentView2Controller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentView2Controller.m; sourceTree = "<group>"; };
+		6800FB471AEB486700942B4E /* ContentView2Controller.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentView2Controller.xib; sourceTree = "<group>"; };
 		FD2CF54A1AE2E60A006F3D46 /* CCNStatusItemWindowConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNStatusItemWindowConfiguration.h; sourceTree = "<group>"; };
 		FD2CF54B1AE2E60A006F3D46 /* CCNStatusItemWindowConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCNStatusItemWindowConfiguration.m; sourceTree = "<group>"; };
 		FD9AC02C1A4F728600129381 /* CCNStatusItem Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CCNStatusItem Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,6 +83,9 @@
 				FD9AC05F1A4F74BC00129381 /* ContentViewController.h */,
 				FD9AC0601A4F74BC00129381 /* ContentViewController.m */,
 				FD9AC0611A4F74BC00129381 /* ContentViewController.xib */,
+				6800FB451AEB486700942B4E /* ContentView2Controller.h */,
+				6800FB461AEB486700942B4E /* ContentView2Controller.m */,
+				6800FB471AEB486700942B4E /* ContentView2Controller.xib */,
 				FD9AC0381A4F728600129381 /* MainMenu.xib */,
 				FD9AC0361A4F728600129381 /* Images.xcassets */,
 				FDA94B8E1A69F9D000EB4169 /* CCNStatusItem */,
@@ -174,6 +182,7 @@
 				FD9AC0371A4F728600129381 /* Images.xcassets in Resources */,
 				FD9AC03A1A4F728600129381 /* MainMenu.xib in Resources */,
 				FD9AC0631A4F74BC00129381 /* ContentViewController.xib in Resources */,
+				6800FB491AEB486700942B4E /* ContentView2Controller.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,6 +217,7 @@
 				FDA94B9A1A69F9D000EB4169 /* CCNStatusItemWindow.m in Sources */,
 				FDA94B991A69F9D000EB4169 /* CCNStatusItem.m in Sources */,
 				FD9AC0331A4F728600129381 /* AppDelegate.m in Sources */,
+				6800FB481AEB486700942B4E /* ContentView2Controller.m in Sources */,
 				FDA94B9D1A69F9D000EB4169 /* CCNStatusItemWindowController.m in Sources */,
 				FD9AC0621A4F74BC00129381 /* ContentViewController.m in Sources */,
 			);

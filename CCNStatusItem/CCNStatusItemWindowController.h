@@ -40,6 +40,8 @@
             contentViewController:(NSViewController *)contentViewController
               windowConfiguration:(CCNStatusItemWindowConfiguration *)windowConfiguration;
 
+- (void)updateContenetViewController:(NSViewController *)contentViewController;
+
 @property (assign) BOOL windowIsOpen;
 @property (assign) BOOL animationIsRunning;
 

@@ -101,6 +101,13 @@ typedef void (^CCNStatusItemProximityDragDetectionHandler)(CCNStatusItem *shared
 - (void)presentStatusItemWithView:(NSView *)itemView contentViewController:(NSViewController *)contentViewController dropHandler:(CCNStatusItemDropHandler)dropHandler;
 
 /**
+ Update the contentViewController for the popover window.
+ 
+ @param contentViewController The contentViewController that is displayed in the popover window.
+ */
+- (void)updateContentViewController:(NSViewController *)contentViewController;
+
+/**
  Property that represents the underlying `NSStatusItem` to be displayed in the statusbar.
  */
 @property (strong, readonly) NSStatusItem *statusItem;

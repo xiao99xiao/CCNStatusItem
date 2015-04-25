@@ -7,7 +7,9 @@
 //
 
 #import "ContentViewController.h"
+#import "ContentView2Controller.h"
 #import "CCNStatusItem.h"
+#import "AppDelegate.h"
 
 @interface ContentViewController ()
 @end
@@ -20,6 +22,10 @@
 
 - (IBAction)quitButtonAction:(id)sender {
     [[NSApplication sharedApplication] terminate:self];
+}
+
+- (IBAction)switchContentViewControllerAction:(id)sender {
+    [[CCNStatusItem sharedInstance] updateContentViewController:[ContentView2Controller viewController]];
 }
 
 - (CGSize)preferredContentSize {
