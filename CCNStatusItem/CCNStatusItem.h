@@ -193,6 +193,7 @@ typedef void (^CCNStatusItemProximityDragDetectionHandler)(CCNStatusItem *shared
 + (void)presentStatusItemWithImage:(NSImage *)itemImage contentViewController:(NSViewController *)contentViewController dropHandler:(CCNStatusItemDropHandler)dropHandler __attribute__((deprecated("Please use the instance method instead!")));
 + (void)presentStatusItemWithView:(NSView *)itemView contentViewController:(NSViewController *)contentViewController __attribute__((deprecated("Please use the instance method instead!")));
 + (void)presentStatusItemWithView:(NSView *)itemView contentViewController:(NSViewController *)contentViewController dropHandler:(CCNStatusItemDropHandler)dropHandler __attribute__((deprecated("Please use the instance method instead!")));
++ (void)setWindowConfiguration:(CCNStatusItemWindowConfiguration *)configuration __attribute__((deprecated("Please use the property instead!")));
 
 @end
 

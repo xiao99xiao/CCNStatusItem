@@ -180,8 +180,7 @@ static NSString *const CCNStatusItemWindowConfigurationPinnedPath = @"windowConf
                                                                                      windowConfiguration:self.windowConfiguration];
 }
 
-- (void)updateContentViewController:(NSViewController *)contentViewController
-{
+- (void)updateContentViewController:(NSViewController *)contentViewController {
     [self.statusItemWindowController updateContenetViewController:contentViewController];
 }
 
@@ -302,13 +301,6 @@ static NSString *const CCNStatusItemWindowConfigurationPinnedPath = @"windowConf
     [self.statusItemWindowController dismissStatusItemWindow];
 }
 
-#pragma mark - Handling StatusItem Layout
-
-+ (void)setWindowConfiguration:(CCNStatusItemWindowConfiguration *)configuration {
-    CCNStatusItem *sharedItem = [CCNStatusItem sharedInstance];
-    sharedItem.windowConfiguration = configuration;
-}
-
 #pragma mark - KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -369,6 +361,11 @@ static NSString *const CCNStatusItemWindowConfigurationPinnedPath = @"windowConf
                                                                                              contentViewController:contentViewController
                                                                                                windowConfiguration:sharedItem.windowConfiguration];
     }
+}
+
++ (void)setWindowConfiguration:(CCNStatusItemWindowConfiguration *)configuration {
+    CCNStatusItem *sharedItem = [CCNStatusItem sharedInstance];
+    sharedItem.windowConfiguration = configuration;
 }
 
 @end
