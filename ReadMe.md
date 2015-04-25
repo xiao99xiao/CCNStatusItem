@@ -44,7 +44,17 @@ That's all! You will have some options to change the design of this statusItem p
     // configure the status item
     CCNStatusItem *sharedItem = [CCNStatusItem sharedInstance];
     sharedItem.windowConfiguration.presentationTransition = CCNPresentationTransitionSlideAndFade;
-    sharedItem.proximityDragDetectionHandler = [self proximityDragDetectionHandler];
+    sharedItem.proximityDragDetectionHandler = ^(CCNStatusItem *item, NSPoint eventLocation, CCNStatusItemProximityDragStatus dragStatus) {
+        switch (dragStatus) {
+            case CCNProximityDragStatusEntered:
+                [item showStatusItemWindow];
+                break;
+
+            case CCNProximityDragStatusExited:
+                [item dismissStatusItemWindow];
+                break;
+        }
+    };
     [sharedItem presentStatusItemWithImage:[NSImage imageNamed:@"statusbar-icon"]
                      contentViewController:[ContentViewController viewController]];
     ...
