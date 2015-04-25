@@ -29,9 +29,8 @@ After it's integrated into your project you are just a few lines of code away fr
 ```Objective-C
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
    ...
-    [CCNStatusItem presentStatusItemWithImage:[NSImage imageNamed:@"statusbar-icon"]
-                        contentViewController:[ContentViewController viewController]];
-initWithNibName:NSStringFromClass([ContentViewController class]) bundle:nil]];
+    [[CCNStatusItem sharedInstance] presentStatusItemWithImage:[NSImage imageNamed:@"statusbar-icon"]
+                                         contentViewController:[ContentViewController viewController]];
    ...
 }
 ```
@@ -42,14 +41,20 @@ That's all! You will have some options to change the design of this statusItem p
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     ...
     
-    CCNStatusItemWindowConfiguration *windowConfig = [CCNStatusItemWindowConfiguration defaultConfiguration];
-    windowConfig.presentationTransition = CCNPresentationTransitionSlideAndFade;
-//    windowConfig.cornerRadius = 85.0;
-//    windowConfig.visibleOnResignKey = YES;
-    [CCNStatusItem setWindowConfiguration:windowConfig];
+    // configure the status item
+    CCNStatusItem *sharedItem = [CCNStatusItem sharedInstance];
+    sharedItem.windowConfiguration.presentationTransition = CCNPresentationTransitionSlideAndFade;
+    sharedItem.proximityDragDetectionHandler = [self proximityDragDetectionHandler];
+    [sharedItem presentStatusItemWithImage:[NSImage imageNamed:@"statusbar-icon"]
+                     contentViewController:[ContentViewController viewController]];
 
-    [CCNStatusItem presentStatusItemWithImage:[NSImage imageNamed:@"statusbar-icon"]
-                        contentViewController:[ContentViewController viewController]];
+
+    // restore GUI elements
+    // (this is an excerpt from the example app)
+    self.proximitySliderValue = sharedItem.proximityDragZoneDistance;
+    self.appearsDisabledCheckbox.state = (sharedItem.appearsDisabled ? NSOnState : NSOffState);
+    self.disableCheckbox.state = (sharedItem.enabled ? NSOffState : NSOnState);
+    [self.presentationTransitionRadios selectCellAtRow:(NSInteger)sharedItem.windowConfiguration.presentationTransition column:0];
     ...
 }
 ```

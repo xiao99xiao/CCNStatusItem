@@ -26,16 +26,20 @@
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    // configure the status item
     CCNStatusItem *sharedItem = [CCNStatusItem sharedInstance];
     sharedItem.windowConfiguration.presentationTransition = CCNPresentationTransitionSlideAndFade;
     sharedItem.proximityDragDetectionHandler = [self proximityDragDetectionHandler];
     [sharedItem presentStatusItemWithImage:[NSImage imageNamed:@"statusbar-icon"]
                      contentViewController:[ContentViewController viewController]];
 
+
+    // restore GUI elements
+    // (this is an excerpt from the example app)
     self.proximitySliderValue = sharedItem.proximityDragZoneDistance;
-    [self.presentationTransitionRadios selectCellAtRow:(NSInteger)sharedItem.windowConfiguration.presentationTransition column:0];
     self.appearsDisabledCheckbox.state = (sharedItem.appearsDisabled ? NSOnState : NSOffState);
     self.disableCheckbox.state = (sharedItem.enabled ? NSOffState : NSOnState);
+    [self.presentationTransitionRadios selectCellAtRow:(NSInteger)sharedItem.windowConfiguration.presentationTransition column:0];
 }
 
 - (CCNStatusItemProximityDragDetectionHandler)proximityDragDetectionHandler {
