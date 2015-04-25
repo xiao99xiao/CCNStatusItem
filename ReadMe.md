@@ -47,14 +47,6 @@ That's all! You will have some options to change the design of this statusItem p
     sharedItem.proximityDragDetectionHandler = [self proximityDragDetectionHandler];
     [sharedItem presentStatusItemWithImage:[NSImage imageNamed:@"statusbar-icon"]
                      contentViewController:[ContentViewController viewController]];
-
-
-    // restore GUI elements
-    // (this is an excerpt from the example app)
-    self.proximitySliderValue = sharedItem.proximityDragZoneDistance;
-    self.appearsDisabledCheckbox.state = (sharedItem.appearsDisabled ? NSOnState : NSOffState);
-    self.disableCheckbox.state = (sharedItem.enabled ? NSOffState : NSOnState);
-    [self.presentationTransitionRadios selectCellAtRow:(NSInteger)sharedItem.windowConfiguration.presentationTransition column:0];
     ...
 }
 ```
