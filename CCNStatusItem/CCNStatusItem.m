@@ -33,6 +33,7 @@
 
 
 static NSString *const CCNStatusItemFrameKeyPath = @"statusItem.button.window.frame";
+static NSString *const CCNStatusItemWindowConfigurationPinnedPath = @"windowConfiguration.pinned";
 
 
 @interface NSStatusBarButton (Tools)
@@ -58,7 +59,6 @@ static NSString *const CCNStatusItemFrameKeyPath = @"statusItem.button.window.fr
 @property (assign, nonatomic) BOOL isStatusItemWindowVisible;
 
 @property (strong, nonatomic) CCNStatusItemWindowController *statusItemWindowController;
-@property (strong, nonatomic) CCNStatusItemWindowConfiguration *windowConfiguration;
 @end
 
 @implementation CCNStatusItem
@@ -92,21 +92,25 @@ static NSString *const CCNStatusItemFrameKeyPath = @"statusItem.button.window.fr
         self.isStatusItemWindowVisible = NO;
         self.statusItemWindowController = nil;
         self.windowConfiguration = [CCNStatusItemWindowConfiguration defaultConfiguration];
+        self.appearsDisabled = NO;
+        self.enabled = YES;
 
         self.dropHandler = nil;
         self.proximityDragDetectionEnabled = NO;
-        self.proximityDragDistance = 23.0;
+        self.proximityDragZoneDistance = 23.0;
         self.proximityDragDetectionHandler = nil;
 
         // We need to observe that because when an status bar item has been removed from the status bar
         // and OS X reorganize all items, we must recalculate our _proximityDragCollisionArea.
         [self addObserver:self forKeyPath:CCNStatusItemFrameKeyPath options:NSKeyValueObservingOptionNew context:nil];
+        [self addObserver:self forKeyPath:CCNStatusItemWindowConfigurationPinnedPath options:NSKeyValueObservingOptionPrior|NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
     }
     return self;
 }
 
 - (void)dealloc {
     [self removeObserver:self forKeyPath:CCNStatusItemFrameKeyPath];
+    [self removeObserver:self forKeyPath:CCNStatusItemWindowConfigurationPinnedPath];
 
     _statusItem = nil;
     _statusItemWindowController = nil;
@@ -138,11 +142,195 @@ static NSString *const CCNStatusItemFrameKeyPath = @"statusItem.button.window.fr
 
 - (void)configureProximityDragCollisionArea {
     NSRect statusItemFrame = self.statusItem.button.window.frame;
-    NSRect collisionFrame = NSInsetRect(statusItemFrame, -_proximityDragDistance, -_proximityDragDistance);
+    NSRect collisionFrame = NSInsetRect(statusItemFrame, -_proximityDragZoneDistance, -_proximityDragZoneDistance);
     _proximityDragCollisionArea = [NSBezierPath bezierPathWithRoundedRect:collisionFrame xRadius:NSWidth(collisionFrame)/2 yRadius:NSHeight(collisionFrame)/2];
 }
 
 #pragma mark - Creating and Displaying a StatusBarItem
+
+- (void)presentStatusItemWithImage:(NSImage *)itemImage contentViewController:(NSViewController *)contentViewController {
+    [self presentStatusItemWithImage:itemImage contentViewController:contentViewController dropHandler:nil];
+}
+
+- (void)presentStatusItemWithImage:(NSImage *)itemImage contentViewController:(NSViewController *)contentViewController dropHandler:(CCNStatusItemDropHandler)dropHandler {
+    if (self.presentationMode != CCNStatusItemPresentationModeUndefined) return;
+
+    self.dropHandler = dropHandler;
+    [self configureWithImage:itemImage];
+    [self configureProximityDragCollisionArea];
+    self.presentationMode = CCNStatusItemPresentationModeImage;
+    self.statusItemWindowController = [[CCNStatusItemWindowController alloc] initWithConnectedStatusItem:self
+                                                                                   contentViewController:contentViewController
+                                                                                     windowConfiguration:self.windowConfiguration];
+}
+
+- (void)presentStatusItemWithView:(NSView *)itemView contentViewController:(NSViewController *)contentViewController {
+    [self presentStatusItemWithView:itemView contentViewController:contentViewController dropHandler:nil];
+}
+
+- (void)presentStatusItemWithView:(NSView *)itemView contentViewController:(NSViewController *)contentViewController dropHandler:(CCNStatusItemDropHandler)dropHandler {
+    if (self.presentationMode != CCNStatusItemPresentationModeUndefined) return;
+
+    self.dropHandler = dropHandler;
+    [self configureWithView:itemView];
+    [self configureProximityDragCollisionArea];
+    self.presentationMode = CCNStatusItemPresentationModeCustomView;
+    self.statusItemWindowController = [[CCNStatusItemWindowController alloc] initWithConnectedStatusItem:self
+                                                                                   contentViewController:contentViewController
+                                                                                     windowConfiguration:self.windowConfiguration];
+}
+
+#pragma mark - Button Action Handling
+
+- (void)handleStatusItemButtonAction:(id)sender {
+    if (self.isStatusItemWindowVisible) {
+        [self dismissStatusItemWindow];
+    } else {
+        [self showStatusItemWindow];
+    }
+}
+
+#pragma mark - Custom Accessors
+
+- (BOOL)isStatusItemWindowVisible {
+    return (self.statusItemWindowController ? self.statusItemWindowController.windowIsOpen : NO);
+}
+
+- (void)setWindowConfiguration:(CCNStatusItemWindowConfiguration *)configuration {
+    _windowConfiguration = configuration;
+    self.statusItem.button.toolTip = configuration.toolTip;
+}
+
+- (BOOL)isDarkMode {
+    NSDictionary *dict = [[NSUserDefaults standardUserDefaults] persistentDomainForName:NSGlobalDomain];
+    id style = [dict objectForKey:@"AppleInterfaceStyle"];
+    return ( style && [style isKindOfClass:[NSString class]] && NSOrderedSame == [style caseInsensitiveCompare:@"dark"] );
+}
+
+- (void)setAppearsDisabled:(BOOL)appearsDisabled {
+    self.statusItem.button.appearsDisabled = appearsDisabled;
+}
+
+- (BOOL)appearsDisabled {
+    return self.statusItem.button.appearsDisabled;
+}
+
+- (void)setEnabled:(BOOL)enabled {
+    self.statusItem.button.enabled = enabled;
+}
+
+- (BOOL)enabled {
+    return self.statusItem.button.enabled;
+}
+
+- (void)setProximityDragDetectionEnabled:(BOOL)proximityDraggingDetectionEnabled {
+    if (_proximityDragDetectionEnabled != proximityDraggingDetectionEnabled) {
+        _proximityDragDetectionEnabled = proximityDraggingDetectionEnabled;
+
+        if (_proximityDragDetectionEnabled && !self.windowConfiguration.isPinned) {
+            [self configureProximityDragCollisionArea];
+            [self enableDragEventMonitor];
+        }
+        else {
+            [self disableDragEventMonitor];
+        }
+    }
+}
+
+- (void)setProximityDragZoneDistance:(NSInteger)proximityDragZoneDistance {
+    if (_proximityDragZoneDistance != proximityDragZoneDistance) {
+        _proximityDragZoneDistance = proximityDragZoneDistance;
+        [self configureProximityDragCollisionArea];
+    }
+}
+
+#pragma mark - Helper
+
+- (void)enableDragEventMonitor {
+    if (_globalDragEventMonitor) return;
+
+    __weak typeof(self) wSelf = self;
+    _globalDragEventMonitor = [NSEvent addGlobalMonitorForEventsMatchingMask:NSLeftMouseDraggedMask handler:^(NSEvent *event) {
+        NSPoint eventLocation = [event locationInWindow];
+        if ([_proximityDragCollisionArea containsPoint:eventLocation]) {
+            // This is for detection if files has been dragged. If it happens the NSPasteboard's changeCount will be incremented.
+            // Dragging a window will keep that changeCount untouched.
+            // (Thank you Matthias aka @eternalstorms Gansrigler for that smart hint!).
+            NSInteger currentChangeCount = [NSPasteboard pasteboardWithName:NSDragPboard].changeCount;
+            if (_pbChangeCount == currentChangeCount) {
+                return;
+            }
+
+            if (!_proximityDragCollisionHandled) {
+                if (wSelf.proximityDragDetectionHandler) {
+                    wSelf.proximityDragDetectionHandler(wSelf, eventLocation, CCNProximityDragStatusEntered);
+                    _proximityDragCollisionHandled = YES;
+                    _pbChangeCount = currentChangeCount;
+                }
+            }
+        }
+        else {
+            if (_proximityDragCollisionHandled) {
+                if (wSelf.proximityDragDetectionHandler) {
+                    wSelf.proximityDragDetectionHandler(wSelf, eventLocation, CCNProximityDragStatusExited);
+                    _proximityDragCollisionHandled = NO;
+                    _pbChangeCount--;
+                }
+            }
+        }
+    }];
+}
+
+- (void)disableDragEventMonitor {
+    [NSEvent removeMonitor:_globalDragEventMonitor];
+    _globalDragEventMonitor = nil;
+}
+
+
+#pragma mark - Handling the Status Item Window
+
+- (void)showStatusItemWindow {
+    [self.statusItemWindowController showStatusItemWindow];
+}
+
+- (void)dismissStatusItemWindow {
+    [self.statusItemWindowController dismissStatusItemWindow];
+}
+
+#pragma mark - Handling StatusItem Layout
+
++ (void)setWindowConfiguration:(CCNStatusItemWindowConfiguration *)configuration {
+    CCNStatusItem *sharedItem = [CCNStatusItem sharedInstance];
+    sharedItem.windowConfiguration = configuration;
+}
+
+#pragma mark - KVO
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if ([keyPath isEqualToString:CCNStatusItemFrameKeyPath]) {
+        [self configureProximityDragCollisionArea];
+    }
+    else if ([keyPath isEqualToString:CCNStatusItemWindowConfigurationPinnedPath]) {
+        if ([change[NSKeyValueChangeOldKey] integerValue] == NSOffState) {
+            [self disableDragEventMonitor];
+        }
+        else {
+            [self dismissStatusItemWindow];
+            if (self.proximityDragDetectionEnabled) {
+                [self enableDragEventMonitor];
+            }
+        }
+    }
+}
+
+@end
+
+
+
+
+#pragma mark - Deprecated
+
+@implementation CCNStatusItem (CCNStatusItemDeprecated)
 
 + (void)presentStatusItemWithImage:(NSImage *)itemImage contentViewController:(NSViewController *)contentViewController {
     [[self class] presentStatusItemWithImage:itemImage contentViewController:contentViewController dropHandler:nil];
@@ -178,95 +366,5 @@ static NSString *const CCNStatusItemFrameKeyPath = @"statusItem.button.window.fr
     }
 }
 
-#pragma mark - Button Action Handling
-
-- (void)handleStatusItemButtonAction:(id)sender {
-    if (self.isStatusItemWindowVisible) {
-        [self dismissStatusItemWindow];
-    } else {
-        [self showStatusItemWindow];
-    }
-}
-
-#pragma mark - Custom Accessors
-
-- (BOOL)isStatusItemWindowVisible {
-    return (self.statusItemWindowController ? self.statusItemWindowController.windowIsOpen : NO);
-}
-
-- (void)setWindowConfiguration:(CCNStatusItemWindowConfiguration *)configuration {
-    _windowConfiguration = configuration;
-    self.statusItem.button.toolTip = configuration.toolTip;
-}
-
-- (BOOL)isDarkMode {
-    NSDictionary *dict = [[NSUserDefaults standardUserDefaults] persistentDomainForName:NSGlobalDomain];
-    id style = [dict objectForKey:@"AppleInterfaceStyle"];
-    return ( style && [style isKindOfClass:[NSString class]] && NSOrderedSame == [style caseInsensitiveCompare:@"dark"] );
-}
-
-- (void)setProximityDragDetectionEnabled:(BOOL)proximityDraggingDetectionEnabled {
-    if (_proximityDragDetectionEnabled != proximityDraggingDetectionEnabled) {
-        _proximityDragDetectionEnabled = proximityDraggingDetectionEnabled;
-
-        if (_proximityDragDetectionEnabled) {
-            __weak typeof(self) wSelf = self;
-            _globalDragEventMonitor = [NSEvent addGlobalMonitorForEventsMatchingMask:NSLeftMouseDraggedMask handler:^(NSEvent *event) {
-                NSPoint eventLocation = [event locationInWindow];
-                if ([_proximityDragCollisionArea containsPoint:eventLocation]) {
-                    // This is for detection if files has been dragged. If it happens the NSPasteboard's changeCount will be incremented.
-                    // Dragging a window will keep that changeCount untouched.
-                    // (Thank you Matthias aka @eternalstorms Gansrigler for that smart hint!).
-                    NSInteger currentChangeCount = [NSPasteboard pasteboardWithName:NSDragPboard].changeCount;
-                    if (_pbChangeCount == currentChangeCount) {
-                        return;
-                    }
-                    _pbChangeCount = currentChangeCount;
-
-                    if (!_proximityDragCollisionHandled) {
-                        if (wSelf.proximityDragDetectionHandler) {
-                            wSelf.proximityDragDetectionHandler(wSelf, eventLocation, CCNProximityDragStatusEntered);
-                        }
-                        _proximityDragCollisionHandled = YES;
-                    }
-                }
-                else {
-                    if (wSelf.proximityDragDetectionHandler) {
-                        wSelf.proximityDragDetectionHandler(wSelf, eventLocation, CCNProximityDragStatusExited);
-                    }
-                    _proximityDragCollisionHandled = NO;
-                }
-            }];
-        }
-        else {
-            [NSEvent removeMonitor:_globalDragEventMonitor];
-        }
-    }
-}
-
-#pragma mark - Handling the Status Item Window
-
-- (void)showStatusItemWindow {
-    [self.statusItemWindowController showStatusItemWindow];
-}
-
-- (void)dismissStatusItemWindow {
-    [self.statusItemWindowController dismissStatusItemWindow];
-}
-
-#pragma mark - Handling StatusItem Layout
-
-+ (void)setWindowConfiguration:(CCNStatusItemWindowConfiguration *)configuration {
-    CCNStatusItem *sharedItem = [CCNStatusItem sharedInstance];
-    sharedItem.windowConfiguration = configuration;
-}
-
-#pragma mark - KVO
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if ([keyPath isEqualToString:CCNStatusItemFrameKeyPath]) {
-        [self configureProximityDragCollisionArea];
-    }
-}
-
 @end
+

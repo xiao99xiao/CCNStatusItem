@@ -10,8 +10,8 @@ It supports a customizable statusItemWindow that will manage any `NSViewControll
 
 This screenshot presents the current example application:
 
-![CCNStatusItem Example Application](https://dl.dropbox.com/u/34133216/WebImages/Github/CCNStatusItem.png)
-
+[![CCNStatusItem Example Application](http://share.gifyoutube.com/vpkXD9.gif
+)](https://youtu.be/yejBocG9bMc)
 
 ## Integration
 

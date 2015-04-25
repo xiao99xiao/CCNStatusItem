@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7531"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7702"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -11,7 +11,17 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customObject id="Voe-Tx-rLC" customClass="AppDelegate"/>
+        <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
+            <connections>
+                <outlet property="appearsDisabledCheckbox" destination="q7a-4H-cHL" id="NAX-lf-cfL"/>
+                <outlet property="currentpProximityDragZoneDistanceTextField" destination="tpF-uV-fiP" id="cZj-Wp-OZN"/>
+                <outlet property="disableCheckbox" destination="P5D-sp-rRe" id="Gey-N0-WKN"/>
+                <outlet property="pinPopoverCheckbox" destination="ODB-Hr-82B" id="FI1-1e-HDL"/>
+                <outlet property="presentationTransitionRadios" destination="vu0-vN-oVZ" id="NHa-tW-q1A"/>
+                <outlet property="proximityDetectionCheckbox" destination="bgP-VT-g3l" id="X4T-Kt-RCR"/>
+                <outlet property="proximityDragZoneDistanceSlider" destination="Fa5-ku-2Ud" id="1xH-yL-SeO"/>
+            </connections>
+        </customObject>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <menu title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
             <items>
@@ -662,16 +672,209 @@
                 </menuItem>
             </items>
         </menu>
-        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" animationBehavior="default" id="Jyi-cW-7II">
-            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+        <window title="CCNStatusItem Example" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" frameAutosaveName="CCNStatusItemExampleWindow" animationBehavior="default" id="Jyi-cW-7II">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="2116" y="21" width="480" height="270"/>
-            <rect key="screenRect" x="1920" y="-225" width="1920" height="1200"/>
+            <rect key="contentRect" x="100" y="568" width="480" height="562"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
             <view key="contentView" id="Uqc-eN-Myc">
-                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                <rect key="frame" x="0.0" y="-1" width="480" height="562"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q7a-4H-cHL">
+                        <rect key="frame" x="60" y="480" width="359" height="18"/>
+                        <buttonCell key="cell" type="check" title="StatusItem appears disabled" bezelStyle="regularSquare" imagePosition="left" inset="2" id="XWm-Di-vPr">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="appearsDisabledCheckboxAction:" target="Voe-Tx-rLC" id="3tz-nJ-atF"/>
+                        </connections>
+                    </button>
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bgP-VT-g3l">
+                        <rect key="frame" x="60" y="428" width="359" height="18"/>
+                        <buttonCell key="cell" type="check" title="Proximity detection for StatusBarItem" bezelStyle="regularSquare" imagePosition="left" inset="2" id="7mf-dH-TBP">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="proximityDetectionCheckboxAction:" target="Voe-Tx-rLC" id="usP-h2-uDw"/>
+                            <binding destination="Voe-Tx-rLC" name="value" keyPath="proximityDetectionEnabled" id="Xmo-MB-g5W"/>
+                        </connections>
+                    </button>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tjk-7d-b92">
+                        <rect key="frame" x="80" y="366" width="339" height="56"/>
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="Whf-jQ-7r1">
+                            <font key="font" metaFont="smallSystem"/>
+                            <string key="title">When enabled it activates a circular proximity zone around the statusbar item. Entering/exiting this zone while dragging objects wil make the CCNStatusItem fire the proximityDragDetectionHandler property - if defined.</string>
+                            <color key="textColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fa5-ku-2Ud">
+                        <rect key="frame" x="76" y="284" width="343" height="26"/>
+                        <sliderCell key="cell" continuous="YES" state="on" alignment="left" minValue="10" maxValue="50" doubleValue="10" tickMarkPosition="above" numberOfTickMarks="40" allowsTickMarkValuesOnly="YES" sliderType="linear" id="E0I-93-1k7"/>
+                        <connections>
+                            <action selector="proximityDragZoneDistanceSliderAction:" target="Voe-Tx-rLC" id="YiI-66-YRd"/>
+                            <binding destination="Voe-Tx-rLC" name="enabled" keyPath="proximityDetectionEnabled" id="cLC-zR-ees">
+                                <dictionary key="options">
+                                    <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                </dictionary>
+                            </binding>
+                            <binding destination="Voe-Tx-rLC" name="value" keyPath="proximitySliderValue" id="d7Q-K9-XaC"/>
+                        </connections>
+                    </slider>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aSF-53-cSX">
+                        <rect key="frame" x="80" y="332" width="197" height="14"/>
+                        <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Proximity zone dimension (in pixels):" id="377-Z9-hn8">
+                            <font key="font" metaFont="smallSystem"/>
+                            <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                        <connections>
+                            <binding destination="Voe-Tx-rLC" name="enabled" keyPath="proximityDetectionEnabled" id="g0z-jj-d75"/>
+                        </connections>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x9U-Fs-ziF">
+                        <rect key="frame" x="73" y="313" width="27" height="11"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="10" id="Ji7-Rj-rFC">
+                            <font key="font" metaFont="miniSystem"/>
+                            <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sEC-Q1-rrP">
+                        <rect key="frame" x="156" y="313" width="27" height="11"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="20" id="pXf-vo-kPa">
+                            <font key="font" metaFont="miniSystem"/>
+                            <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O9o-dt-xwG">
+                        <rect key="frame" x="238" y="313" width="27" height="11"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="30" id="pfJ-9G-Wwl">
+                            <font key="font" metaFont="miniSystem"/>
+                            <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="olp-wV-XXn">
+                        <rect key="frame" x="320" y="313" width="27" height="11"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="40" id="mJm-yM-BMm">
+                            <font key="font" metaFont="miniSystem"/>
+                            <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tPo-M1-lvf">
+                        <rect key="frame" x="394" y="313" width="27" height="11"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="50" id="aRo-W9-hAF">
+                            <font key="font" metaFont="miniSystem"/>
+                            <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tpF-uV-fiP">
+                        <rect key="frame" x="276" y="332" width="31" height="14"/>
+                        <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" id="E7F-hK-XF7">
+                            <font key="font" metaFont="smallSystemBold"/>
+                            <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                        <connections>
+                            <binding destination="Voe-Tx-rLC" name="displayPatternValue1" keyPath="proximitySliderValue" id="DvQ-Hz-2T2">
+                                <dictionary key="options">
+                                    <string key="NSDisplayPattern">%{value1}@</string>
+                                </dictionary>
+                            </binding>
+                        </connections>
+                    </textField>
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ODB-Hr-82B">
+                        <rect key="frame" x="60" y="190" width="359" height="18"/>
+                        <buttonCell key="cell" type="check" title="Pin the popover on Finder" bezelStyle="regularSquare" imagePosition="left" inset="2" id="x47-hw-mrV">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="pinPopoverCheckboxAction:" target="Voe-Tx-rLC" id="Ila-O4-XXV"/>
+                        </connections>
+                    </button>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z6Q-4k-OJE">
+                        <rect key="frame" x="80" y="138" width="339" height="46"/>
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="A6S-Re-thm">
+                            <font key="font" metaFont="smallSystem"/>
+                            <string key="title">When enabled the popover keeps visible even if it loses its key window status. Pinning the popover will ignore proximity detection.</string>
+                            <color key="textColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rza-bT-nnW">
+                        <rect key="frame" x="60" y="514" width="359" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Status Item" id="MNl-Gb-ac4">
+                            <font key="font" metaFont="systemBold"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eU0-If-iN6">
+                        <rect key="frame" x="60" y="224" width="359" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Status Item Popover" id="NLZ-6P-qHX">
+                            <font key="font" metaFont="systemBold"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bKQ-wU-dzP">
+                        <rect key="frame" x="80" y="107" width="339" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Presentation Transition" id="LWz-Lw-aLP">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <matrix verticalHuggingPriority="750" fixedFrame="YES" allowsEmptySelection="NO" autorecalculatesCellSize="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vu0-vN-oVZ">
+                        <rect key="frame" x="82" y="41" width="335" height="58"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        <size key="cellSize" width="161" height="18"/>
+                        <size key="intercellSpacing" width="4" height="2"/>
+                        <buttonCell key="prototype" type="radio" title="Radio" imagePosition="left" alignment="left" controlSize="small" inset="2" id="jJK-T1-H96">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="smallSystem"/>
+                        </buttonCell>
+                        <cells>
+                            <column>
+                                <buttonCell type="radio" title="None, appear immediately" imagePosition="left" alignment="left" controlSize="small" state="on" tag="1" inset="2" id="eHX-Lr-6vy">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="smallSystem"/>
+                                </buttonCell>
+                                <buttonCell type="radio" title="Fade" imagePosition="left" alignment="left" controlSize="small" inset="2" id="cLj-31-okE">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="smallSystem"/>
+                                </buttonCell>
+                                <buttonCell type="radio" title="Slide and Fade" imagePosition="left" alignment="left" controlSize="small" inset="2" id="l1Z-UK-voY">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="smallSystem"/>
+                                </buttonCell>
+                            </column>
+                        </cells>
+                        <connections>
+                            <action selector="presentationTransitionRadiosAction:" target="Voe-Tx-rLC" id="Zke-aQ-kYz"/>
+                        </connections>
+                    </matrix>
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P5D-sp-rRe">
+                        <rect key="frame" x="60" y="460" width="359" height="18"/>
+                        <buttonCell key="cell" type="check" title="StatusItem disabled" bezelStyle="regularSquare" imagePosition="left" inset="2" id="eMt-MZ-jdf">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="disableCheckboxAction:" target="Voe-Tx-rLC" id="AoF-aE-MUI"/>
+                        </connections>
+                    </button>
+                </subviews>
             </view>
-            <point key="canvasLocation" x="672" y="648"/>
+            <point key="canvasLocation" x="-210" y="487"/>
         </window>
     </objects>
 </document>

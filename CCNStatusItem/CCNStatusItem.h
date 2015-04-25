@@ -30,6 +30,7 @@
 #import <Cocoa/Cocoa.h>
 #import "CCNStatusItemWindowConfiguration.h"
 
+
 @class CCNStatusItem;
 
 typedef NS_ENUM(NSUInteger, CCNStatusItemPresentationMode) {
@@ -37,54 +38,157 @@ typedef NS_ENUM(NSUInteger, CCNStatusItemPresentationMode) {
     CCNStatusItemPresentationModeImage,
     CCNStatusItemPresentationModeCustomView
 };
-
-typedef void (^CCNStatusItemDropHandler)(CCNStatusItem *item);
-
 typedef NS_ENUM(NSInteger, CCNStatusItemProximityDragStatus) {
     CCNProximityDragStatusEntered = 0,
     CCNProximityDragStatusExited
 };
-typedef void (^CCNStatusItemProximityDragDetectionHandler)(CCNStatusItem *item, NSPoint eventLocation, CCNStatusItemProximityDragStatus dragStatus);
+
+typedef void (^CCNStatusItemDropHandler)(CCNStatusItem *sharedItem);
+typedef void (^CCNStatusItemProximityDragDetectionHandler)(CCNStatusItem *sharedItem, NSPoint eventLocation, CCNStatusItemProximityDragStatus proxymityDragStatus);
 
 
 #pragma mark - CCNStatusItem
 
 @interface CCNStatusItem : NSObject
 
-#pragma mark - Creating and Displaying a StatusBarItem
+#pragma mark - Initialization
+/** @name Initialization */
 
-+ (void)presentStatusItemWithImage:(NSImage *)itemImage contentViewController:(NSViewController *)contentViewController;
-+ (void)presentStatusItemWithImage:(NSImage *)itemImage contentViewController:(NSViewController *)contentViewController dropHandler:(CCNStatusItemDropHandler)dropHandler;
-+ (void)presentStatusItemWithView:(NSView *)itemView contentViewController:(NSViewController *)contentViewController;
-+ (void)presentStatusItemWithView:(NSView *)itemView contentViewController:(NSViewController *)contentViewController dropHandler:(CCNStatusItemDropHandler)dropHandler;
+/**
+ Returns a shared `CCNStatusItem` object.
+ 
+ If the shared `CCNStatusItem` object doesn't exist yet, it is created.
 
+ @return The shared `CCNStatusItem` object.
+ */
 + (instancetype)sharedInstance;
+
+#pragma mark - Creating and Displaying a StatusBarItem
+/** @name Creating and Displaying a StatusBarItem */
+
+/**
+ Presents the shared `CCNStatusItem` object with the given image and contentViewController for the popover window.
+
+ @param itemImage             The image the is displayed in the status bar item. This image becomes a template image automatically.
+ @param contentViewController The contentViewController that is displayed in the popover window.
+ */
+- (void)presentStatusItemWithImage:(NSImage *)itemImage contentViewController:(NSViewController *)contentViewController;
+
+/**
+ Presents the shared `CCNStatusItem` object with the given image and contentViewController for the popover window.
+
+ @param itemImage             The image the is displayed in the status bar item. This image becomes a template image automatically.
+ @param contentViewController The contentViewController that is displayed in the popover window.
+ @param dropHandler           A handler to be called when a drop occurs on the status bar item.
+ */
+- (void)presentStatusItemWithImage:(NSImage *)itemImage contentViewController:(NSViewController *)contentViewController dropHandler:(CCNStatusItemDropHandler)dropHandler;
+
+/**
+ Presents the shared `CCNStatusItem` object with the given custom view and contentViewController for the popover window.
+
+ @param itemView              A view to be presented as the status item view.
+ @param contentViewController The contentViewController that is displayed in the popover window.
+ */
+- (void)presentStatusItemWithView:(NSView *)itemView contentViewController:(NSViewController *)contentViewController;
+
+/**
+ Presents the shared `CCNStatusItem` object with the given custom view and contentViewController for the popover window.
+
+ @param itemView              A view to be presented as the status item view.
+ @param contentViewController The contentViewController that is displayed in the popover window.
+ @param dropHandler           A handler to be called when a drop occurs on the status bar item.
+ */
+- (void)presentStatusItemWithView:(NSView *)itemView contentViewController:(NSViewController *)contentViewController dropHandler:(CCNStatusItemDropHandler)dropHandler;
+
+/**
+ Property that represents the underlying `NSStatusItem` to be displayed in the statusbar.
+ */
 @property (strong, readonly) NSStatusItem *statusItem;
 
-#pragma mark - Handling the StatusBarItem Image
 
-@property (readonly, nonatomic) BOOL isStatusItemWindowVisible;
-@property (readonly, nonatomic) CCNStatusItemPresentationMode presentationMode;
+#pragma mark - StatusBarItem and Popover presentation
+/** @name StatusBarItem and Popover presentation */
+
+/**
+ Boolean property that determines whether the system, thus the status item is in dark (dark menu bar) or light mode.
+ */
 @property (readonly, nonatomic) BOOL isDarkMode;
 
-# pragma mark - Handling drag events and proximity drag detection
+/**
+ Boolean property that determines whether the status item appears disabled or normal.
+ 
+ Appearing disabled doesn't mean the status item itself is disabled too. This behaviour is often used for indicating network reachability e.g.
+ */
+@property (assign, nonatomic) BOOL appearsDisabled;
 
-@property (assign, nonatomic, getter=isProximityDragDetectionEnabled) BOOL proximityDragDetectionEnabled;
-@property (assign, nonatomic) CGFloat proximityDragDistance;
-@property (copy, nonatomic) CCNStatusItemProximityDragDetectionHandler proximityDragDetectionHandler;
+/**
+ Boolean property that determines whether the status item is enabled or not.
+ 
+ @value YES The status item is enable.
+ @value NO The status item is disabled.
+ */
+@property (assign, nonatomic) BOOL enabled;
 
-#pragma mark - Handling the Status Item Window
+/**
+ Boolean property that determines whether the status item popover is currently visible or not.
+ 
+ @value YES The popover is visible.
+ @value NO The popover is not visible.
+ */
+@property (readonly, nonatomic) BOOL isStatusItemWindowVisible;
 
+/**
+ Presents the popover window.
+ 
+ If the `contentViewController` isn't set nothing will happen.
+ */
 - (void)showStatusItemWindow;
+
+/**
+ Dismisses the popover window.
+ 
+ Since this popover is a subclass of `NSPanel` it won't released when it's closed.
+ */
 - (void)dismissStatusItemWindow;
 
 
-#pragma mark - Handling StatusItem Layout
+# pragma mark - Handling Drag Events and Proximity Drag Detection
+/** @name Handling Drag Events and Proximity Drag Detection */
 
-+ (void)setWindowConfiguration:(CCNStatusItemWindowConfiguration *)configuration;
-@property (readonly, nonatomic) CCNStatusItemWindowConfiguration *windowConfiguration;
+/**
+ Boolean property that determines whether the status item is sensitive for advances or not.
+
+
+ */
+@property (assign, nonatomic, getter=isProximityDragDetectionEnabled) BOOL proximityDragDetectionEnabled;
+@property (assign, nonatomic) NSInteger proximityDragZoneDistance;
+@property (copy, nonatomic) CCNStatusItemProximityDragDetectionHandler proximityDragDetectionHandler;
+
+
+#pragma mark - Handling StatusItem Popover Layout
+/** @name Handling StatusItem Popover Layout */
+
+/**
+ Property that holds an window configuration object.
+ 
+ @see `CCNStatusItemWindowConfiguration`.
+ */
+@property (strong, nonatomic) CCNStatusItemWindowConfiguration *windowConfiguration;
 
 @end
+
+
+#pragma mark - Deprecated
+
+@interface CCNStatusItem (CCNStatusItemDeprecated)
+
++ (void)presentStatusItemWithImage:(NSImage *)itemImage contentViewController:(NSViewController *)contentViewController __attribute__((deprecated("Please use the instance method instead!")));
++ (void)presentStatusItemWithImage:(NSImage *)itemImage contentViewController:(NSViewController *)contentViewController dropHandler:(CCNStatusItemDropHandler)dropHandler __attribute__((deprecated("Please use the instance method instead!")));
++ (void)presentStatusItemWithView:(NSView *)itemView contentViewController:(NSViewController *)contentViewController __attribute__((deprecated("Please use the instance method instead!")));
++ (void)presentStatusItemWithView:(NSView *)itemView contentViewController:(NSViewController *)contentViewController dropHandler:(CCNStatusItemDropHandler)dropHandler __attribute__((deprecated("Please use the instance method instead!")));
+
+@end
+
 
 
 
@@ -93,5 +197,4 @@ FOUNDATION_EXPORT NSString *const CCNStatusItemWindowWillShowNotification;
 FOUNDATION_EXPORT NSString *const CCNStatusItemWindowDidShowNotification;
 FOUNDATION_EXPORT NSString *const CCNStatusItemWindowWillDismissNotification;
 FOUNDATION_EXPORT NSString *const CCNStatusItemWindowDidDismissNotification;
-
 FOUNDATION_EXPORT NSString *const CCNSystemInterfaceThemeChangedNotification;			// sent every time when system theme toggles between dark menu mode and mormal menu mode

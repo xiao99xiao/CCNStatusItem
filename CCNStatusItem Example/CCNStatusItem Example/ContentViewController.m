@@ -7,9 +7,9 @@
 //
 
 #import "ContentViewController.h"
+#import "CCNStatusItem.h"
 
 @interface ContentViewController ()
-
 @end
 
 @implementation ContentViewController

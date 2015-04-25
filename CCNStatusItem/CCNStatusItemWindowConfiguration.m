@@ -31,7 +31,6 @@
 #import "CCNStatusItemWindowConfiguration.h"
 
 
-static const CGFloat CCNDefaultCornerRadius             = 5.0;
 static const CGFloat CCNDefaultStatusItemMargin         = 2.0;
 static const NSTimeInterval CCNDefaultAnimationDuration = 0.21;
 
@@ -45,7 +44,6 @@ static const NSTimeInterval CCNDefaultAnimationDuration = 0.21;
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.cornerRadius             = CCNDefaultCornerRadius;
         self.windowToStatusItemMargin = CCNDefaultStatusItemMargin;
         self.animationDuration        = CCNDefaultAnimationDuration;
         self.presentationTransition   = CCNPresentationTransitionFade;

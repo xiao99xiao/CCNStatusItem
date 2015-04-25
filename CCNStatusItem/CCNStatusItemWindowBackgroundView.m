@@ -48,7 +48,7 @@
 - (void)drawRect:(NSRect)dirtyRect {
     CGFloat arrowHeight   = CCNDefaultArrowHeight;
     CGFloat arrowWidth    = CCNDefaultArrowWidth;
-    CGFloat cornerRadius  = self.windowConfiguration.cornerRadius;
+    CGFloat cornerRadius  = CCNDefaultCornerRadius;
     NSRect backgroundRect = NSMakeRect(NSMinX(self.bounds), NSMinY(self.bounds), NSWidth(self.bounds), NSHeight(self.bounds) - arrowHeight);
 
     NSBezierPath *windowPath     = [NSBezierPath bezierPath];

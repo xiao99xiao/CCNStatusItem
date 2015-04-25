@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7531"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7702"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ContentViewController">
@@ -16,18 +16,8 @@
             <rect key="frame" x="0.0" y="5" width="351" height="180"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kyl-1K-MzH">
-                    <rect key="frame" x="78" y="136" width="195" height="18"/>
-                    <buttonCell key="cell" type="check" title="StatusItem appears disabled" bezelStyle="regularSquare" imagePosition="left" inset="2" id="jjb-ZN-RLx">
-                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="enableDisableCheckboxAction:" target="Ruq-Mh-u0B" id="Hiz-Sk-w78"/>
-                    </connections>
-                </button>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2GC-v0-EfZ">
-                    <rect key="frame" x="134" y="90" width="82" height="32"/>
+                    <rect key="frame" x="134" y="109" width="82" height="32"/>
                     <buttonCell key="cell" type="push" title="Quit" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="DEa-v7-F1k">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -39,14 +29,14 @@ DQ
                         <action selector="quitButtonAction:" target="-2" id="r7Q-JY-O7R"/>
                     </connections>
                 </button>
-                <scrollView fixedFrame="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7zv-z5-JCW">
-                    <rect key="frame" x="0.0" y="0.0" width="351" height="82"/>
-                    <clipView key="contentView" misplaced="YES" id="6AM-R1-2Lt">
+                <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7zv-z5-JCW">
+                    <rect key="frame" x="0.0" y="0.0" width="351" height="89"/>
+                    <clipView key="contentView" id="6AM-R1-2Lt">
                         <rect key="frame" x="1" y="17" width="238" height="117"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="ah3-8W-a5Y" viewBased="YES" id="lv0-Vo-dTJ">
-                                <rect key="frame" x="0.0" y="0.0" width="238" height="117"/>
+                                <rect key="frame" x="0.0" y="0.0" width="351" height="0.0"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -121,6 +111,10 @@ DQ
                         </subviews>
                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </clipView>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="351" id="Exg-Wj-58n"/>
+                        <constraint firstAttribute="height" constant="89" id="fIh-P9-bnr"/>
+                    </constraints>
                     <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="y75-sF-JYf">
                         <rect key="frame" x="1" y="119" width="223" height="15"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -135,12 +129,13 @@ DQ
                     </tableHeaderView>
                 </scrollView>
             </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="7zv-z5-JCW" secondAttribute="bottom" id="BH7-6c-u05"/>
+                <constraint firstItem="7zv-z5-JCW" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="C78-FH-cji"/>
+                <constraint firstAttribute="trailing" secondItem="7zv-z5-JCW" secondAttribute="trailing" id="ms5-mb-tvV"/>
+            </constraints>
             <point key="canvasLocation" x="-1204.5" y="116"/>
         </customView>
-        <customObject id="Ruq-Mh-u0B" customClass="AppDelegate">
-            <connections>
-                <outlet property="enableDisableCheckbox" destination="kyl-1K-MzH" id="s79-SB-K3M"/>
-            </connections>
-        </customObject>
+        <customObject id="Ruq-Mh-u0B" customClass="AppDelegate"/>
     </objects>
 </document>

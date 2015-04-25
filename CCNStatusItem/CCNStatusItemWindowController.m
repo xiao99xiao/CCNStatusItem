@@ -176,7 +176,7 @@ typedef void (^CCNStatusItemWindowAnimationCompletion)(void);
         wSelf.windowIsOpen = (fadeDirection == CCNFadeDirectionFadeIn);
 
         if (fadeDirection == CCNFadeDirectionFadeIn) {
-            [window makeKeyAndOrderFront:nil];
+            [window makeKeyWindow];
             [nc postNotificationName:CCNStatusItemWindowDidShowNotification object:window];
         }
         else {
@@ -190,7 +190,8 @@ typedef void (^CCNStatusItemWindowAnimationCompletion)(void);
 #pragma mark - Notifications
 
 - (void)handleWindowDidResignKeyNotification:(NSNotification *)note {
-    if ([note.object isEqual:self.window] && !self.windowConfiguration.isPinned) {
+    if (![note.object isEqual:self.window]) return;
+    if (!self.windowConfiguration.isPinned) {
         [self dismissStatusItemWindow];
     }
 }

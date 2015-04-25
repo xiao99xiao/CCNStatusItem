@@ -55,13 +55,14 @@
         self.hasShadow = YES;
         self.level = NSStatusWindowLevel;
         self.backgroundColor = [NSColor clearColor];
+		self.collectionBehavior = (NSWindowCollectionBehaviorStationary | NSWindowCollectionBehaviorIgnoresCycle);
         [self setAppearance:[NSAppearance currentAppearance]];
 	}
     return self;
 }
 
 - (BOOL)canBecomeKeyWindow { return YES; }
-- (BOOL)canBecomeMainWindow { return YES; }
+//- (BOOL)hidesOnDeactivate { return NO; }
 
 - (void)setContentView:(id)contentView {
     if ([self.userContentView isEqual:contentView]) return;
@@ -75,7 +76,7 @@
         self.backgroundView = [[CCNStatusItemWindowBackgroundView alloc] initWithFrame:bounds windowConfiguration:_configuration];
         self.backgroundView.wantsLayer = YES;
         self.backgroundView.layer.frame = bounds;
-        self.backgroundView.layer.cornerRadius = _configuration.cornerRadius;
+        self.backgroundView.layer.cornerRadius = CCNDefaultCornerRadius;
         self.backgroundView.layer.masksToBounds = YES;
         self.backgroundView.layer.edgeAntialiasingMask = antialiasingMask;
         super.contentView = self.backgroundView;
@@ -90,7 +91,7 @@
     self.userContentView.autoresizingMask = (NSViewWidthSizable | NSViewHeightSizable);
     self.userContentView.wantsLayer = YES;
     self.userContentView.layer.frame = bounds;
-    self.userContentView.layer.cornerRadius = _configuration.cornerRadius;
+    self.userContentView.layer.cornerRadius = CCNDefaultCornerRadius;
     self.userContentView.layer.masksToBounds = YES;
     self.userContentView.layer.edgeAntialiasingMask = antialiasingMask;
 
