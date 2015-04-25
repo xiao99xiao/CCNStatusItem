@@ -180,6 +180,11 @@ static NSString *const CCNStatusItemWindowConfigurationPinnedPath = @"windowConf
                                                                                      windowConfiguration:self.windowConfiguration];
 }
 
+- (void)updateContentViewController:(NSViewController *)contentViewController
+{
+    [self.statusItemWindowController updateContenetViewController:contentViewController];
+}
+
 #pragma mark - Button Action Handling
 
 - (void)handleStatusItemButtonAction:(id)sender {
