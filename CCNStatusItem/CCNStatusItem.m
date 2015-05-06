@@ -29,6 +29,7 @@
 
 #import <Availability.h>
 #import "CCNStatusItem.h"
+#import "CCNStatusItemDropView.h"
 #import "CCNStatusItemWindowController.h"
 
 
@@ -95,6 +96,7 @@ static NSString *const CCNStatusItemWindowConfigurationPinnedPath = @"windowConf
         self.appearsDisabled = NO;
         self.enabled = YES;
 
+        self.dropTypes = @[NSFilenamesPboardType];
         self.dropHandler = nil;
         self.proximityDragDetectionEnabled = NO;
         self.proximityDragZoneDistance = 23.0;
@@ -146,6 +148,20 @@ static NSString *const CCNStatusItemWindowConfigurationPinnedPath = @"windowConf
     _proximityDragCollisionArea = [NSBezierPath bezierPathWithRoundedRect:collisionFrame xRadius:NSWidth(collisionFrame)/2 yRadius:NSHeight(collisionFrame)/2];
 }
 
+- (void)configureDropView {
+    if (self.dropHandler) {
+        NSStatusBarButton *button = self.statusItem.button;
+        NSRect buttonWindowFrame = button.window.frame;
+        NSRect statusItemFrame = NSMakeRect(0.0, 0.0, NSWidth(buttonWindowFrame), NSHeight(buttonWindowFrame));
+        CCNStatusItemDropView *dropView = [[CCNStatusItemDropView alloc] initWithFrame:statusItemFrame];
+        dropView.statusItem = self;
+        dropView.dropTypes = self.dropTypes;
+        dropView.dropHandler = self.dropHandler;
+        [button addSubview:dropView];
+        dropView.autoresizingMask = (NSViewWidthSizable | NSViewHeightSizable);
+    }
+}
+
 #pragma mark - Creating and Displaying a StatusBarItem
 
 - (void)presentStatusItemWithImage:(NSImage *)itemImage contentViewController:(NSViewController *)contentViewController {
@@ -158,6 +174,7 @@ static NSString *const CCNStatusItemWindowConfigurationPinnedPath = @"windowConf
     self.dropHandler = dropHandler;
     [self configureWithImage:itemImage];
     [self configureProximityDragCollisionArea];
+    [self configureDropView];
     self.presentationMode = CCNStatusItemPresentationModeImage;
     self.statusItemWindowController = [[CCNStatusItemWindowController alloc] initWithConnectedStatusItem:self
                                                                                    contentViewController:contentViewController
@@ -174,6 +191,7 @@ static NSString *const CCNStatusItemWindowConfigurationPinnedPath = @"windowConf
     self.dropHandler = dropHandler;
     [self configureWithView:itemView];
     [self configureProximityDragCollisionArea];
+    [self configureDropView];
     self.presentationMode = CCNStatusItemPresentationModeCustomView;
     self.statusItemWindowController = [[CCNStatusItemWindowController alloc] initWithConnectedStatusItem:self
                                                                                    contentViewController:contentViewController
