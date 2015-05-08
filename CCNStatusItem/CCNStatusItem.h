@@ -43,7 +43,7 @@ typedef NS_ENUM(NSInteger, CCNStatusItemProximityDragStatus) {
     CCNProximityDragStatusExited
 };
 
-typedef void (^CCNStatusItemDropHandler)(CCNStatusItem *sharedItem);
+typedef void (^CCNStatusItemDropHandler)(CCNStatusItem *sharedItem, NSString *pasteboardType, NSArray *droppedObjects);
 typedef void (^CCNStatusItemProximityDragDetectionHandler)(CCNStatusItem *sharedItem, NSPoint eventLocation, CCNStatusItemProximityDragStatus proxymityDragStatus);
 
 
@@ -170,6 +170,7 @@ typedef void (^CCNStatusItemProximityDragDetectionHandler)(CCNStatusItem *shared
 @property (assign, nonatomic, getter=isProximityDragDetectionEnabled) BOOL proximityDragDetectionEnabled;
 @property (assign, nonatomic) NSInteger proximityDragZoneDistance;
 @property (copy, nonatomic) CCNStatusItemProximityDragDetectionHandler proximityDragDetectionHandler;
+@property (copy, nonatomic) NSArray *dropTypes;
 
 
 #pragma mark - Handling StatusItem Popover Layout

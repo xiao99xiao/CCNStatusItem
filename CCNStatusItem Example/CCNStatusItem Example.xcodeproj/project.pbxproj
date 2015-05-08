@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1782392C1AFBCEEB00D41AB3 /* CCNStatusItemDropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1782392B1AFBCEEB00D41AB3 /* CCNStatusItemDropView.m */; };
 		6800FB481AEB486700942B4E /* ContentView2Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 6800FB461AEB486700942B4E /* ContentView2Controller.m */; };
 		6800FB491AEB486700942B4E /* ContentView2Controller.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6800FB471AEB486700942B4E /* ContentView2Controller.xib */; };
 		FD2CF54C1AE2E60A006F3D46 /* CCNStatusItemWindowConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2CF54B1AE2E60A006F3D46 /* CCNStatusItemWindowConfiguration.m */; };
@@ -23,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1782392A1AFBCEEB00D41AB3 /* CCNStatusItemDropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNStatusItemDropView.h; sourceTree = "<group>"; };
+		1782392B1AFBCEEB00D41AB3 /* CCNStatusItemDropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCNStatusItemDropView.m; sourceTree = "<group>"; };
 		6800FB451AEB486700942B4E /* ContentView2Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentView2Controller.h; sourceTree = "<group>"; };
 		6800FB461AEB486700942B4E /* ContentView2Controller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentView2Controller.m; sourceTree = "<group>"; };
 		6800FB471AEB486700942B4E /* ContentView2Controller.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentView2Controller.xib; sourceTree = "<group>"; };
@@ -108,6 +111,8 @@
 			children = (
 				FDA94B8F1A69F9D000EB4169 /* CCNStatusItem.h */,
 				FDA94B901A69F9D000EB4169 /* CCNStatusItem.m */,
+				1782392A1AFBCEEB00D41AB3 /* CCNStatusItemDropView.h */,
+				1782392B1AFBCEEB00D41AB3 /* CCNStatusItemDropView.m */,
 				FDA94B911A69F9D000EB4169 /* CCNStatusItemWindow.h */,
 				FDA94B921A69F9D000EB4169 /* CCNStatusItemWindow.m */,
 				FDA94B951A69F9D000EB4169 /* CCNStatusItemWindowBackgroundView.h */,
@@ -220,6 +225,7 @@
 				6800FB481AEB486700942B4E /* ContentView2Controller.m in Sources */,
 				FDA94B9D1A69F9D000EB4169 /* CCNStatusItemWindowController.m in Sources */,
 				FD9AC0621A4F74BC00129381 /* ContentViewController.m in Sources */,
+				1782392C1AFBCEEB00D41AB3 /* CCNStatusItemDropView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
