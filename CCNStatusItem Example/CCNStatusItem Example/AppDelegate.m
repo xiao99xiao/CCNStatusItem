@@ -14,6 +14,7 @@
 @property (weak) IBOutlet NSButton *appearsDisabledCheckbox;
 @property (weak) IBOutlet NSButton *disableCheckbox;
 @property (weak) IBOutlet NSButton *proximityDetectionCheckbox;
+@property (weak) IBOutlet NSButton *dragAndDropCheckbox;
 @property (weak) IBOutlet NSButton *pinPopoverCheckbox;
 @property (weak) IBOutlet NSSlider *proximityDragZoneDistanceSlider;
 @property (weak) IBOutlet NSTextField *currentpProximityDragZoneDistanceTextField;
@@ -31,9 +32,10 @@
     sharedItem.windowConfiguration.presentationTransition = CCNPresentationTransitionSlideAndFade;
     sharedItem.proximityDragDetectionHandler = [self proximityDragDetectionHandler];
     [sharedItem presentStatusItemWithImage:[NSImage imageNamed:@"statusbar-icon"]
-                     contentViewController:[ContentViewController viewController]];
-
-
+                     contentViewController:[ContentViewController viewController]
+                               dropHandler:nil];
+    
+    
     // restore GUI elements
     // (this is an excerpt from the example app)
     self.proximitySliderValue = sharedItem.proximityDragZoneDistance;
@@ -67,6 +69,25 @@
 - (IBAction)proximityDetectionCheckboxAction:(NSButton *)proximityDetectionCheckbox {
     CCNStatusItem *sharedItem = [CCNStatusItem sharedInstance];
     sharedItem.proximityDragDetectionEnabled = (proximityDetectionCheckbox.state == NSOnState);
+}
+
+- (IBAction)dragAndDropCheckboxAction:(NSButton *)dragAndDropCheckbox {
+    CCNStatusItem *sharedItem = [CCNStatusItem sharedInstance];
+    if (dragAndDropCheckbox.state == NSOnState) {
+        sharedItem.dropHandler = ^(CCNStatusItem *sharedItem, NSString *pasteboardType, NSArray *droppedObjects) {
+            NSAlert *alert = [[NSAlert alloc] init];
+            alert.messageText = @"Dropped Objects";
+            __block NSMutableString *objects = [NSMutableString new];
+            [droppedObjects enumerateObjectsUsingBlock:^(NSString *path, NSUInteger idx, BOOL *stop) {
+                [objects appendFormat:@"%@. %@\n\n", @(idx+1), path];
+            }];
+            alert.informativeText = objects;
+            [alert runModal];
+        };
+    }
+    else {
+        sharedItem.dropHandler = nil;
+    }
 }
 
 - (IBAction)pinPopoverCheckboxAction:(NSButton *)pinPopoverCheckbox {

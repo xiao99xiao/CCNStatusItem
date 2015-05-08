@@ -112,6 +112,12 @@ typedef void (^CCNStatusItemProximityDragDetectionHandler)(CCNStatusItem *shared
  */
 @property (strong, readonly) NSStatusItem *statusItem;
 
+/**
+ Property that represents the dropHandler to be executed if not nil.
+ */
+
+@property (copy, nonatomic) CCNStatusItemDropHandler dropHandler;
+
 
 #pragma mark - StatusBarItem and Popover presentation
 /** @name StatusBarItem and Popover presentation */

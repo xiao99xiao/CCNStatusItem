@@ -81,8 +81,7 @@ typedef void (^CCNStatusItemWindowAnimationCompletion)(void);
     return self;
 }
 
-- (void)updateContenetViewController:(NSViewController *)contentViewController
-{
+- (void)updateContenetViewController:(NSViewController *)contentViewController {
     // Set nil first to trigger window resize
     self.contentViewController = nil;
     self.contentViewController = contentViewController;

@@ -55,10 +55,9 @@ static NSString *const CCNStatusItemWindowConfigurationPinnedPath = @"windowConf
     NSInteger _pbChangeCount;
 }
 @property (strong) NSStatusItem *statusItem;
-@property (copy) CCNStatusItemDropHandler dropHandler;
 @property (assign) CCNStatusItemPresentationMode presentationMode;
 @property (assign, nonatomic) BOOL isStatusItemWindowVisible;
-
+@property (strong) CCNStatusItemDropView *dropView;
 @property (strong, nonatomic) CCNStatusItemWindowController *statusItemWindowController;
 @end
 
@@ -149,17 +148,22 @@ static NSString *const CCNStatusItemWindowConfigurationPinnedPath = @"windowConf
 }
 
 - (void)configureDropView {
-    if (self.dropHandler) {
-        NSStatusBarButton *button = self.statusItem.button;
-        NSRect buttonWindowFrame = button.window.frame;
-        NSRect statusItemFrame = NSMakeRect(0.0, 0.0, NSWidth(buttonWindowFrame), NSHeight(buttonWindowFrame));
-        CCNStatusItemDropView *dropView = [[CCNStatusItemDropView alloc] initWithFrame:statusItemFrame];
-        dropView.statusItem = self;
-        dropView.dropTypes = self.dropTypes;
-        dropView.dropHandler = self.dropHandler;
-        [button addSubview:dropView];
-        dropView.autoresizingMask = (NSViewWidthSizable | NSViewHeightSizable);
-    }
+    [self.dropView removeFromSuperview];
+    self.dropView = nil;
+
+    if (!self.dropHandler) {
+        return;
+    };
+
+    NSStatusBarButton *button = self.statusItem.button;
+    NSRect buttonWindowFrame = button.window.frame;
+    NSRect statusItemFrame = NSMakeRect(0.0, 0.0, NSWidth(buttonWindowFrame), NSHeight(buttonWindowFrame));
+    self.dropView = [[CCNStatusItemDropView alloc] initWithFrame:statusItemFrame];
+    self.dropView.statusItem = self;
+    self.dropView.dropTypes = self.dropTypes;
+    self.dropView.dropHandler = self.dropHandler;
+    [button addSubview:self.dropView];
+    self.dropView.autoresizingMask = (NSViewWidthSizable | NSViewHeightSizable);
 }
 
 #pragma mark - Creating and Displaying a StatusBarItem
@@ -171,10 +175,10 @@ static NSString *const CCNStatusItemWindowConfigurationPinnedPath = @"windowConf
 - (void)presentStatusItemWithImage:(NSImage *)itemImage contentViewController:(NSViewController *)contentViewController dropHandler:(CCNStatusItemDropHandler)dropHandler {
     if (self.presentationMode != CCNStatusItemPresentationModeUndefined) return;
 
-    self.dropHandler = dropHandler;
     [self configureWithImage:itemImage];
     [self configureProximityDragCollisionArea];
-    [self configureDropView];
+
+    self.dropHandler = dropHandler;
     self.presentationMode = CCNStatusItemPresentationModeImage;
     self.statusItemWindowController = [[CCNStatusItemWindowController alloc] initWithConnectedStatusItem:self
                                                                                    contentViewController:contentViewController
@@ -188,10 +192,10 @@ static NSString *const CCNStatusItemWindowConfigurationPinnedPath = @"windowConf
 - (void)presentStatusItemWithView:(NSView *)itemView contentViewController:(NSViewController *)contentViewController dropHandler:(CCNStatusItemDropHandler)dropHandler {
     if (self.presentationMode != CCNStatusItemPresentationModeUndefined) return;
 
-    self.dropHandler = dropHandler;
     [self configureWithView:itemView];
     [self configureProximityDragCollisionArea];
-    [self configureDropView];
+
+    self.dropHandler = dropHandler;
     self.presentationMode = CCNStatusItemPresentationModeCustomView;
     self.statusItemWindowController = [[CCNStatusItemWindowController alloc] initWithConnectedStatusItem:self
                                                                                    contentViewController:contentViewController
@@ -264,6 +268,11 @@ static NSString *const CCNStatusItemWindowConfigurationPinnedPath = @"windowConf
         _proximityDragZoneDistance = proximityDragZoneDistance;
         [self configureProximityDragCollisionArea];
     }
+}
+
+- (void)setDropHandler:(CCNStatusItemDropHandler)dropHandler {
+    _dropHandler = [dropHandler copy];
+    [self configureDropView];
 }
 
 #pragma mark - Helper
