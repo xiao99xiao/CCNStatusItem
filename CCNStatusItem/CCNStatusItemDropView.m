@@ -50,8 +50,7 @@
 
 - (NSString *)dropTypeInPasteboardTypes:(NSArray *)pasteboardTypes {
     for (NSString *type in self.dropTypes) {
-        if ([pasteboardTypes containsObject:type])
-        {
+        if ([pasteboardTypes containsObject:type]) {
             return type;
         }
     }
@@ -63,7 +62,8 @@
     
     if ([self dropTypeInPasteboardTypes:pboard.types]) {
         return NSDragOperationCopy;
-    } else {
+    }
+    else {
         return NSDragOperationNone;
     }
 }
@@ -74,7 +74,6 @@
     
     if (type) {
         NSArray *items = [pboard propertyListForType:type];
-        
         if (self.dropHandler) {
             self.dropHandler(self.statusItem, type, items);
             return YES;
