@@ -55,7 +55,7 @@
         self.hasShadow = YES;
         self.level = NSStatusWindowLevel;
         self.backgroundColor = [NSColor clearColor];
-		self.collectionBehavior = (NSWindowCollectionBehaviorStationary | NSWindowCollectionBehaviorIgnoresCycle);
+	self.collectionBehavior = (NSWindowCollectionBehaviorCanJoinAllSpaces | NSWindowCollectionBehaviorIgnoresCycle);
         [self setAppearance:[NSAppearance currentAppearance]];
 	}
     return self;
