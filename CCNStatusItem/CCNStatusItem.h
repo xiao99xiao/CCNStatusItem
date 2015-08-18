@@ -115,7 +115,6 @@ typedef void (^CCNStatusItemProximityDragDetectionHandler)(CCNStatusItem *shared
 /**
  Property that represents the dropHandler to be executed if not nil.
  */
-
 @property (copy, nonatomic) CCNStatusItemDropHandler dropHandler;
 
 
