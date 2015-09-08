@@ -118,14 +118,14 @@
                                                     options:0
                                                     metrics:nil
                                                   views:@{@"vw":self.userContentView}];
-    [self.backgroundView addConstraints:arr];
+    [self.userContentView addConstraints:arr];
 
     //vertical constraints
     arr = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[vw]|"
                                                     options:0
                                                     metrics:nil
                                                       views:@{@"vw":self.userContentView}];
-    [self.backgroundView addConstraints:arr];
+    [self.userContentView addConstraints:arr];
 
     self.userContentView.wantsLayer = YES;
     self.userContentView.layer.frame = bounds;
