@@ -82,23 +82,23 @@
         self.backgroundView.translatesAutoresizingMaskIntoConstraints = NO;
         super.contentView = self.backgroundView;
 
-        //add constraints to fill parent view
-        NSArray *arr;
+        // //add constraints to fill parent view
+        // NSArray *arr;
 
-        //horizontal constraints
-        arr = [NSLayoutConstraint constraintsWithVisualFormat:@"|[vw]|"
-                                                        options:0
-                                                        metrics:nil
-                                                      views:@{@"vw":self.backgroundView}];
-        [self.backgroundView addConstraints:arr];
+        // //horizontal constraints
+        // arr = [NSLayoutConstraint constraintsWithVisualFormat:@"|[vw]|"
+        //                                                 options:0
+        //                                                 metrics:nil
+        //                                               views:@{@"vw":self.backgroundView}];
+        // [self.backgroundView addConstraints:arr];
 
-        //vertical constraints
-        arr = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[vw]|"
-                                                        options:0
-                                                        metrics:nil
-                                                          views:@{@"vw":self.backgroundView}];
-        [self.backgroundView addConstraints:arr];
-    
+        // //vertical constraints
+        // arr = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[vw]|"
+        //                                                 options:0
+        //                                                 metrics:nil
+        //                                                   views:@{@"vw":self.backgroundView}];
+        // [self.backgroundView addConstraints:arr];
+
     }
 
     if (self.userContentView) {
@@ -109,7 +109,6 @@
     self.userContentView.frame = [self contentRectForFrameRect:bounds];
     //self.userContentView.autoresizingMask = (NSViewWidthSizable | NSViewHeightSizable);
     self.userContentView.translatesAutoresizingMaskIntoConstraints = NO;
-    //turn off springs and struts
 
     //add constraints to fill parent view
     NSArray *arr;
@@ -119,14 +118,14 @@
                                                     options:0
                                                     metrics:nil
                                                   views:@{@"vw":self.userContentView}];
-    [self.userContentView addConstraints:arr];
+    [self.backgroundView addConstraints:arr];
 
     //vertical constraints
     arr = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[vw]|"
                                                     options:0
                                                     metrics:nil
                                                       views:@{@"vw":self.userContentView}];
-    [self.userContentView addConstraints:arr];
+    [self.backgroundView addConstraints:arr];
 
     self.userContentView.wantsLayer = YES;
     self.userContentView.layer.frame = bounds;
