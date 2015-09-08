@@ -210,7 +210,7 @@ static NSString *const CCNStatusItemWindowConfigurationPinnedPath = @"windowConf
     NSRect itemFrame = self.customView.frame;
     
     _customViewContainer = [[CCNStatusItemContainerView alloc] initWithFrame:itemFrame];
-    _customViewContainer.autoresizingMask = (NSViewWidthSizable | NSViewHeightSizable);
+    //_customViewContainer.autoresizingMask = (NSViewWidthSizable | NSViewHeightSizable);
     _customViewContainer.translatesAutoresizingMaskIntoConstraints = NO;
     _customViewContainer.target = self;
     _customViewContainer.action = @selector(handleStatusItemButtonAction:);
@@ -221,7 +221,8 @@ static NSString *const CCNStatusItemWindowConfigurationPinnedPath = @"windowConf
     NSStatusBarButton *button = self.statusItem.button;
     button.frame = itemFrame;
     [button addSubview:_customViewContainer];
-    itemView.autoresizingMask = (NSViewWidthSizable | NSViewHeightSizable);
+    //itemView.autoresizingMask = (NSViewWidthSizable | NSViewHeightSizable);
+    itemView.translatesAutoresizingMaskIntoConstraints = NO;
 }
 
 - (void)configureProximityDragCollisionArea {
