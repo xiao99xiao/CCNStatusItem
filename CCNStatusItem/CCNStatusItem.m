@@ -206,10 +206,12 @@ static NSString *const CCNStatusItemWindowConfigurationPinnedPath = @"windowConf
 
 - (void)configureWithView:(NSView *)itemView {
     self.customView = itemView;
+    self.customView.translatesAutoresizingMaskIntoConstraints = NO;
     NSRect itemFrame = self.customView.frame;
     
     _customViewContainer = [[CCNStatusItemContainerView alloc] initWithFrame:itemFrame];
     _customViewContainer.autoresizingMask = (NSViewWidthSizable | NSViewHeightSizable);
+    _customViewContainer.translatesAutoresizingMaskIntoConstraints = NO;
     _customViewContainer.target = self;
     _customViewContainer.action = @selector(handleStatusItemButtonAction:);
     [_customViewContainer addSubview:self.customView];
@@ -243,6 +245,7 @@ static NSString *const CCNStatusItemWindowConfigurationPinnedPath = @"windowConf
     self.dropView.statusItem = self;
     self.dropView.dropTypes = self.dropTypes;
     self.dropView.dropHandler = self.dropHandler;
+    self.dropView.translatesAutoresizingMaskIntoConstraints = NO;
     [button addSubview:self.dropView];
     self.dropView.autoresizingMask = (NSViewWidthSizable | NSViewHeightSizable);
 }

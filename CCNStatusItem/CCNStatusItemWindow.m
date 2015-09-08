@@ -79,6 +79,7 @@
         self.backgroundView.layer.cornerRadius = CCNDefaultCornerRadius;
         self.backgroundView.layer.masksToBounds = YES;
         self.backgroundView.layer.edgeAntialiasingMask = antialiasingMask;
+        self.backgroundView.translatesAutoresizingMaskIntoConstraints = NO;
         super.contentView = self.backgroundView;
     }
 
@@ -89,6 +90,7 @@
     self.userContentView = userContentView;
     self.userContentView.frame = [self contentRectForFrameRect:bounds];
     self.userContentView.autoresizingMask = (NSViewWidthSizable | NSViewHeightSizable);
+    self.userContentView.translatesAutoresizingMaskIntoConstraints = NO;
     self.userContentView.wantsLayer = YES;
     self.userContentView.layer.frame = bounds;
     self.userContentView.layer.cornerRadius = CCNDefaultCornerRadius;
