@@ -287,12 +287,25 @@ static NSString *const CCNStatusItemWindowConfigurationPinnedPath = @"windowConf
     [self.statusItemWindowController updateContenetViewController:contentViewController];
 }
 
+- (void)removeStatusItem {
+    if (self.statusItem) {
+        [[NSStatusBar systemStatusBar] removeStatusItem:self.statusItem];
+        
+        self.statusItem = nil;
+        self.presentationMode = CCNStatusItemPresentationModeUndefined;
+        self.isStatusItemWindowVisible = NO;
+        self.statusItemWindowController = nil;
+    }
+}
+
+
 #pragma mark - Button Action Handling
 
 - (void)handleStatusItemButtonAction:(id)sender {
     if (self.isStatusItemWindowVisible) {
         [self dismissStatusItemWindow];
-    } else {
+    }
+    else if (!self.shouldShowHandler || self.shouldShowHandler(self)) {
         [self showStatusItemWindow];
     }
 }

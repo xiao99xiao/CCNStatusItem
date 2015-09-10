@@ -45,6 +45,7 @@ typedef NS_ENUM(NSInteger, CCNStatusItemProximityDragStatus) {
 
 typedef void (^CCNStatusItemDropHandler)(CCNStatusItem *sharedItem, NSString *pasteboardType, NSArray *droppedObjects);
 typedef void (^CCNStatusItemProximityDragDetectionHandler)(CCNStatusItem *sharedItem, NSPoint eventLocation, CCNStatusItemProximityDragStatus proxymityDragStatus);
+typedef BOOL (^CCNStatusItemShouldShowHandler)(CCNStatusItem *sharedItem);
 
 
 #pragma mark - CCNStatusItem
@@ -108,6 +109,11 @@ typedef void (^CCNStatusItemProximityDragDetectionHandler)(CCNStatusItem *shared
 - (void)updateContentViewController:(NSViewController *)contentViewController;
 
 /**
+ Removes the status item.
+ */
+- (void)removeStatusItem;
+
+/**
  Property that represents the underlying `NSStatusItem` to be displayed in the statusbar.
  */
 @property (strong, readonly) NSStatusItem *statusItem;
@@ -116,6 +122,11 @@ typedef void (^CCNStatusItemProximityDragDetectionHandler)(CCNStatusItem *shared
  Property that represents the dropHandler to be executed if not nil.
  */
 @property (copy, nonatomic) CCNStatusItemDropHandler dropHandler;
+
+/**
+ Property that represents the shouldShowHandler to be executed when the status item is clicked, if not nil.
+ */
+@property (copy, nonatomic) CCNStatusItemShouldShowHandler shouldShowHandler;
 
 
 #pragma mark - StatusBarItem and Popover presentation
@@ -169,8 +180,6 @@ typedef void (^CCNStatusItemProximityDragDetectionHandler)(CCNStatusItem *shared
 
 /**
  Boolean property that determines whether the status item is sensitive for advances or not.
-
-
  */
 @property (assign, nonatomic, getter=isProximityDragDetectionEnabled) BOOL proximityDragDetectionEnabled;
 @property (assign, nonatomic) NSInteger proximityDragZoneDistance;
