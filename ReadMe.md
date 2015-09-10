@@ -11,6 +11,8 @@ Features:
 * Yosemite's dark menu mode will be automatically handled
 * Proximity drag detection
 * Support for Drag&Drop
+* Custom Views as StatusItems
+* Support for switching the StatusItem on/off (in case you're using both the StatusItem **and** a Dock Icon)
 
 It supports a customizable statusItemWindow that will manage any `NSViewController` instance for presenting the content.
 
@@ -82,7 +84,7 @@ The statusItem popover's frame size will be determined automatically by calling 
 
 ## Requirements
 
-`CCNStatusItem` was written using ARC and "modern" Objective-C 2. At the moment it has only support for OS X 10.10 Yosemite.
+`CCNStatusItem` has been written using ARC and "modern" Objective-C 2. It supports OS X 10.10 Yosemite and above.
 
 
 ## Contribution
