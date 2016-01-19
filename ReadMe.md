@@ -72,7 +72,7 @@ That's all! You will have some options to change the design of this statusItem p
 
 ## Some Side Notes
 
-The statusItem popover's frame size will be determined automatically by calling `preferedContentSize` on the `contentViewController`. So you shouldn't forget to set it to a reasonable value. Using XIB's for building the content a good war to do so is returning:
+The statusItem popover's frame size will be determined automatically by calling `preferedContentSize` on the `contentViewController`. So you shouldn't forget to set it to a reasonable value. Using XIB's for building the content a good way to do so is returning:
 
 ```Objective-C
 - (CGSize)preferredContentSize {
