@@ -9,15 +9,15 @@
 /* Begin PBXBuildFile section */
 		5352C3FC1C800DF800BCF3ED /* CCNStatusItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 5352C3F01C800DF800BCF3ED /* CCNStatusItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5352C3FD1C800DF800BCF3ED /* CCNStatusItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5352C3F11C800DF800BCF3ED /* CCNStatusItem.m */; };
-		5352C3FE1C800DF800BCF3ED /* CCNStatusItemDropView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5352C3F21C800DF800BCF3ED /* CCNStatusItemDropView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5352C3FE1C800DF800BCF3ED /* CCNStatusItemDropView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5352C3F21C800DF800BCF3ED /* CCNStatusItemDropView.h */; };
 		5352C3FF1C800DF800BCF3ED /* CCNStatusItemDropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5352C3F31C800DF800BCF3ED /* CCNStatusItemDropView.m */; };
-		5352C4001C800DF800BCF3ED /* CCNStatusItemWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 5352C3F41C800DF800BCF3ED /* CCNStatusItemWindow.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5352C4001C800DF800BCF3ED /* CCNStatusItemWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 5352C3F41C800DF800BCF3ED /* CCNStatusItemWindow.h */; };
 		5352C4011C800DF800BCF3ED /* CCNStatusItemWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 5352C3F51C800DF800BCF3ED /* CCNStatusItemWindow.m */; };
-		5352C4021C800DF800BCF3ED /* CCNStatusItemWindowBackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5352C3F61C800DF800BCF3ED /* CCNStatusItemWindowBackgroundView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5352C4021C800DF800BCF3ED /* CCNStatusItemWindowBackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5352C3F61C800DF800BCF3ED /* CCNStatusItemWindowBackgroundView.h */; };
 		5352C4031C800DF800BCF3ED /* CCNStatusItemWindowBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5352C3F71C800DF800BCF3ED /* CCNStatusItemWindowBackgroundView.m */; };
 		5352C4041C800DF800BCF3ED /* CCNStatusItemWindowConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 5352C3F81C800DF800BCF3ED /* CCNStatusItemWindowConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5352C4051C800DF800BCF3ED /* CCNStatusItemWindowConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 5352C3F91C800DF800BCF3ED /* CCNStatusItemWindowConfiguration.m */; };
-		5352C4061C800DF800BCF3ED /* CCNStatusItemWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 5352C3FA1C800DF800BCF3ED /* CCNStatusItemWindowController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5352C4061C800DF800BCF3ED /* CCNStatusItemWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 5352C3FA1C800DF800BCF3ED /* CCNStatusItemWindowController.h */; };
 		5352C4071C800DF800BCF3ED /* CCNStatusItemWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5352C3FB1C800DF800BCF3ED /* CCNStatusItemWindowController.m */; };
 /* End PBXBuildFile section */
 
@@ -93,10 +93,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				5352C3FC1C800DF800BCF3ED /* CCNStatusItem.h in Headers */,
+				5352C4041C800DF800BCF3ED /* CCNStatusItemWindowConfiguration.h in Headers */,
 				5352C3FE1C800DF800BCF3ED /* CCNStatusItemDropView.h in Headers */,
 				5352C4061C800DF800BCF3ED /* CCNStatusItemWindowController.h in Headers */,
 				5352C4001C800DF800BCF3ED /* CCNStatusItemWindow.h in Headers */,
-				5352C4041C800DF800BCF3ED /* CCNStatusItemWindowConfiguration.h in Headers */,
 				5352C4021C800DF800BCF3ED /* CCNStatusItemWindowBackgroundView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
