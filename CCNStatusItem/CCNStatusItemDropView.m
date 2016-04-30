@@ -59,7 +59,7 @@
 
 - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender {
     NSPasteboard *pboard = [sender draggingPasteboard];
-    
+
     if ([self dropTypeInPasteboardTypes:pboard.types]) {
         return NSDragOperationCopy;
     }
@@ -71,7 +71,7 @@
 - (BOOL)performDragOperation:(id <NSDraggingInfo>)sender {
     NSPasteboard *pboard = [sender draggingPasteboard];
     NSString *type = [self dropTypeInPasteboardTypes:pboard.types];
-    
+
     if (type) {
         NSArray *items = [pboard propertyListForType:type];
         if (self.dropHandler) {

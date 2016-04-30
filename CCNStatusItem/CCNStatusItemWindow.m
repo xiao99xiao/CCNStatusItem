@@ -55,14 +55,15 @@
         self.hasShadow = YES;
         self.level = NSStatusWindowLevel;
         self.backgroundColor = [NSColor clearColor];
-	self.collectionBehavior = (NSWindowCollectionBehaviorCanJoinAllSpaces | NSWindowCollectionBehaviorIgnoresCycle);
+        self.collectionBehavior = (NSWindowCollectionBehaviorCanJoinAllSpaces | NSWindowCollectionBehaviorIgnoresCycle);
         [self setAppearance:[NSAppearance currentAppearance]];
-	}
+    }
     return self;
 }
 
-- (BOOL)canBecomeKeyWindow { return YES; }
-//- (BOOL)hidesOnDeactivate { return NO; }
+- (BOOL)canBecomeKeyWindow {
+    return YES;
+}
 
 - (void)setContentView:(id)contentView {
     if ([self.userContentView isEqual:contentView]) return;

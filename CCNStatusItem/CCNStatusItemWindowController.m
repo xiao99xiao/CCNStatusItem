@@ -85,7 +85,7 @@ typedef void (^CCNStatusItemWindowAnimationCompletion)(void);
     // Set nil first to trigger window resize
     self.contentViewController = nil;
     self.contentViewController = contentViewController;
-    
+
     [self updateWindowFrame];
 }
 
@@ -93,7 +93,7 @@ typedef void (^CCNStatusItemWindowAnimationCompletion)(void);
 
 - (void)updateWindowFrame {
     CGRect statusItemRect = [[self.statusItemView.statusItem.button window] frame];
-    CGRect windowFrame = NSMakeRect(NSMinX(statusItemRect) - NSWidth(self.window.frame)/2 + NSWidth(statusItemRect)/2,
+    CGRect windowFrame = NSMakeRect(NSMinX(statusItemRect) - NSWidth(self.window.frame) / 2 + NSWidth(statusItemRect) / 2,
                                     NSMinY(statusItemRect) - NSHeight(self.window.frame) - self.windowConfiguration.windowToStatusItemMargin,
                                     self.window.frame.size.width,
                                     self.window.frame.size.height);
@@ -110,13 +110,13 @@ typedef void (^CCNStatusItemWindowAnimationCompletion)(void);
     [self.window setAlphaValue:0.0];
     [self showWindow:nil];
 
-    [self animateWindow:(CCNStatusItemWindow *)self.window withFadeDirection:CCNFadeDirectionFadeIn];
+    [self animateWindow:(CCNStatusItemWindow *) self.window withFadeDirection:CCNFadeDirectionFadeIn];
 }
 
 - (void)dismissStatusItemWindow {
     if (self.animationIsRunning) return;
 
-    [self animateWindow:(CCNStatusItemWindow *)self.window withFadeDirection:CCNFadeDirectionFadeOut];
+    [self animateWindow:(CCNStatusItemWindow *) self.window withFadeDirection:CCNFadeDirectionFadeOut];
 }
 
 - (void)animateWindow:(CCNStatusItemWindow *)window withFadeDirection:(CCNFadeDirection)fadeDirection {
@@ -142,7 +142,7 @@ typedef void (^CCNStatusItemWindowAnimationCompletion)(void);
         context.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
         [[window animator] setAlphaValue:(fadeDirection == CCNFadeDirectionFadeIn ? 1.0 : 0.0)];
 
-    } completionHandler:[self animationCompletionForWindow:window fadeDirection:fadeDirection]];
+    }                   completionHandler:[self animationCompletionForWindow:window fadeDirection:fadeDirection]];
 }
 
 - (void)animateWindow:(CCNStatusItemWindow *)window withSlideAndFadeTransitionUsingFadeDirection:(CCNFadeDirection)fadeDirection {
@@ -172,7 +172,7 @@ typedef void (^CCNStatusItemWindowAnimationCompletion)(void);
         [[window animator] setFrame:windowEndFrame display:NO];
         [[window animator] setAlphaValue:(fadeDirection == CCNFadeDirectionFadeIn ? 1.0 : 0.0)];
 
-    } completionHandler:[self animationCompletionForWindow:window fadeDirection:fadeDirection]];
+    }                   completionHandler:[self animationCompletionForWindow:window fadeDirection:fadeDirection]];
 }
 
 - (CCNStatusItemWindowAnimationCompletion)animationCompletionForWindow:(CCNStatusItemWindow *)window fadeDirection:(CCNFadeDirection)fadeDirection {
