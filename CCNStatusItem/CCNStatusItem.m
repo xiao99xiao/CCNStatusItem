@@ -39,6 +39,7 @@ static NSString *const CCNStatusItemWindowConfigurationPinnedPath = @"windowConf
 
 @interface NSStatusBarButton (Tools)
 @end
+
 @implementation NSStatusBarButton (Tools)
 - (void)rightMouseDown:(NSEvent *)theEvent {}
 @end
@@ -63,7 +64,7 @@ static NSString *const CCNStatusItemWindowConfigurationPinnedPath = @"windowConf
         _highlighted = NO;
         _backgroundDefaultColor = [NSColor clearColor];
         _backgroundHighlightColor = [NSColor selectedMenuItemColor];
-        
+
         _target = nil;
         _action = nil;
     }
@@ -86,7 +87,7 @@ static NSString *const CCNStatusItemWindowConfigurationPinnedPath = @"windowConf
 - (void)mouseDown:(NSEvent *)theEvent {
     _highlighted = YES;
     [self setNeedsDisplay:YES];
-    
+
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
     if (self.target && self.action) {
@@ -102,7 +103,6 @@ static NSString *const CCNStatusItemWindowConfigurationPinnedPath = @"windowConf
 }
 
 @end
-
 
 
 #pragma mark - CCNStatusItemView
@@ -146,10 +146,10 @@ static NSString *const CCNStatusItemWindowConfigurationPinnedPath = @"windowConf
     if (self) {
         _globalDragEventMonitor = nil;
         _proximityDragCollisionHandled = NO;
-        
+
         _pbChangeCount = [NSPasteboard pasteboardWithName:NSDragPboard].changeCount;
         _customViewContainer = nil;
-        
+
         self.statusItem = nil;
         self.customView = nil;
         self.presentationMode = CCNStatusItemPresentationModeUndefined;
@@ -158,18 +158,18 @@ static NSString *const CCNStatusItemWindowConfigurationPinnedPath = @"windowConf
         self.windowConfiguration = [CCNStatusItemWindowConfiguration defaultConfiguration];
         self.appearsDisabled = NO;
         self.enabled = YES;
-        
+
         self.dropTypes = @[NSFilenamesPboardType];
         self.dropHandler = nil;
         self.proximityDragDetectionEnabled = NO;
         self.proximityDragZoneDistance = 23.0;
         self.proximityDragDetectionHandler = nil;
-        
+
         // We need to observe that because when an status bar item has been removed from the status bar
         // and OS X reorganize all items, we must recalculate our _proximityDragCollisionArea.
         [self addObserver:self forKeyPath:CCNStatusItemFrameKeyPath options:NSKeyValueObservingOptionNew context:nil];
-        [self addObserver:self forKeyPath:CCNStatusItemWindowConfigurationPinnedPath options:NSKeyValueObservingOptionPrior|NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
-        
+        [self addObserver:self forKeyPath:CCNStatusItemWindowConfigurationPinnedPath options:(NSKeyValueObservingOptionPrior | NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) context:nil];
+
         // We need to handle system theme changes, eventually...
         [[NSDistributedNotificationCenter defaultCenter] addObserverForName:@"AppleInterfaceThemeChangedNotification" object:nil queue:nil
                                                                  usingBlock:^(NSNotification *note) {
@@ -182,7 +182,7 @@ static NSString *const CCNStatusItemWindowConfigurationPinnedPath = @"windowConf
 - (void)dealloc {
     [self removeObserver:self forKeyPath:CCNStatusItemFrameKeyPath];
     [self removeObserver:self forKeyPath:CCNStatusItemWindowConfigurationPinnedPath];
-    
+
     _statusItem = nil;
     _customView = nil;
     _statusItemWindowController = nil;
@@ -195,9 +195,9 @@ static NSString *const CCNStatusItemWindowConfigurationPinnedPath = @"windowConf
 
 - (void)configureWithImage:(NSImage *)itemImage {
     [itemImage setTemplate:YES];
-    
+
     self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
-    
+
     NSStatusBarButton *button = self.statusItem.button;
     button.target = self;
     button.action = @selector(handleStatusItemButtonAction:);
@@ -208,15 +208,15 @@ static NSString *const CCNStatusItemWindowConfigurationPinnedPath = @"windowConf
     self.customView = itemView;
     self.customView.translatesAutoresizingMaskIntoConstraints = NO;
     NSRect itemFrame = self.customView.frame;
-    
+
     _customViewContainer = [[CCNStatusItemContainerView alloc] initWithFrame:itemFrame];
     _customViewContainer.autoresizingMask = (NSViewWidthSizable | NSViewHeightSizable);
     _customViewContainer.target = self;
     _customViewContainer.action = @selector(handleStatusItemButtonAction:);
     [_customViewContainer addSubview:self.customView];
-    
+
     self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSWidth(itemFrame)];
-    
+
     NSStatusBarButton *button = self.statusItem.button;
     button.frame = itemFrame;
     [button addSubview:_customViewContainer];
@@ -226,17 +226,17 @@ static NSString *const CCNStatusItemWindowConfigurationPinnedPath = @"windowConf
 - (void)configureProximityDragCollisionArea {
     NSRect statusItemFrame = self.statusItem.button.window.frame;
     NSRect collisionFrame = NSInsetRect(statusItemFrame, -_proximityDragZoneDistance, -_proximityDragZoneDistance);
-    _proximityDragCollisionArea = [NSBezierPath bezierPathWithRoundedRect:collisionFrame xRadius:NSWidth(collisionFrame)/2 yRadius:NSHeight(collisionFrame)/2];
+    _proximityDragCollisionArea = [NSBezierPath bezierPathWithRoundedRect:collisionFrame xRadius:NSWidth(collisionFrame) / 2 yRadius:NSHeight(collisionFrame) / 2];
 }
 
 - (void)configureDropView {
     [self.dropView removeFromSuperview];
     self.dropView = nil;
-    
+
     if (!self.dropHandler) {
         return;
     };
-    
+
     NSStatusBarButton *button = self.statusItem.button;
     NSRect buttonWindowFrame = button.window.frame;
     NSRect statusItemFrame = NSMakeRect(0.0, 0.0, NSWidth(buttonWindowFrame), NSHeight(buttonWindowFrame));
@@ -257,10 +257,10 @@ static NSString *const CCNStatusItemWindowConfigurationPinnedPath = @"windowConf
 
 - (void)presentStatusItemWithImage:(NSImage *)itemImage contentViewController:(NSViewController *)contentViewController dropHandler:(CCNStatusItemDropHandler)dropHandler {
     if (self.presentationMode != CCNStatusItemPresentationModeUndefined) return;
-    
+
     [self configureWithImage:itemImage];
     [self configureProximityDragCollisionArea];
-    
+
     self.dropHandler = dropHandler;
     self.presentationMode = CCNStatusItemPresentationModeImage;
     self.statusItemWindowController = [[CCNStatusItemWindowController alloc] initWithConnectedStatusItem:self
@@ -274,10 +274,10 @@ static NSString *const CCNStatusItemWindowConfigurationPinnedPath = @"windowConf
 
 - (void)presentStatusItemWithView:(NSView *)itemView contentViewController:(NSViewController *)contentViewController dropHandler:(CCNStatusItemDropHandler)dropHandler {
     if (self.presentationMode != CCNStatusItemPresentationModeUndefined) return;
-    
+
     [self configureWithView:itemView];
     [self configureProximityDragCollisionArea];
-    
+
     self.dropHandler = dropHandler;
     self.presentationMode = CCNStatusItemPresentationModeCustomView;
     self.statusItemWindowController = [[CCNStatusItemWindowController alloc] initWithConnectedStatusItem:self
@@ -292,7 +292,7 @@ static NSString *const CCNStatusItemWindowConfigurationPinnedPath = @"windowConf
 - (void)removeStatusItem {
     if (self.statusItem) {
         [[NSStatusBar systemStatusBar] removeStatusItem:self.statusItem];
-        
+
         self.statusItem = nil;
         self.presentationMode = CCNStatusItemPresentationModeUndefined;
         self.isStatusItemWindowVisible = NO;
@@ -326,7 +326,7 @@ static NSString *const CCNStatusItemWindowConfigurationPinnedPath = @"windowConf
 - (BOOL)isDarkMode {
     NSDictionary *dict = [[NSUserDefaults standardUserDefaults] persistentDomainForName:NSGlobalDomain];
     id style = [dict objectForKey:@"AppleInterfaceStyle"];
-    return ( style && [style isKindOfClass:[NSString class]] && NSOrderedSame == [style caseInsensitiveCompare:@"dark"] );
+    return (style && [style isKindOfClass:[NSString class]] && NSOrderedSame == [style caseInsensitiveCompare:@"dark"]);
 }
 
 - (void)setAppearsDisabled:(BOOL)appearsDisabled {
@@ -375,7 +375,7 @@ static NSString *const CCNStatusItemWindowConfigurationPinnedPath = @"windowConf
 
 - (void)enableDragEventMonitor {
     if (_globalDragEventMonitor) return;
-    
+
     __weak typeof(self) wSelf = self;
     _globalDragEventMonitor = [NSEvent addGlobalMonitorForEventsMatchingMask:NSLeftMouseDraggedMask handler:^(NSEvent *event) {
         NSPoint eventLocation = [event locationInWindow];
@@ -431,7 +431,7 @@ static NSString *const CCNStatusItemWindowConfigurationPinnedPath = @"windowConf
         [self configureProximityDragCollisionArea];
     }
     else if ([keyPath isEqualToString:CCNStatusItemWindowConfigurationPinnedPath]) {
-        if ([change[NSKeyValueChangeOldKey] integerValue] == NSOffState) {
+        if ([change[ NSKeyValueChangeOldKey ] integerValue] == NSOffState) {
             [self disableDragEventMonitor];
         }
         else {
