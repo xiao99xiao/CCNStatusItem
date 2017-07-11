@@ -74,6 +74,7 @@ typedef BOOL (^CCNStatusItemShouldShowHandler)(CCNStatusItem *sharedItem);
  @param contentViewController The contentViewController that is displayed in the popover window.
  */
 - (void)presentStatusItemWithImage:(NSImage *)itemImage contentViewController:(NSViewController *)contentViewController;
+- (void)showStatusItemWithImage:(NSImage *)itemImage contentViewController:(NSViewController *)contentViewController;
 
 /**
  Presents the shared `CCNStatusItem` object with the given image and contentViewController for the popover window.

@@ -253,6 +253,10 @@ static NSString *const CCNStatusItemWindowConfigurationPinnedPath = @"windowConf
     [self presentStatusItemWithImage:itemImage contentViewController:contentViewController dropHandler:nil];
 }
 
+- (void)showStatusItemWithImage:(NSImage *)itemImage contentViewController:(NSViewController *)contentViewController {
+    [self presentStatusItemWithImage:itemImage contentViewController:contentViewController dropHandler:nil];
+}
+
 - (void)presentStatusItemWithImage:(NSImage *)itemImage contentViewController:(NSViewController *)contentViewController dropHandler:(CCNStatusItemDropHandler)dropHandler {
     if (self.presentationMode != CCNStatusItemPresentationModeUndefined) return;
 
