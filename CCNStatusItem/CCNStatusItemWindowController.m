@@ -94,7 +94,7 @@ typedef void (^CCNStatusItemWindowAnimationCompletion)(void);
 - (void)updateWindowFrame {
     CGRect statusItemRect = [[self.statusItemView.statusItem.button window] frame];
     CGRect windowFrame = NSMakeRect(NSMinX(statusItemRect) - NSWidth(self.window.frame) / 2 + NSWidth(statusItemRect) / 2,
-                                    MIN(NSMinY(statusItemRect), self.window.screen.frame.size.height) - NSHeight(self.window.frame) - self.windowConfiguration.windowToStatusItemMargin,
+                                    MIN(NSMinY(statusItemRect), [NSScreen mainScreen].frame.size.height) - NSHeight(self.window.frame) - self.windowConfiguration.windowToStatusItemMargin,
                                     self.window.frame.size.width,
                                     self.window.frame.size.height);
     [self.window setFrame:windowFrame display:YES];
