@@ -81,6 +81,7 @@
         self.backgroundView.layer.masksToBounds = YES;
         self.backgroundView.layer.edgeAntialiasingMask = antialiasingMask;
         super.contentView = self.backgroundView;
+
     }
 
     if (self.userContentView) {
@@ -96,7 +97,27 @@
     self.userContentView.layer.masksToBounds = YES;
     self.userContentView.layer.edgeAntialiasingMask = antialiasingMask;
 
+    self.userContentView.translatesAutoresizingMaskIntoConstraints = NO;
+    
     [self.backgroundView addSubview:self.userContentView];
+
+        //add constraints to fill parent view
+    NSArray *arr;
+    
+    //horizontal constraints
+    arr = [NSLayoutConstraint constraintsWithVisualFormat:@"|[vw]|"
+                                                  options:0
+                                                  metrics:nil
+                                                    views:@{@"vw":self.userContentView}];
+    [self.backgroundView addConstraints:arr];
+    
+    //vertical constraints
+    arr = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[vw]|"
+                                                  options:0
+                                                  metrics:nil
+                                                    views:@{@"vw":self.userContentView}];
+    [self.backgroundView addConstraints:arr];
+
 }
 
 - (id)contentView {
